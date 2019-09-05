@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drink2Nite</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <link rel="stylesheet" href="css/onsenui.css">
+  <link rel="stylesheet" href="css/dark-onsen-css-components.min.css">
+  <link rel="stylesheet" href="css/inicio.css"/>
+  <script src="cordova.js"></script>
+  <script src="js/onsenui.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/funciones.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyDHpSkI3_q35SfKPOOguHSjd5zm4D2QwNw"></script>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/mapmarker.jquery.js"></script>
+</head>
+<body>
+      
+    <ons-navigator swipeable id="myNavigator" page="tab1.html">
+
+    <ons-page id="PrincipalPage">
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button onclick="menu.toggle()">
+                    <ons-icon component="button/menu" icon="md-menu" size="28px" fixed-width="false"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+          <div class="center"><img src="img/logo.png" height="30" style="position:relative; top:8px;"> </div>
+          <div class="right">
+            <ons-toolbar-button component="button/search"><ons-icon icon="md-search"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button component="button/settings"><ons-icon icon="md-settings"></ons-icon></ons-toolbar-button>
+      </div></ons-toolbar>
+        /*badge="7"*/
+        <ons-tabbar id="myTabbar" swipeable position="auto">
+          <ons-tab page="tab1.html" label="Inicio" icon="md-map"  active>
+          </ons-tab>
+          <ons-tab page="tab2.html" label="Locales" icon="ion-md-globe">
+          </ons-tab>
+          <ons-tab page="tab3.html" label="Tonight" icon="md-fire">
+            </ons-tab>
+            <ons-tab page="tab4.html" label="Mi Cuenta" icon="ion-md-contact">
+                </ons-tab>
+        </ons-tabbar>
+      </ons-page>
+      
+      <template id="tab1.html">
+        <ons-page id="Tab1">
+            <ons-progress-bar style="position: absolute; top:0; left:0; right:0;" indeterminate></ons-progress-bar>
+            	<img src="img/avatar.png" class="foto_central"><div class="pulse_holder"><div class="pulse_marker"><div class="pulse_rays"></div></div></div>
+  <div id="mapa" style="height:100%; width:100%; color:#000; background:#00573d;"></div>
+  
+  <div class="cargando_datos"><i class="fa fa-circle-notch fa-spin"></i> Cargando datos</div>
+  <div id="nohay_lugar"><div style="font-size:14px; padding-top:2px;">Lo sentimos, no se encontraron resultados</div></div>
+  
+  <div class="toolbar" style="background: transparent; position:absolute; top:auto; bottom:20px; display:none;" id="seleccionar_tipo">
+      <div class="toolbar__center">
+        <div class="segment" style="width:200px;margin:7px 50px;">
+          <div class="segment__item">
+            <input type="radio" class="segment__input" name="navi-segment-a" onclick="cambiar_tipo('1')" id="bar_check">
+            <div class="segment__button"><ons-icon icon="ion-md-beer"></ons-icon> Bar</div>
+          </div>
+    
+          <div class="segment__item">
+            <input type="radio" class="segment__input" name="navi-segment-a" onclick="cambiar_tipo('2')" id="club_check">
+            <div class="segment__button"><ons-icon icon="ion-md-wine"></ons-icon> Club</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+        </ons-page>
+      </template>
+      
+      <template id="tab2.html">
+        <ons-page id="tonightPage">
+            <ons-carousel swipeable auto-scroll var="carousel">
+              <div id="promo_carousel"></div>
+              </ons-carousel>
+            <ons-list id="contenido_tonight">
+                
+              </ons-list>
+        </ons-page>
+      </template>
+
+      <template id="tab3.html">
+          <ons-page id="Tab2">
+            <p style="text-align: center;">
+              Tonight
+            </p>
+          </ons-page>
+        </template>
+
+        <template id="tab4.html">
+            <ons-page id="Tab2">
+                <div class="profile-card">
+
+                    <img src="img/avatar.png" class="profile-image">
+                    <div class="profile-name">Carlos Ortez</div>
+                    <div class="profile-id">@carlos.ortez</div>
+                    <div class="profile-desc">Lic. en Informática Educativa / Ing. en Sistemas</div>
+            
+                  </div>
+            
+                  <ons-list>
+                    <ons-list-item>
+                      <ons-row>
+                        <ons-col class="info-col">
+                          <div class="info-num">87</div>
+                          <div class="info-unit">Comentarios</div>
+                        </ons-col>
+                        <ons-col class="info-col">
+                          <div class="info-num">40</div>
+                          <div class="info-unit">Siguiendo</div>
+                        </ons-col>
+                        <ons-col class="info-col">
+                          <div class="info-num">38</div>
+                          <div class="info-unit">Seguidores</div>
+                        </ons-col>
+                      </ons-row>
+                    </ons-list-item>
+                  </ons-list>
+            
+                  <ons-list modifier="inset" style="margin-top: 10px">
+            
+                    <ons-list-item modifier="chevron">
+                      Ver detalles
+                    </ons-list-item>
+            
+                    <ons-list-item modifier="chevron">
+                      Ver favoritos
+                    </ons-list-item>
+            
+                  </ons-list>
+            
+                  
+            </ons-page>
+          </template>
+
+      
+      </ons-navigator>
+</body>
+</html>
