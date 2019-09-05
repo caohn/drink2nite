@@ -1,0 +1,174 @@
+.login-form {
+  text-align: center;
+  width:320px;
+  height:340px;
+  margin: auto;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+.login-form .logo {
+	width:80%;
+	margin:0 0 15px 0;
+}
+.text-input__label {
+  top:15px;
+}
+.text-input {
+  padding:25px 0;
+  margin-bottom: 15px;
+}
+.login-button {
+	background:#fd3b3b;
+  	width: 100%;
+  	margin: 0 auto;
+}
+.login-button:active {
+	background:#C30;
+}
+.notas {
+	font-size:12px;
+	display:none;
+}
+.notas span.ok {
+	color:#390;
+	font-weight:bold;
+}
+.notas span.error {
+	color:#C30;
+	font-weight:bold;
+}
+.registrar-button {
+	background:#519D2E;
+  	width: 100%;
+  	margin: 10px auto 0 auto;
+}
+.registrar-button:active {
+	background:#390;
+}
+.forgot-password {
+  display: block;
+  margin: 2px auto 0 auto;
+  font-size: 12px;
+  color:#FFF;
+}
+.otras_cuentas {
+	border-top:1px solid #424242;
+	font-size:12px;
+	margin:18px 0 0 0;
+	padding:10px 0 0 0;
+}
+.otras_cuentas ons-row {
+	margin:5px 0 0 0;
+}
+.otras_cuentas ons-row ons-col:first-child {
+	padding:0 5px 0 0;
+}
+.otras_cuentas ons-row ons-col:last-child {
+	padding:0 0 0 5px;
+}
+.otras_cuentas .facebook-button {
+	background:#3a5fa3;
+}
+.otras_cuentas .twitter-button {
+	background:#12a9de;
+}
+.drink {
+	background:#242424;
+	border-color:#000000;
+	text-shadow:0px 1px 0px rgba(255,255,255,0.3);
+}
+.gradiant .page__background {
+	 background-image:radial-gradient(#292f3f,#0f1015);
+}
+.btn-default {
+	background:#FFF;
+	color:#292f3f;
+}
+.btn-primary {
+	background:#265BAC;
+	color:#FFF;
+}
+/* Perdiste */
+.form-row {
+  margin: 4px;
+}
+
+.width-full {
+  width: 100%;
+}
+
+.width-half {
+  width: 48%;
+}
+
+.lucent {
+  opacity: 0.4;
+}
+
+.note {
+  margin: 12px 8px;
+  font-size: 13px;
+}
+
+.vspc {
+  margin-top: 20px;
+}
+
+.formarea, .formarea2 {
+  width: 320px;
+  height:160px;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  margin: auto;
+}
+.formarea2 {
+	height:345px;
+}
+.avatar {
+	position:relative;
+}
+.avatar img {
+	width:100%;
+	border-radius:10px;
+}
+.custom-file-input {
+  color:transparent;
+  width:100%;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content:'Subir imagen';
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  color:#FFF;
+  background:#519D2E;
+  border-radius:5px;
+  padding:12px 0;
+  width:100%;
+  display:block;
+  text-align:center;
+  height:18px;
+  outline:none;
+  white-space:nowrap;
+  -webkit-user-select:none;
+  cursor:pointer;
+  font-weight:500;
+  font-size:16px;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background:#390; 
+}
