@@ -1,0 +1,47 @@
+<ons-page id="localPage">
+  <ons-toolbar modifier="cover-content">
+    <div class="left"><ons-back-button></ons-back-button></div>
+    <div class="center" id="titulo_app"><img src="img/logo.png" height="30" style="position:relative; top:10px;"></div>
+    </ons-toolbar>
+        <ons-progress-bar id="cargador_local" indeterminate></ons-progress-bar>
+        <div class="profile-card" style="display: none;">
+          <div class="profile-opacidad"></div><div style="position:relative; z-index:1;">
+                  <img src="" class="profile-image3" id="imagen_local">
+                  <div id="valor_valoracion" style="font-size:13px;"></div>
+                  <div class="profile-name2" id="descripcion_local" style="margin:5px 0 0 0;"></div>
+                  <div class="profile-id" id="direccion_local"></div>
+          </div>
+                </div>
+                <div style="background:#000; padding:8px 20px;" id="botones_local"></div>
+                <div style="font-size:12px; padding:15px 30px;">
+                <div class="opacidad"><div id="publicador"> 
+                <form id="publicar_publicacion" action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="local_id" value="" name="local_id">
+                <input type="hidden" id="usuario_id" value="" name="usuario_id">
+                <input type="hidden" id="usuario_nombre" value="" name="usuario_nombre">
+                <input type="hidden" id="usuario_foto" value="" name="usuario_foto">
+                <input type="hidden" id="calificacion_valor" value="" name="rating_calificar"><div class="titulo"><i class="fa fa-times" onClick="cerrar_publicar()"></i>Publicar</div><div class="publicante"><img src="img/avatar.png" id="foto_persona2"><div id="nombre_persona2"></div><div id="ciudad_publicante"></div><div class="triangulo2"></div><div class="triangulo"></div></div><div class="textarea_dentro"><textarea placeholder="Escribir una nota sobre el local..." id="texto" name="texto"></textarea></div><div class="botones_accion"><input type="file" class="custom-file-input" id="foto" name="foto" accept="image/*" capture="camera"><button class="publicar" onclick="escribir_publicacion()">Publicar</button></div></div></form></div>
+                <div class="que_piensas"><img src="img/avatar.png" id="foto_persona"><div id="nombre_persona"></div>
+                <div class="calificacion" id="calificacion">
+                <i class="fa fa-star-o custom-star" onclick="valoracion('1')"></i><i class="fa fa-star-o custom-star" onclick="valoracion('2')"></i><i class="fa fa-star-o custom-star" onclick="valoracion('3')"></i><i class="fa fa-star-o custom-star" onclick="valoracion('4')"></i><i class="fa fa-star-o custom-star" onclick="valoracion('5')"></i>
+                </div>
+                <textarea name="texto2" id="texto2" placeholder="Escribe alguna nota del lugar..." onClick="publicar()"></textarea>
+                <div class="opciones" style="display:none;"><input type="file" id="foto" name="foto" accept="image/*" capture="camera" onchange="nombre2(this.value)" style="display:none;" /><button type="button" class="btn btn-default" onclick="chooseFile()">Adjuntar foto</button><span class="blanco">O</span><button class="btn btn-primary" onclick="escribir_publicacion()">Publicar</button>
+                <label id="nombre_archivo" style="margin:2px 0 0 3px; display:inline-block;"></label></div>
+                </div>
+                <div style="text-align:center;"><button class="publicar_boton" onClick="publicar2()">Publicar evento</button></div>
+                
+                <div class="opacidad2"><div id="publicador"> 
+                <form id="publicar_publicacion" action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="local_id" value="" name="local_id2">
+                <input type="hidden" id="usuario_id" value="" name="usuario_id2">
+                <input type="hidden" id="usuario_nombre" value="" name="usuario_nombre2">
+                <input type="hidden" id="usuario_foto" value="" name="usuario_foto2"><div class="titulo"><i class="fa fa-times" onClick="cerrar_publicar2()"></i>Publicar evento</div><div class="publicante"><img src="" id="foto_persona3"><div id="nombre_persona3"></div><div id="ciudad_publicante"></div><div class="triangulo2"></div><div class="triangulo"></div></div><div class="textarea_dentro" style="bottom:140px;"><textarea placeholder="Escribir sobre el evento del local..." id="texto3" name="texto"></textarea></div><div class="botones_accion2"><ons-row><ons-col><label class="label_titulo">Inicia:</label><input type="date" class="text-input--underbar" name="fecha1" value="" style="display:block; width:95%; margin-right:5%" required><input type="time" class="text-input--underbar" name="hora1" value="" style="display:block; width:95%; margin-right:5%" required>
+               </ons-col>
+          <ons-col><label class="label_titulo" style="margin-left:10%;">Termina:</label><input type="date" class="text-input--underbar" name="fecha2" value="" style="display:block; margin-left:5%; width:95%;" required><input type="time" class="text-input--underbar" name="hora2" value="" style="display:block; margin-left:5%; width:95%;" required></ons-col>
+          </ons-row></div><div class="botones_accion"><input type="file" class="custom-file-input" id="foto2" name="foto2" accept="image/*" capture="camera"><button class="publicar" onclick="escribir_evento()">Publicar</button></div></div></form></div>
+                
+            </div>
+             <div id="publicacion_nueva"></div>
+             <div id="publicaciones_10"></div>
+</ons-page>

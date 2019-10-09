@@ -1,10 +1,10 @@
 <ons-page id="buscarPage">
     <ons-toolbar>
         <div class="left"><ons-back-button></ons-back-button></div>
-        <div class="center"><img src="img/logo.png" height="30" style="position:relative; top:10px;"></div>
+        <div class="center"><img src="img/logo.png" height="30" style="position:relative; top:6px;"></div>
         </ons-toolbar>
   <p style="text-align: center; margin:0; padding: 0;">
-      <ons-search-input placeholder="Buscar en drink2nite" style="width: 100%;"></ons-search-input>
+      <ons-search-input placeholder="Buscar en drink2nite" style="width: 100%;" id="input_buscador" onkeypress="buscar_local(event)"></ons-search-input>
       <ons-list id="contenido_busqueda">
                 
     </ons-list>
