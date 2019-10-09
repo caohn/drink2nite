@@ -1,5 +1,5 @@
 window.myApp = {};
-
+var storage = window.localStorage;
 document.addEventListener('init', function(event) {
   var page = event.target;
 
@@ -12,20 +12,6 @@ document.addEventListener('init', function(event) {
 myApp.controllers = {
 
   PrincipalPage: function(page) {
-
-    if (navigator.geolocation) {
-      var options = {
-        enableHighAccuracy: false,
-        timeout: 15000,
-        maximumAge: 0
-      };
-      navigator.geolocation.getCurrentPosition(localizar, error, options); }  
-      else { alert('No soportado!'); }
-
-    // Set button functionality to open/close the menu.
-    page.querySelector('[component="button/search"]').onclick = function() {
-      document.querySelector('#myNavigator').pushPage('html/buscar.html', {data: {title: 'Buscar'}, animation: 'lift'});
-    };
 
     page.querySelector('[component="button/settings"]').onclick = function() {
       document.querySelector('#myNavigator').pushPage('html/configuracion.html', {data: {title: 'Configuración'}, animation: 'lift'});
@@ -48,20 +34,13 @@ privacidadPage: function(page) {
   html('privacidad', 'contenido_privacidad', 'cargador_privacidad');
 },
 
-tonightPage: function(page) {
+localesPage: function(page) {
 
   promo('promo_carousel');
-  locales('contenido_tonight');
+  locales('contenido_locales_principal');
   
 },
 buscarPage: function(page) {
   locales('contenido_busqueda');
 }
 };
-
-document.addEventListener('prechange', function(event) {
-  if(event.tabItem.getAttribute('label') != 'Inicio') {
-    document.querySelector('ons-toolbar .center').innerHTML = event.tabItem.getAttribute('label'); } else {
-      document.querySelector('ons-toolbar .center').innerHTML = '<img src="img/logo.png" height="30" style="position:relative; top:8px;">';
-      }
-  });
