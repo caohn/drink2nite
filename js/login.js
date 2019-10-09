@@ -15,7 +15,7 @@ function iniciar_sesion() {
 		buttonLabel: 'OK',
 		animation: 'default',
    }); return false; }
-	$.ajax({ "url": "http://drink2nite.com/app/index2.php?do=seguros&act=iniciar_sesion&password="+password+"&email="+email, "dataType": "jsonp", success: function( response ) {
+	$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=iniciar_sesion&password="+password+"&email="+email, "dataType": "jsonp", success: function( response ) {
 	if(response.mensaje == 0) { 
 	ons.notification.alert({
 		 message: 'Los datos ingresados son incorrectos',
@@ -24,9 +24,12 @@ function iniciar_sesion() {
 		 animation: 'default',
 	}); } 
 	if(response.mensaje != 0) { 
-		storage.setItem('usuario_aseguradora', response.mensaje);
-		storage.setItem('nombre_aseguradora', response.nombre);
-		storage.setItem('correo_aseguradora', response.correo);
+		storage.setItem('usuario_drink2nite', response.mensaje);
+		storage.setItem('nombre_drink2nite', response.nombre);
+		storage.setItem('correo_drink2nite', response.correo);
+		storage.setItem('foto_drink2nite', response.foto);
+		storage.setItem('seguidos_drink2nite', response.seguidos);
+		storage.setItem('seguidores_drink2nite', response.seguidores);
 		window.location ="inicio.html";
 	} 
 	} });
@@ -50,12 +53,12 @@ function recuperar() {
    }); return false; }
 	var modal = document.querySelector('ons-modal');
 	modal.show();
-	$.ajax({ "url": "http://drink2nite.com/app/index2.php?do=seguros&act=recuperar&email="+email, "dataType": "jsonp", success: function( response ) {
+	$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=recuperar&email="+email, "dataType": "jsonp", success: function( response ) {
 			if(response.mensaje == 0) { 
 				ons.notification.alert({ message: 'El correo electrónico ingresado es incorrecto', title: 'Error', buttonLabel: 'OK', animation: 'default' }); 
 			} else {
-				storage.setItem('usuario_aseguradora_recuperar', response.mensaje);
-				storage.setItem('codigo_aseguradora', response.generado);
+				storage.setItem('usuario_drink2nite_recuperar', response.mensaje);
+				storage.setItem('codigo_drink2nite', response.generado);
 				myNavigator.pushPage('recuperar2.html', { animation : 'slide' } ); 
 			}
 			modal.hide();
@@ -64,7 +67,7 @@ function recuperar() {
 }
 function recuperar2() {
 	codigo = document.getElementById("codigo").value;
-	if(localStorage["codigo_aseguradora"] == codigo) { myNavigator.pushPage('recuperar3.html', { animation : 'slide' } ); } else {
+	if(localStorage["codigo_drink2nite"] == codigo) { myNavigator.pushPage('recuperar3.html', { animation : 'slide' } ); } else {
 		ons.notification.alert({
 					 message: 'El código ingresado es incorrecto',
 					 title: 'Error',
@@ -79,10 +82,13 @@ function recuperar3() {
 	password2 = document.getElementById("nueva_password2").value;
 	if(password == password2) { 
 	modal.show();
-	$.ajax({ "url": "http://drink2nite.com/app/index2.php?do=seguros&act=nueva_password&usuario="+localStorage["usuario_aseguradora_recuperar"]+"&password="+password, "dataType": "jsonp", success: function( response ) {
-		storage.setItem('usuario_aseguradora', storage.getItem('usuario_aseguradora_recuperar'));
-		storage.setItem('nombre_aseguradora', response.nombre);
-		storage.setItem('correo_aseguradora', response.correo);
+	$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=nueva_password&usuario="+localStorage["usuario_drink2nite_recuperar"]+"&password="+password, "dataType": "jsonp", success: function( response ) {
+		storage.setItem('usuario_drink2nite', storage.getItem('usuario_drink2nite_recuperar'));
+		storage.setItem('nombre_drink2nite', response.nombre);
+		storage.setItem('correo_drink2nite', response.correo);
+		storage.setItem('foto_drink2nite', response.foto);
+		storage.setItem('seguidos_drink2nite', response.seguidos);
+		storage.setItem('seguidores_drink2nite', response.seguidores);
 			modal.hide();
 			window.location ="inicio.html";
 		}
@@ -133,11 +139,14 @@ function registro_1() {
 			animation: 'default',
 	   }); return false; }
 	}
-	$.ajax({ "url": "http://drink2nite.com/app/index2.php?do=seguros&act=registro&nombre="+nombre+"&apellido="+apellido+"&email="+email+"&password="+password+"&d="+d+"&m="+m+"&a="+a+"&sexo="+sexo, "dataType": "jsonp", success: function( response ) {
+	$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=registro&nombre="+nombre+"&apellido="+apellido+"&email="+email+"&password="+password+"&d="+d+"&m="+m+"&a="+a+"&sexo="+sexo, "dataType": "jsonp", success: function( response ) {
 		if(response.mensaje == 0) { 
-		storage.setItem('usuario_aseguradora', response.usuario);
-		storage.setItem('nombre_aseguradora', response.nombre);
-		storage.setItem('correo_aseguradora', response.correo);
+		storage.setItem('usuario_drink2nite', response.usuario);
+		storage.setItem('nombre_drink2nite', response.nombre);
+		storage.setItem('correo_drink2nite', response.correo);
+		storage.setItem('foto_drink2nite', response.foto);
+		storage.setItem('seguidos_drink2nite', response.seguidos);
+		storage.setItem('seguidores_drink2nite', response.seguidores);
 		window.location ="inicio.html"; }
 		if(response.mensaje == 1) { 
 		ons.notification.alert({
