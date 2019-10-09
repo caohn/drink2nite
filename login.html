@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Seguro</title>
+<title>Drink2Nite</title>
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
   <link rel="stylesheet" href="css/onsenui.css">
-  <link rel="stylesheet" href="css/onsen-css-components.min.css">
+  <link rel="stylesheet" href="css/dark-onsen-css-components.min.css">
   <link rel="stylesheet" href="css/login.css"/>
   <script src="cordova.js"></script>
   <script src="js/jquery.js"></script>
@@ -27,21 +27,21 @@
             <template id="tab1.html">
             <ons-page id="PrincipalPage" class="gradiant">
                <div class="login-form">
-              <img src="img/logo_seguros.png" class="logo">
+              <img src="img/logo.png" class="logo">
                   <div class="notas" id="notas"></div>
-                  <ons-input id="email" type="email" placeholder="Correo electrónico" modifier=" " style="width: 100%;" autocomplete="off"></ons-input>
+                  <ons-input id="email" type="email" placeholder="Correo electrónico" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
                   <ons-input id="password" placeholder="Contraseña" type="password" modifier="underbar" style="width: 100%;">
             </ons-input>
                   <br>
-                  <ons-button modifier="large" class="login-button neo" onclick="iniciar_sesion()">Iniciar sesión</ons-button>
-                  <ons-button modifier="large" class="login-button neo" style="margin-top:10px;" onclick="myNavigator.pushPage('crear.html', { animation : 'slide' } )">Crear cuenta</ons-button>
+                  <ons-button modifier="large" class="login-button" onclick="iniciar_sesion()">Iniciar sesión</ons-button>
+                  <ons-button modifier="large" class="registrar-button" onclick="myNavigator.pushPage('crear.html', { animation : 'slide' } )">Crear cuenta</ons-button>
                   <div class="otras_cuentas" style="display:none;">Iniciar sesión con tu cuenta de Facebook ó Twitter
                   <ons-row>
               <ons-col><ons-button modifier="large" class="facebook-button" onclick="deshabilitado()"><ons-icon icon="fa-facebook"></ons-icon> Facebook</ons-button></ons-col>
               <ons-col><ons-button modifier="large" class="twitter-button" onclick="deshabilitado()"><ons-icon icon="fa-twitter"></ons-icon> Twitter</ons-button></ons-col>
             </ons-row>
             </div>
-                  <ons-button modifier="quiet" onclick="myNavigator.pushPage('recuperar.html', { animation : 'slide' } )" class="neo" style="margin-top:10px; color:rgba(0,0,0,0.4);">¿Olvidaste tu contraseña?</ons-button>
+                  <ons-button modifier="quiet" onclick="myNavigator.pushPage('recuperar.html', { animation : 'slide' } )" class="forgot-password">¿Olvidaste tu contraseña?</ons-button>
                 </div>
               </ons-page>
               
@@ -56,7 +56,7 @@
             
                  <div class="formarea">
                   <div class="form-row">
-                      <ons-input id="email2" type="email" placeholder="Correo electrónico" modifier="" style="width: 100%;" autocomplete="off"></ons-input>
+                      <ons-input id="email2" type="email" placeholder="Correo electrónico" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
                   </div>
           
                   <div class="lucent">
@@ -65,8 +65,8 @@
                   </div>
           
                   <div class="vspc form-row">
-                    <ons-button modifier="light" class="btn-primary width-half neo" onclick="recuperar()">Enviar</ons-button>
-                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half neo">Regresar</ons-button>
+                    <ons-button modifier="light" class="btn-primary width-half" onclick="recuperar()">Enviar</ons-button>
+                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Regresar</ons-button>
                   </div>
                 </div>
             </div>
@@ -93,8 +93,8 @@
                   </div>
           
                   <div class="vspc form-row">
-                    <ons-button modifier="light" class="btn-primary width-half neo" onclick="recuperar2()">Proceder</ons-button>
-                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half neo">Cancelar</ons-button>
+                    <ons-button modifier="light" class="btn-primary width-half" onclick="recuperar2()">Proceder</ons-button>
+                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Cancelar</ons-button>
                   </div>
                 </div>
             </div>
@@ -121,8 +121,8 @@
                   </div>
           
                   <div class="vspc form-row">
-                    <ons-button modifier="light" class="btn-primary width-half neo" onclick="recuperar3()">Proceder</ons-button>
-                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half neo">Cancelar</ons-button>
+                    <ons-button modifier="light" class="btn-primary width-half" onclick="recuperar3()">Proceder</ons-button>
+                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Cancelar</ons-button>
                   </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
             
             <template id="crear.html">
               <ons-page id="RegistrarPage">
-            <ons-toolbar><div class="left"><ons-back-button ons-if-platform="ios" modifier="light">Atrás</ons-back-button></div><div class="center neo">Crear una cuenta</div></ons-toolbar>
+            <ons-toolbar class="drink"><div class="left"><ons-back-button ons-if-platform="ios" modifier="light">Atrás</ons-back-button></div><div class="center">Crear una cuenta</div></ons-toolbar>
             
             <div>
             
@@ -144,7 +144,7 @@
                     <ons-input id="apellido" type="apellido" placeholder="Apellido" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
                   </ons-col></ons-row>
                   <div class="form-row">
-                      <ons-input id="email3" type="email" placeholder="Correo electrónico" modifier="" style="width: 100%;" autocomplete="off"></ons-input>
+                      <ons-input id="email3" type="email" placeholder="Correo electrónico" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
                   </div>
                   
                    <div class="form-row">
@@ -154,23 +154,23 @@
                   <div class="lucent">
                     <p class="note" style="font-size:11px;">La contraseña debe de contener mínimo 6 caracteres</p>
                   </div>
-                  <div style="font-size:11px; text-transform:uppercase; font-weight:bold; padding:0 10px; color:rgba(0,0,0,0.5);">Fecha de Nacimiento</div>
+                  <div style="font-size:11px; text-transform:uppercase; font-weight:bold; padding:0 10px; color:rgba(255,255,255,0.5);">Fecha de Nacimiento</div>
                   <div class="form-row">
-                  <select class="text-input--underbar" id="dia" style="width:23%; text-align:center; color:rgba(0,0,0,0.5);">
+                  <select class="text-input--underbar" id="dia" style="width:23%; text-align:center; color:rgba(255,255,255,0.5);">
           <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
-                  <select class="text-input--underbar" id="mes" style="width:50%; text-align:center; color:rgba(0,0,0,0.5);"><option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option><option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option><option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option></select>
-                  <select class="text-input--underbar" id="year" style="width:23%; text-align:center; color:rgba(0,0,0,0.5);"><option value="1960">1960</option><option value="1961">1961</option><option value="1962">1962</option><option value="1963">1963</option><option value="1964">1964</option><option value="1965">1965</option><option value="1966">1966</option><option value="1967">1967</option><option value="1968">1968</option><option value="1969">1969</option><option value="1970">1970</option><option value="1971">1971</option><option value="1972">1972</option><option value="1973">1973</option><option value="1974">1974</option><option value="1975">1975</option><option value="1976">1976</option><option value="1977">1977</option><option value="1978">1978</option><option value="1979">1979</option><option value="1980">1980</option><option value="1981">1981</option><option value="1982">1982</option><option value="1983">1983</option><option value="1984">1984</option><option value="1985">1985</option><option value="1986">1986</option><option value="1987">1987</option><option value="1988">1988</option><option value="1989">1989</option><option value="1990">1990</option><option value="1991">1991</option><option value="1992">1992</option><option value="1993">1993</option><option value="1994">1994</option><option value="1995">1995</option><option value="1996">1996</option><option value="1997">1997</option><option value="1998">1998</option><option value="1999">1999</option><option value="2000">2000</option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option></select>
+                  <select class="text-input--underbar" id="mes" style="width:50%; text-align:center; color:rgba(255,255,255,0.5);"><option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option><option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option><option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option><option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option></select>
+                  <select class="text-input--underbar" id="year" style="width:23%; text-align:center; color:rgba(255,255,255,0.5);"><option value="1960">1960</option><option value="1961">1961</option><option value="1962">1962</option><option value="1963">1963</option><option value="1964">1964</option><option value="1965">1965</option><option value="1966">1966</option><option value="1967">1967</option><option value="1968">1968</option><option value="1969">1969</option><option value="1970">1970</option><option value="1971">1971</option><option value="1972">1972</option><option value="1973">1973</option><option value="1974">1974</option><option value="1975">1975</option><option value="1976">1976</option><option value="1977">1977</option><option value="1978">1978</option><option value="1979">1979</option><option value="1980">1980</option><option value="1981">1981</option><option value="1982">1982</option><option value="1983">1983</option><option value="1984">1984</option><option value="1985">1985</option><option value="1986">1986</option><option value="1987">1987</option><option value="1988">1988</option><option value="1989">1989</option><option value="1990">1990</option><option value="1991">1991</option><option value="1992">1992</option><option value="1993">1993</option><option value="1994">1994</option><option value="1995">1995</option><option value="1996">1996</option><option value="1997">1997</option><option value="1998">1998</option><option value="1999">1999</option><option value="2000">2000</option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option></select>
                   </div>
-                  <div style="font-size:11px; text-transform:uppercase; font-weight:bold; padding:0 10px; color:rgba(0,0,0,0.5); margin:10px 0 0 0 ;">Sexo</div>
+                  <div style="font-size:11px; text-transform:uppercase; font-weight:bold; padding:0 10px; color:rgba(255,255,255,0.5); margin:10px 0 0 0 ;">Sexo</div>
                   <div class="form-row">
-                  <select class="text-input--underbar" id="sexo" style="width:100%; text-align:center; color:rgba(0,0,0,0.5);">
+                  <select class="text-input--underbar" id="sexo" style="width:100%; text-align:center; color:rgba(255,255,255,0.5);">
           <option value="1">Masculino</option>
           <option value="2">Femenino</option>
           </select></div>
           
                   <div class="vspc form-row" style="text-align:center;">
-                    <ons-button modifier="light" class="btn-primary width-half neo" onclick="registro_1()">Hecho</ons-button>
-                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half neo">Regresar</ons-button>
+                    <ons-button modifier="light" class="btn-primary width-half" onclick="registro_1()">Hecho</ons-button>
+                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Regresar</ons-button>
                   </div>
                 </div>
             </div>
@@ -179,7 +179,7 @@
             
              <template id="proceso2.html">
                <ons-page id="Registrar2Page">
-            <ons-toolbar class="drink"><div class="left"><ons-back-button ons-if-platform="ios" modifier="light">Atrás</ons-back-button></div><div class="center neo">Completando registro</div></ons-toolbar>
+            <ons-toolbar class="drink"><div class="left"><ons-back-button ons-if-platform="ios" modifier="light">Atrás</ons-back-button></div><div class="center">Completando registro</div></ons-toolbar>
             
             <div>
             
@@ -193,8 +193,8 @@
               </form>
               
                   <div class="vspc form-row" style="text-align:center;">
-                    <ons-button modifier="light" class="btn-primary width-full neo" onclick="registro_2()" id="omitir">Omitir</ons-button>
-                     <ons-button modifier="light" class="btn-primary width-full neo" onclick="registro_2()" id="terminar" style="display:none;">Hecho</ons-button>
+                    <ons-button modifier="light" class="btn-primary width-full" onclick="registro_2()" id="omitir">Omitir</ons-button>
+                     <ons-button modifier="light" class="btn-primary width-full" onclick="registro_2()" id="terminar" style="display:none;">Hecho</ons-button>
                   </div>
                 </div>
             </div>
