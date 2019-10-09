@@ -1,3 +1,6 @@
+@font-face{font-family:"Neosan";src:url('../fonts/NeoSan.ttf');font-weight:normal;}
+@font-face{font-family:"Neosan";src:url('../fonts/NeoSan.ttf');font-style:italic;}
+@font-face{font-family:"NeoSanBol";src:url('../fonts/NeoSanBol.ttf');font-weight:bold;}
 .login-form {
   text-align: center;
   width:320px;
@@ -9,9 +12,13 @@
   right:0;
   bottom:0;
 }
+.neo {
+  font-family: NeoSan;
+  font-weight: bold;
+}
 .login-form .logo {
-	width:80%;
-	margin:0 0 15px 0;
+  width:250px;
+	margin:0 0 30px 0;
 }
 .text-input__label {
   top:15px;
@@ -21,7 +28,6 @@
   margin-bottom: 15px;
 }
 .login-button {
-	background:#fd3b3b;
   	width: 100%;
   	margin: 0 auto;
 }
@@ -81,14 +87,14 @@
 	text-shadow:0px 1px 0px rgba(255,255,255,0.3);
 }
 .gradiant .page__background {
-	 background-image:radial-gradient(#292f3f,#0f1015);
+	 /* background-image:radial-gradient(#ffffff,#cccccc); */
 }
 .btn-default {
 	background:#FFF;
 	color:#292f3f;
 }
 .btn-primary {
-	background:#265BAC;
+	background:#CD2833;
 	color:#FFF;
 }
 /* Perdiste */

@@ -1,3 +1,63 @@
+@font-face{font-family:"Neosan";src:url('../fonts/NeoSan.ttf');font-weight:normal;}
+@font-face{font-family:"Neosan";src:url('../fonts/NeoSan.ttf');font-style:italic;}
+@font-face{font-family:"NeoSanBol";src:url('../fonts/NeoSanBol.ttf');font-weight:bold;}
+.neo {
+	font-family: NeoSan;
+  }
+  .neob {
+	font-family: NeoSan;
+	font-weight: bold;
+  }
+.menu {
+	position: relative;
+	text-align: center;
+	font-size: 26px;
+	font-family: NeoSan;
+	padding:0 20px;
+	color:#CD2833;
+}
+.menu h2 {
+	color:#777;
+	font-family: NeoSanBol;
+	font-weight: bold;
+	margin-top:-30px;
+	font-size:16px;
+	margin-bottom: 30px;
+}
+.menu ons-icon {
+	border:1px solid #CD2833;
+	background: transparent;
+	padding:15px;
+	border-radius:30px;
+	height: 26px;
+	width: 26px;
+	-webkit-transition:all 0.5s ease;
+}
+.menu ons-icon:hover {
+	background:#CD2833;
+	color:#FFF;
+}
+.menu span {
+	display: block;
+	font-size: 16px;
+	color:#777;
+	margin:5px 0 0 0;
+}
+.menu ons-col {
+	margin-bottom: 25px;
+}
+.contenedor_icono {
+	border-radius:3px;
+	width: 30px;
+	height: 30px;
+	padding:10px;
+	text-align: center;
+	background: #e5e6e7;
+}
+.contenedor_icono ons-icon {
+	color:#999;
+	font-size:30px;
+}
 .drink2 {
 	background-image:radial-gradient(#292f3f,#0f1015);
 	border-color:#000000;
@@ -68,7 +128,6 @@
 	color:#999;
 }
 .center {
-	padding-left:30px!important;
 }
 .foto_central {
 	position:absolute;
@@ -202,10 +261,9 @@
   width: 100%;
   text-align: center;
   color: white;
-  padding: 30px 0;
+  padding: 30px 0 10px 0;
   line-height: 1.4;
-  background-color: #33393c;
-   background: url(../img/abstracto.jpg) no-repeat center center fixed; 
+  background-color: #000;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -448,6 +506,7 @@
 .publicar_boton {
 	border-radius:3px;
 	background:#26AA25;
+	box-shadow:0 0 10px #26AA25;
 	color:#FFF;
 	padding:10px;
 	font-size:15px;
@@ -735,4 +794,15 @@
 	margin-top:12px;
 	display:inline-block;
 	font-size:13px;
-}
+} 
+.gm-style .gm-style-iw-c {
+	color:#147afb!important;
+} 
+.gm-style .gm-style-iw-c .button-bar__button {
+	border-color: #147afb!important;
+	color:#147afb!important;
+} 
+.gm-style .gm-style-iw-c .button-bar__button:active{
+	background:#147afb!important;
+	color:#FFF!important;
+} 
