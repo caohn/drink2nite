@@ -1,119 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Drink2Nite</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <meta charset="UTF-8">
+    <title>Sguros</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=400, target-densitydpi=device-dpi" />
   <link rel="stylesheet" href="css/onsenui.css">
-  <link rel="stylesheet" href="css/dark-onsen-css-components.min.css">
+  <link rel="stylesheet" href="css/onsen-css-components.min.css">
   <link rel="stylesheet" href="css/inicio.css"/>
   <script src="cordova.js"></script>
   <script src="js/onsenui.min.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/funciones.js"></script>
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyDHpSkI3_q35SfKPOOguHSjd5zm4D2QwNw"></script>
   <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/mapmarker.jquery.js"></script>
 </head>
 <body>
-      
+  <ons-modal direction="up">
+    <div><img src="img/logo_segurosb.png" style="height:35px; margin:0 0 5px 0;"></div>
+    <ons-icon icon="md-spinner" size="28px" spin></ons-icon>
+    <br>
+    <br> Por favor, espere
+    <br>Solicitud en proceso...
+  </ons-modal>
     <ons-navigator swipeable id="myNavigator" page="tab1.html">
 
     <ons-page id="PrincipalPage">
         <ons-toolbar>
             <div class="left">
-                <ons-toolbar-button onclick="menu.toggle()">
+                <ons-toolbar-button>
                     <ons-icon component="button/menu" icon="md-menu" size="28px" fixed-width="false"></ons-icon>
                 </ons-toolbar-button>
             </div>
-          <div class="center"><img src="img/logo.png" height="30" style="position:relative; top:8px;"> </div>
+          <div class="center"><img src="img/logo_segurosb.png" height="28" style="position:relative; top:8px;"> </div>
           <div class="right">
-            <ons-toolbar-button component="button/search"><ons-icon icon="md-search"></ons-icon></ons-toolbar-button>
-            <ons-toolbar-button component="button/settings"><ons-icon icon="md-settings"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button component="button/settings"><ons-icon icon="md-notifications"></ons-icon></ons-toolbar-button>
       </div></ons-toolbar>
         /*badge="7"*/
-        <ons-tabbar id="myTabbar" swipeable position="auto">
-          <ons-tab page="tab1.html" label="Inicio" icon="md-map"  active>
+        <ons-tabbar id="myTabbar" swipeable position="bottom">
+          <ons-tab page="tab1.html" label="Inicio" icon="ion-md-apps"  active>
           </ons-tab>
-          <ons-tab page="tab2.html" label="Locales" icon="ion-md-globe">
+          <ons-tab page="tab2.html" label="Cotizaciones" icon="ion-md-briefcase">
           </ons-tab>
-          <ons-tab page="tab3.html" label="Tonight" icon="md-fire">
+          <ons-tab page="tab3.html" label="Seguros" icon="ion-md-heart">
             </ons-tab>
-            <ons-tab page="tab4.html" label="Mi Cuenta" icon="ion-md-contact">
+            <ons-tab page="tab4.html" label="Cuenta" icon="ion-md-contact">
                 </ons-tab>
         </ons-tabbar>
       </ons-page>
       
       <template id="tab1.html">
         <ons-page id="Tab1">
-            <ons-progress-bar style="position: absolute; top:0; left:0; right:0;" indeterminate></ons-progress-bar>
-            	<img src="img/avatar.png" class="foto_central"><div class="pulse_holder"><div class="pulse_marker"><div class="pulse_rays"></div></div></div>
-  <div id="mapa" style="height:100%; width:100%; color:#000; background:#00573d;"></div>
-  
-  <div class="cargando_datos"><i class="fa fa-circle-notch fa-spin"></i> Cargando datos</div>
-  <div id="nohay_lugar"><div style="font-size:14px; padding-top:2px;">Lo sentimos, no se encontraron resultados</div></div>
-  
-  <div class="toolbar" style="background: transparent; position:absolute; top:auto; bottom:20px; display:none;" id="seleccionar_tipo">
-      <div class="toolbar__center">
-        <div class="segment" style="width:200px;margin:7px 50px;">
-          <div class="segment__item">
-            <input type="radio" class="segment__input" name="navi-segment-a" onclick="cambiar_tipo('1')" id="bar_check">
-            <div class="segment__button"><ons-icon icon="ion-md-beer"></ons-icon> Bar</div>
-          </div>
-    
-          <div class="segment__item">
-            <input type="radio" class="segment__input" name="navi-segment-a" onclick="cambiar_tipo('2')" id="club_check">
-            <div class="segment__button"><ons-icon icon="ion-md-wine"></ons-icon> Club</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
+            <ons-progress-bar style="position: absolute; top:0; left:0; right:0; display: none;" indeterminate></ons-progress-bar>
+            <div style="position: relative;" class="neo"><div style="position: absolute; left:30px; top:30px; right:30px;"><b>Descuento por invitar</b><div style="margin: 7px 0 10px 0; color:#777; font-size:15px; width: 65%;">Obten descuento de hasta 10% por invitar a tus amigos</div><button class="button button--outline" style="line-height: 16px; font-size:13px;">Invitar amigos</button></div><img src="img/promo2.jpg" style="width: 100%; border-radius:3px;"></div>
+            <ons-carousel swipeable auto-scroll var="carousel" style="position: relative; top:-50px;">
+              <ons-carousel-item><ons-card style="border-radius:15px; margin:10px 40px;"> <ons-row> <ons-col width="60px" style="padding-right:10px;"><div class="contenedor_icono"><ons-icon icon="ion-md-car"></ons-icon></div></ons-col> <ons-col class="neo"><div class="title" style="font-size:18px;">Auto de Ejemplo</div><span style="color:rgba(0,0,0,0.4); font-size:13px;">Informacion</span></ons-col> </ons-row></ons-card></ons-carousel-item>
+              <ons-carousel-item><ons-card style="border-radius:15px; margin:10px 40px;"> <ons-row> <ons-col width="60px" style="padding-right:10px;"><div class="contenedor_icono"><ons-icon icon="ion-md-car"></ons-icon></div></ons-col> <ons-col class="neo"><div class="title" style="font-size:18px;">Auto de Ejemplo 2</div><span style="color:rgba(0,0,0,0.4); font-size:13px;">Informacion</span></ons-col> </ons-row></ons-card></ons-carousel-item>
+              </ons-carousel>
+              <div class="menu">
+                <h2>¿Qué tipo de seguro quieres contratar?</h2>
+                <ons-row>
+                <ons-col width="33%"><ons-icon icon="ion-md-airplane"></ons-icon><span>Viajes</span></ons-col>
+                <ons-col width="33%"><ons-icon icon="ion-md-desktop"></ons-icon><span>Electrónica</span></ons-col>
+                <ons-col width="33%"><ons-icon icon="ion-md-car"></ons-icon><span>Automóvil</span></ons-col>
+                <ons-col width="33%"><ons-icon icon="ion-md-happy"></ons-icon><span>Vida</span></ons-col>
+                <ons-col width="33%"><ons-icon icon="ion-md-heart"></ons-icon><span>Salud</span></ons-col>
+                <ons-col width="33%"><ons-icon icon="ion-md-paw"></ons-icon><span>Mascota</span></ons-col>
+              </ons-row>
+
+              <button class="button button--outline" style="width: 80%; margin: 0 auto;">Otro tipo de seguro</button>
+            </div>
+
         </ons-page>
       </template>
       
       <template id="tab2.html">
-        <ons-page id="tonightPage">
+        <ons-page id="localesPage">
             <ons-carousel swipeable auto-scroll var="carousel">
               <div id="promo_carousel"></div>
               </ons-carousel>
-            <ons-list id="contenido_tonight">
+            <ons-list id="contenido_locales_principal">
+                <p style="text-align: center; height: 40px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto; width: 100%;">
                 
+                    <ons-progress-circular indeterminate></ons-progress-circular>
+                </p>
               </ons-list>
         </ons-page>
       </template>
 
       <template id="tab3.html">
-          <ons-page id="Tab2">
-            <p style="text-align: center;">
-              Tonight
+          <ons-page id="tonightPage">
+              
+            <p style="text-align: center; height: 40px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto; width: 100%;">
+                
+                <ons-progress-circular indeterminate></ons-progress-circular>
             </p>
           </ons-page>
         </template>
 
         <template id="tab4.html">
-            <ons-page id="Tab2">
-                <div class="profile-card">
-
-                    <img src="img/avatar.png" class="profile-image">
-                    <div class="profile-name">Carlos Ortez</div>
-                    <div class="profile-id">@carlos.ortez</div>
-                    <div class="profile-desc">Lic. en Informática Educativa / Ing. en Sistemas</div>
-            
-                  </div>
+            <ons-page id="propioPage">
+               
+              <div class="profile-card">
+                <div style="position:relative; z-index:1;">
+                        <img src="" class="profile-image2" id="imagen_perfil_propio">
+                        <div class="profile-name2" id="nombre_pperfil_ver_propio"></div>
+                        <div class="profile-id" id="email_perfil_ver_propio"></div>
+                </div>
+                </div>
             
                   <ons-list>
                     <ons-list-item>
                       <ons-row>
                         <ons-col class="info-col">
-                          <div class="info-num">87</div>
-                          <div class="info-unit">Comentarios</div>
+                          <div class="info-num" id="oon1">0</div>
+                          <div class="info-unit">Check In</div>
                         </ons-col>
-                        <ons-col class="info-col">
-                          <div class="info-num">40</div>
+                        <ons-col class="info-col" onclick="seguidos('','contenido_seguidores','cargador_seguidores')">
+                          <div class="info-num" id="oon2">0</div>
                           <div class="info-unit">Siguiendo</div>
                         </ons-col>
-                        <ons-col class="info-col">
-                          <div class="info-num">38</div>
+                        <ons-col class="info-col" onclick="seguidores('','contenido_seguidores','cargador_seguidores')">
+                          <div class="info-num" id="oon3">0</div>
                           <div class="info-unit">Seguidores</div>
                         </ons-col>
                       </ons-row>
