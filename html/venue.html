@@ -1,17 +1,33 @@
 <ons-page id="venuePage">
     <ons-toolbar>
         <div class="left"><ons-back-button></ons-back-button></div>
-        <div class="center"><img src="img/logo.png" height="30" style="position:relative; top:6px; font-weight: bold;"></div>
+        <div class="center" style="text-align: center; padding-left: 0!important;"><img src="img/logo.png" height="30" style="position:relative; top:6px; font-weight: bold;"></div>
+        <div class="right">
+          <ons-toolbar-button component="button/settings" style="display: none;"><ons-icon icon="md-notifications"></ons-icon></ons-toolbar-button>
+    </div>
         </ons-toolbar>
         <ons-progress-bar id="cargador_venue" indeterminate></ons-progress-bar>
-        <div id="mapa_venue" style="height:200px; width: 100%;"></div>
+        <div id="mapa_venue" style="height:200px; width: 100%;" class="animated-background"></div>
         <div id="contenido_venue" style="position: relative; top:-25px;">
     
         </div>
 
-        <ons-list modifier="inset">
+        <ons-list modifier="inset" style="margin-top:-10px;">
             <ons-list-header>Listado de asistencia</ons-list-header>
-            <div id="listado_asistencia"></div>
+            <div id="listado_asistencia"><p style="text-align: center; height: 40px; padding:30px 0; margin: auto; width: 100%;">
+                
+              <ons-progress-circular indeterminate></ons-progress-circular>
+          </p></div>
+          </ons-list>
+
+          <ons-list modifier="inset" style="margin-top:15px; margin-bottom: 15px;">
+            <ons-list-header>Chat del Venue</ons-list-header>
+            <div id="chat_venue"><p style="text-align: center; height: 40px; padding:30px 0; margin: auto; width: 100%;">
+                
+              <ons-progress-circular indeterminate></ons-progress-circular>
+          </p></div>
+            <div style="background:#333; padding:3px; border-top:1px solid #222;"><input type="text" value="" placeholder="Escribir un texto..." class="search-input search-input--material" style="width: 100%; background-image: none; padding-left:24px;" id="escribir_chat" onkeypress="escribir_chat(event)"></div>
+            <input type="hidden" id="venue_id" value="" name="venue_id">
           </ons-list>
 
         <div id="acciones_menu"></div>

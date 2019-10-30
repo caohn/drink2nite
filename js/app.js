@@ -1,4 +1,13 @@
-window.myApp = {};
+window.myApp = {
+
+  pushNotification: function(){
+
+    FCMPlugin.getToken(function(token){
+      alert(token); 
+  });
+  }
+
+};
 var storage = window.localStorage;
 document.addEventListener('init', function(event) {
   var page = event.target;
