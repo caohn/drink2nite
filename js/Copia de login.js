@@ -111,7 +111,7 @@ function registro_1() {
 	d = document.getElementById("dia").value;
 	m = document.getElementById("mes").value;
 	a = document.getElementById("year").value;
-	sexo = 1;
+	sexo = document.getElementById("sexo").value;
 	expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	if(nombre == '' || apellido == '' || email == '' || !expr.test(email) || password == '') {
 		if(nombre == '') { ons.notification.alert({

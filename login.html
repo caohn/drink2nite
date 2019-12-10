@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
 <title>Drink2Nite</title>
 <meta name="format-detection" content="telephone=no" />
 <meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=400, target-densitydpi=device-dpi" />
   <link rel="stylesheet" href="css/onsenui.css">
   <link rel="stylesheet" href="css/dark-onsen-css-components.min.css">
   <link rel="stylesheet" href="css/login.css"/>
   <script src="cordova.js"></script>
   <script src="js/jquery.js"></script>
   <script src="js/onsenui.min.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/app2.js"></script>
   <script src="js/login.js"></script>
 </head>
 <body>
@@ -35,10 +37,13 @@
                   <br>
                   <ons-button modifier="large" class="login-button" onclick="iniciar_sesion()">Iniciar sesión</ons-button>
                   <ons-button modifier="large" class="registrar-button" onclick="myNavigator.pushPage('crear.html', { animation : 'slide' } )">Crear cuenta</ons-button>
-                  <div class="otras_cuentas" style="display:none;">Iniciar sesión con tu cuenta de Facebook ó Twitter
-                  <ons-row>
-              <ons-col><ons-button modifier="large" class="facebook-button" onclick="deshabilitado()"><ons-icon icon="fa-facebook"></ons-icon> Facebook</ons-button></ons-col>
+                  <div class="otras_cuentas">Iniciar sesión ó registrarte con tu cuenta de Facebook
+                  <ons-row style="display: none;">
+              <ons-col><ons-button modifier="large" class="facebook-button" onclick="loginWithFB()"><ons-icon icon="fa-facebook"></ons-icon> Facebook</ons-button></ons-col>
               <ons-col><ons-button modifier="large" class="twitter-button" onclick="deshabilitado()"><ons-icon icon="fa-twitter"></ons-icon> Twitter</ons-button></ons-col>
+            </ons-row>
+            <ons-row>
+              <ons-col><ons-button modifier="large" class="facebook-button" onclick="loginWithFB()"><ons-icon icon="fa-facebook" style="margin-right: 4px;"></ons-icon> Registrarte con Facebook</ons-button></ons-col>
             </ons-row>
             </div>
                   <ons-button modifier="quiet" onclick="myNavigator.pushPage('recuperar.html', { animation : 'slide' } )" class="forgot-password">¿Olvidaste tu contraseña?</ons-button>

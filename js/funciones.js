@@ -9,6 +9,9 @@ function localizar(posicion) {
     storage.setItem('zoom_drink2nite', response2.zoom);
     storage.setItem('latitud_drink2nite', posicion.coords.latitude);
     storage.setItem('longitud_drink2nite', posicion.coords.longitude);
+    storage.setItem('nombres_drink2nite', response2.nombres);
+    storage.setItem('apellidos_drink2nite', response2.apellidos);
+    storage.setItem('foto_drink2nite', response2.foto);
     if(response2.notificacion > 0){ $('#notificaciones_contenedor').html('<span class="notification" style="position: absolute; top: 10px; left:6px;">'+response2.notificacion+'</span>'); } else { $('#notificaciones_contenedor').html(''); }
     $('.foto_central').attr('src',response2.foto);
     } });
@@ -32,7 +35,13 @@ function localizar(posicion) {
     $('.cargando_datos, .foto_central, .pulse_holder, ons-progress-bar').fadeOut(); } });
   }
   function editar_perfil() {
-    document.querySelector('#myNavigator').pushPage('html/configuracion.html', { animation : 'slide' });
+    document.querySelector('#myNavigator').pushPage('html/editar.html', { animation : 'slide', callback: function() {
+      $('#imagen_fondo').css('background-image', 'url(' + storage.getItem('foto_drink2nite') + ')');
+      $('#nombre').val(storage.getItem('nombres_drink2nite'));
+      $('#apellido').val(storage.getItem('apellidos_drink2nite'));
+      $('#email').val(storage.getItem('correo_drink2nite'));
+    }
+     });
   }
 
   function ayuda() {
@@ -116,10 +125,28 @@ function localizar(posicion) {
       $('#titulo_app').html(titulo2);
     });
     
-     $.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=local&id="+id+"&uid="+storage.getItem('usuario_drink2nite'), "dataType": "jsonp", success: function( response ) {
-        $('#cargador_local').fadeOut();
+     $.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=local&id="+id+"&uid="+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite'), "dataType": "jsonp", success: function( response ) {
+       if(response.promo) {
+          $('#mapa_venue').html('<ons-carousel swipeable auto-scroll var="carousel">'+response.promo+'</ons-carousel>').css("height", "auto");
+          $('#ons-card-info').css("top", "-5px");
+          $('.degradado_negro').css("bottom", "5px");
+       } else {
+        var latlng = new google.maps.LatLng(response.latitud, response.longitud);
+        var myMarkers = {"markers": [
+          {"latitude": ""+response.latitud+"", "longitude":""+response.longitud+"", "baloon_text": ""+response.local+""}]};
+      
+          $("#mapa_venue").mapmarker({
+          zoom	: 11,
+          center	: latlng,
+          markers	: myMarkers
+        });
+      }
+      if(response.tipo == 1) { icono = '<ons-icon icon="ion-md-beer" style="color:#FFF; font-size:16px; position:relative; top:-2px;"></ons-icon>'; } else { icono = '<ons-icon icon="ion-md-wine" style="color:#FFF; font-size:16px; position:relative; top:-2px;"></ons-icon>'; }
+      $('#titulo_local').html(titulo2);
+      $('#cargador_local').fadeOut();
         $('#imagen_local').attr('src',response.logo);
-        $('#descripcion_local').html(response.descripcion);
+        $('#descripcion_local').html(response.descripcion2);
+        $('#icono_local').html(icono);
         $('#direccion_local').html(response.direccion);
         $('#botones_local').html(response.botones);
         $('#carga_rapida_local').hide();
@@ -220,7 +247,7 @@ function buscar_local(event) {
 
         $.each(data, function(i, item) {
 
-          content2 += '<ons-card onclick="perfil_ver(\''+ item.id +'\', \''+ item.id +'\')"> <ons-row> <ons-col width="50px" style="padding-right:10px;"><img src="img/avatar.png" style="width: 100%; border-radius:30px;"> </ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.correo +'<br>'+ item.distancia +'km</span></ons-col> </ons-row></ons-card>';
+          content2 += '<ons-card onclick="perfil_ver(\''+ item.id +'\', \''+ item.id +'\')"> <ons-row> <ons-col width="50px" style="padding-right:10px;"><img src="'+item.foto+'" style="width: 100%; border-radius:30px;"> </ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.correo +'<br>'+ item.distancia +'km</span></ons-col> </ons-row></ons-card>';
             //alert(item.title);
         })
         modal.hide();
@@ -236,6 +263,7 @@ function perfil_ver(id,tipo) {
 	$('#carga_rapida_perfil').show();
   document.querySelector('#myNavigator').pushPage('html/perfiles.html', { animation: 'lift'});
 	$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=perfil&id="+id+"&tipo="+tipo+"&uid="+storage.getItem('usuario_drink2nite'), "dataType": "jsonp", success: function( response ) {
+    acciones = '<ons-action-sheet id="action-sheet-dialog" cancelable><ons-action-sheet-button onclick="reportar(\''+id+'\',1)" icon="ion-md-flash">Lenguaje inapropiado</ons-action-sheet-button><ons-action-sheet-button onclick="reportar(\''+id+'\',2)" icon="ion-md-hand">Comentarios racistas</ons-action-sheet-button><ons-action-sheet-button onclick="reportar(\''+id+'\',3)" icon="ion-md-man">Acoso</ons-action-sheet-button><ons-action-sheet-button onclick="reportar(\''+id+'\',4)" icon="ion-md-sad">Robo de identidad</ons-action-sheet-button></ons-action-sheet>';
 		$('#carga_rapida_perfil').hide();
 		$('#titulo_perfil').html(response.nombre+' '+response.apellido);
 		$('#imagen_perfil_ver').attr("src",response.foto);
@@ -249,6 +277,7 @@ function perfil_ver(id,tipo) {
     if(localStorage["usuario_drink2nite"] == id) { $('#botones_perfil').hide(); } else { $('#botones_perfil').show(); }
     $('#datos_animados_perfil').fadeOut();
     $('#datos_reales_perfil').delay(400).fadeIn();
+    $('#acciones_menu').html(acciones);
 	}
 	});
 }
@@ -381,7 +410,7 @@ function venue3(id) {
 	  }
 	});
 }
-function reportar(id) {
+function reportar(id,tipo) {
 	mensaje = '¡Usuario reportado!'; 
 	ons.notification.alert({
 	  message: mensaje,
@@ -391,8 +420,9 @@ function reportar(id) {
 	  callback: function() {
       var modal = document.querySelector('ons-modal');
 		  modal.show();
-		  $.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=reportar&id="+id+"&uid="+storage.getItem('usuario_drink2nite'), "dataType": "jsonp", success: function( response ) {
-				modal.hide();
+		  $.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=reportar&id="+id+"&uid="+storage.getItem('usuario_drink2nite')+"&tipo="+tipo, "dataType": "jsonp", success: function( response ) {
+        modal.hide();
+        document.getElementById('action-sheet-dialog').hide();
 		  } });
 	  }
 	});
@@ -443,7 +473,7 @@ function seguidores(id, contenedor, cargador){
   
         $.each(data, function(i, item) {
   
-          content += '<ons-list-item onclick="perfil_ver(\''+ item.id +'\', \''+ item.tipo +'\')"> <div class="left"> <img class="list-item__thumbnail" src="img/avatar.png"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + '</span><span class="list-item__subtitle">Seguidores: '+ item.seguidores +'</span> </div> </ons-list-item>';
+          content += '<ons-list-item onclick="perfil_ver(\''+ item.id +'\', \''+ item.tipo +'\')"> <div class="left"> <img class="list-item__thumbnail" src="'+item.foto+'"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + '</span><span class="list-item__subtitle">Seguidores: '+ item.seguidores +'</span> </div> </ons-list-item>';
             //alert(item.title);
         })
   
@@ -473,7 +503,7 @@ function seguidos(id, contenedor, cargador){
   
         $.each(data, function(i, item) {
   
-          content += '<ons-list-item onclick="perfil_ver(\''+ item.id +'\', \''+ item.tipo +'\')"> <div class="left"> <img class="list-item__thumbnail" src="img/avatar.png"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + '</span><span class="list-item__subtitle">Seguidores: '+ item.seguidores +'</span> </div> </ons-list-item>';
+          content += '<ons-list-item onclick="perfil_ver(\''+ item.id +'\', \''+ item.tipo +'\')"> <div class="left"> <img class="list-item__thumbnail" src="'+item.foto+'"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + '</span><span class="list-item__subtitle">Seguidores: '+ item.seguidores +'</span> </div> </ons-list-item>';
             //alert(item.title);
         })
   
@@ -499,7 +529,7 @@ function tonightv2() {
 
         $.each(data, function(i, item) {
 
-          content += '<ons-list-item onclick="perfil_ver(\''+ item.id +'\', \''+ item.tipo +'\')"> <div class="left"> <img class="list-item__thumbnail" src="img/avatar.png"> </div> <div class="center"> <span class="list-item__title" style="padding-bottom:10px;">' + item.completo + '</span> </div> <div class="right"><span style="font-size:20px;">'+ item.distancia +'</span><span style="font-size:11px">km</span></div></ons-list-item>';
+          content += '<ons-list-item onclick="perfil_ver(\''+ item.id +'\', \''+ item.tipo +'\')"> <div class="left"> <img class="list-item__thumbnail" src="'+item.foto+'"> </div> <div class="center"> <span class="list-item__title" style="padding-bottom:10px;">' + item.completo + '</span> </div> <div class="right"><span style="font-size:20px;">'+ item.distancia +'</span><span style="font-size:11px">km</span></div></ons-list-item>';
             //alert(item.title);
         })
         showData.empty();
@@ -661,7 +691,7 @@ function venue_ir(id){
           if(item.asistencia == 3) {
             asiste = '¡Voy a ir!';
           }
-          content2 += '<ons-list-item> <div class="left"> <img class="list-item__thumbnail" src="img/avatar.png"> </div> <div class="center"> <span class="list-item__title">' + item.completo + '</span><span class="list-item__subtitle">' + asiste + '</span> </div></ons-list-item>';
+          content2 += '<ons-list-item> <div class="left"> <img class="list-item__thumbnail" src="'+item.foto+'"> </div> <div class="center"> <span class="list-item__title">' + item.completo + '</span><span class="list-item__subtitle">' + asiste + '</span> </div></ons-list-item>';
             //alert(item.title);
         })
         showData2.empty();
@@ -677,7 +707,7 @@ function venue_ir(id){
         console.log(data);
 
         $.each(data, function(i, item) {
-          content3 += '<ons-list-item> <div class="left"> <img class="list-item__thumbnail" src="img/avatar.png"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + ' <span style="background:rgba(255,255,255,0.3); font-size:10px; padding:2px 4px; margin-left:5px; border-radius:3px; color:#FFF; margin-top:-2px;">'+item.fechac+'</span></span><span class="list-item__subtitle">' + item.texto + '</span> </div> </ons-list-item>';
+          content3 += '<ons-list-item> <div class="left"> <img class="list-item__thumbnail" src="'+item.foto+'"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + ' <span style="background:rgba(255,255,255,0.3); font-size:10px; padding:2px 4px; margin-left:5px; border-radius:3px; color:#FFF; margin-top:-2px;">'+item.fechac+'</span></span><span class="list-item__subtitle">' + item.texto + '</span> </div> </ons-list-item>';
             //alert(item.title);
         })
         showData3.empty();
@@ -722,9 +752,10 @@ function mis_venues() {
         console.log(data);
 
         $.each(data, function(i, item) {
-          if(item.activo == 0) boton_activo = '<button class="button button--light" style="line-height:16px; font-size:13px;">Cerrado</button>'; else boton_activo = '<button class="button button--outline" style="line-height:16px; font-size:13px; border-color:#16D558; background:#16D558; color:#FFF;">Abierto</button>';
-          boton_hace = '<button class="button button--light" style="line-height:16px; font-size:13px;">'+item.hace+'</button> ';
-          content2 += '<ons-list-item onclick="venue_ir(\''+ item.id_v +'\')"> <div class="left"> <img class="list-item__thumbnail" src="http://drink2nite.com/subidas/logos/' + item.logo + '"> </div> <div class="center"> <span class="list-item__title">' + item.local + '</span><span class="list-item__subtitle">' + boton_hace + boton_activo + '</span> </div> <div class="right"><span style="font-size:20px;">'+ item.distancia +'</span><span style="font-size:11px">km</span></div></ons-list-item>';
+          if(item.activo == 0) boton_activo = '<button class="button button--light" style="line-height:16px; font-size:13px;">Cerrado</button>'; else boton_activo = '<button class="button button--outline" style="line-height:16px; font-size:13px; border-color:#FE4B36; background:#FE4B36; color:#FFF;">Cerrar venue</button>';
+          
+          
+          content2 += '<ons-card onclick="venue_ir(\''+ item.id_v +'\')" style="margin:10px 12px 5px 12px;"><ons-row> <ons-col width="130px" style="padding-right:10px; position: relative;"><div style="position: relative;"><img src="http://drink2nite.com/subidas/logos/' + item.logo + '" class="list-item__thumbnail" style="width:110px; height:auto; position:relative; border-radius:5px;"></div></ons-col><ons-col><div class="title" style="font-size:18px;">' + item.local + '</div><span style="font-size:13px;">'+ item.local +'<br><span style="color:rgba(255,255,255,0.6);">'+item.direccion+'</span><br><div style="margin-top:8px;"><button class="button button--light" style="line-height:16px; font-size:13px;">'+item.hace+' </button> '+boton_activo+'</div></span></ons-col></ons-row><ons-row style="margin-top:20px;"><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-walk" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ item.distancia +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-6px; color:#999;">Distancia (km)</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-contacts" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ item.asistencia +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Confirmados</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-chatbubbles" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ item.chat +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Chats</span></ons-col></ons-row></ons-card>';
             //alert(item.title);
         })
         showData2.empty();
@@ -745,7 +776,7 @@ function mis_favoritos() {
         console.log(data);
 
         $.each(data, function(i, item) {
-          content2 += '<ons-list-item onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> <div class="left"> <img class="list-item__thumbnail" src="http://drink2nite.com/subidas/logos/' + item.logo + '"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + '</span><span class="list-item__subtitle">' + item.direccion + '</span> </div> <div class="right"><span style="font-size:20px;">'+ item.distancia +'</span><span style="font-size:11px">km</span></div></ons-list-item>';
+          content2 += '<ons-list-item onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> <div class="left"> <img style="width:75px; margin-right:10px;" src="http://drink2nite.com/subidas/logos/' + item.logo + '"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + '</span><span class="list-item__subtitle">' + item.direccion + '</span> </div> <div class="right"><span style="font-size:20px;">'+ item.distancia +'</span><span style="font-size:11px">km</span></div></ons-list-item>';
             //alert(item.title);
         })
         showData2.empty();
@@ -769,8 +800,8 @@ function mis_locales(id, contenedor, cargador){
         var content = '';
   
         $.each(data, function(i, item) {
-  
-          content += '<ons-card onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> <ons-row> <ons-col width="100px" style="padding-right:10px;"><img src="http://drink2nite.com/subidas/logos/'+ item.logo +'" style="width: 100%; border-radius:3px;"> </ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.descripcion +'<br><span style="color:rgba(255,255,255,0.8)">'+item.lugar+'</span></span></ons-col> </ons-row></ons-card>';
+          
+          content += '<ons-card> <ons-row> <ons-col width="100px" style="padding-right:10px;"><img src="http://drink2nite.com/subidas/logos/'+ item.logo +'" style="width: 100%; border-radius:3px;" onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> </ons-col> <ons-col><div class="title" style="font-size:18px;" onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.descripcion +'<br><span style="color:rgba(255,255,255,0.8)">'+item.lugar+'</span></span><div><button class="button button--outline" style="line-height:16px; font-size:13px; margin-top:10px;" onclick="editar_local(\''+ item.id +'\')"><ons-icon icon="ion-md-create" style="color:#FFF; margin-right:3px; position:relative; top:-2px;" ></ons-icon> Editar local</button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;" onclick="eliminar_local(\''+ item.id +'\', \''+ item.nombre +'\')"><ons-icon icon="ion-md-close" style="color:#999; margin-right:3px; position:relative; top:-2px;" ></ons-icon> Eliminar</button></div></ons-col> </ons-row></ons-card>';
             //alert(item.title);
         })
   
@@ -801,15 +832,172 @@ function escribir_chat(event) {
 
         $.each(data, function(i, item) {
 
-          content += '<ons-list-item> <div class="left"> <img class="list-item__thumbnail" src="img/avatar.png"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + ' <span style="background:rgba(255,255,255,0.3); font-size:10px; padding:2px 4px; margin-left:5px; border-radius:3px; color:#FFF; margin-top:-2px;">'+item.fechac+'</span></span><span class="list-item__subtitle">' + item.texto + '</span> </div> </ons-list-item>';
+          content += '<ons-list-item> <div class="left"> <img class="list-item__thumbnail" src="'+item.foto+'"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + ' <span style="background:rgba(255,255,255,0.3); font-size:10px; padding:2px 4px; margin-left:5px; border-radius:3px; color:#FFF; margin-top:-2px;">'+item.fechac+'</span></span><span class="list-item__subtitle">' + item.texto + '</span> </div> </ons-list-item>';
             //alert(item.title);
         })
         showData.empty();
         showData.append(content);
         modal.hide();
-        $('#escribir_chat').val('');
+        $('#escribir_chat').val('').blur();
         if(!content) showData.html('<div style="padding:20px; text-align:center;">No se encontraron chats en este venue</div>');
     });
     
   }
+}
+function editar_cuenta() {
+  $("#informacion_basica").submit(function( event ) {
+    event.preventDefault();
+    id = storage.getItem('usuario_drink2nite');
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    $.ajax({ url: "http://drink2nite.com/app/index.php?do=drink&act=editar_cuenta&id="+id, type:"POST", data: new FormData(this), contentType: false, cache: false, processData:false,
+    success: function(data) {
+      console.log(data);
+      modal.hide();
+      if(data == '("0")') {
+        ons.notification.alert({
+          message: '¡Tu correo electrónico es inválido!',
+          title: 'Inválido',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+      }
+      else {
+        ons.notification.alert({
+          message: '¡Tus datos se han actualizado con éxito!',
+          title: 'Actualizado',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+        recargar();
+        document.querySelector('#myNavigator').popPage();
+      }
+    } });
+  });
+}
+function editar_acceso() {
+  $("#informacion_acceso").submit(function( event ) {
+    event.preventDefault();
+    id = storage.getItem('usuario_drink2nite');
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    $.ajax({ url: "http://drink2nite.com/app/index.php?do=drink&act=editar_acceso&id="+id, type:"POST", data: new FormData(this), contentType: false, cache: false, processData:false,
+    success: function(data) {
+      console.log(data);
+      modal.hide();
+      if(data == '("0")') {
+        ons.notification.alert({
+          message: '¡La contraseña ingresada no es la actual!',
+          title: 'Error',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+      }
+      if(data == '("1")') {
+        ons.notification.alert({
+          message: '¡Las contraseña no coinciden!',
+          title: 'Error',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+      }
+      if(data == '("2")') {
+        ons.notification.alert({
+          message: '¡Tus datos se han actualizado con éxito!',
+          title: 'Actualizado',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+        recargar();
+        document.querySelector('#myNavigator').popPage();
+      }
+    } });
+  });
+}
+function editar_local(id) {
+  document.querySelector('#myNavigator').pushPage('html/editarlocal.html', {data: {title: 'Editar local'}, animation: 'slide', callback: function() {
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    var apiSrc = 'http://drink2nite.com/app/index.php?do=drink&act=datos_local&id='+id;
+  
+    $.getJSON(apiSrc, function(data) {
+      $.each(data, function(i, item) {
+        item.logo = 'http://drink2nite.com/subidas/logos/'+item.logo;
+        modal.hide();
+        $('#cargador_editarlocal').fadeOut();
+        $('#nombre').val(item.nombre);
+        $('#direccion').val(item.direccion);
+        $('#descripcion').val(item.descripcion);
+        $('#h_e').val(item.h_e);
+        $('#h_c').val(item.h_c);
+        $('#telefono').val(item.numero);
+        $('#pagina').val(item.pagina);
+        $('#id_local').val(id);
+        $('#imagen_fondo').css('background-image', 'url(' + item.logo + ')');
+        $('#imagen_fondo').css('background-position', 'center');
+      })
+    });
+  } 
+  });
+
+}
+function editar_local_guardar() {
+  $("#informacion_basica").submit(function( event ) {
+    event.preventDefault();
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    $.ajax({ url: "http://drink2nite.com/app/index.php?do=drink&act=editar_local", type:"POST", data: new FormData(this), contentType: false, cache: false, processData:false,
+    success: function(data) {
+      console.log(data);
+      modal.hide();
+      if(data == '("0")') {
+        ons.notification.alert({
+          message: '¡Alguna información suministrada es inválida!',
+          title: 'Inválido',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+      }
+      else {
+        ons.notification.alert({
+          message: '¡Los datos se han actualizado con éxito!',
+          title: 'Actualizado',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+        document.querySelector('#myNavigator').popPage();
+      }
+    } });
+  });
+}
+function eliminar_local(id, nombre) {
+  ons.notification.confirm({message:'¿Seguro que quieres eliminar '+nombre+'?', callback: function(answer) { switch (answer) { 
+    case 1: 
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    $.ajax({ url: "http://drink2nite.com/app/index.php?do=drink&act=eliminar_local&id="+id, type:"POST", data: new FormData(this), contentType: false, cache: false, processData:false,
+    success: function(data) {
+      modal.hide();
+      document.querySelector('#myNavigator').popPage();
+    } });
+    break; }}});
+}
+function enviar() {
+	$("#formulario_agregar").submit(function( event ) {
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+		$.ajax({ url: "http://drink2nite.com/app/index.php?do=drink&act=agregar_local", type:"POST", data: new FormData(this), contentType: false, cache: false, processData:false,
+			success: function(data) { 
+        console.log(data);
+        modal.hide();
+        document.querySelector('#myNavigator').popPage();
+        ons.notification.alert({
+          message: '¡Los datos de tu local se han agregado con éxito!',
+          title: 'Local agregado',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+			} });
+			event.preventDefault();
+	});
 }

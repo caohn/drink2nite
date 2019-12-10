@@ -5,7 +5,7 @@
     <title>Drink2Nite</title>
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=400, target-densitydpi=device-dpi" />
+    <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=400, target-densitydpi=device-dpi" />
   <link rel="stylesheet" href="css/onsenui.css">
   <link rel="stylesheet" href="css/dark-onsen-css-components.min.css">
   <link rel="stylesheet" href="css/inicio.css"/>
@@ -14,10 +14,12 @@
   <script src="js/app.js"></script>
   <script src="js/funciones.js"></script>
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyDHpSkI3_q35SfKPOOguHSjd5zm4D2QwNw"></script>
-  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery2.js"></script>
   <script type="text/javascript" src="js/mapmarker.jquery.js"></script>
+  <script type="text/javascript" src="js/FCM.js"></script>
+  <script type="text/javascript" src="js/jquery.geocomplete.marker.js"></script>
 </head>
-<body>
+<body onload="onLoad()">
   <ons-modal direction="up">
     <div><img src="img/logo.png" style="height:35px; margin:0 0 5px 0;"></div>
     <ons-icon icon="md-spinner" size="28px" spin></ons-icon>
