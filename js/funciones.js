@@ -238,7 +238,7 @@ function buscar_local(event) {
         showData.prepend('<ul class="list list--material"><li class="list-header list-header--material">Locales</li></ul>');
     });
 
-    var apiSrc2 = 'http://drink2nite.com/app/index.php?do=drink&act=busqueda_total_usuarios&busqueda='+inputVal+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite');
+    var apiSrc2 = 'http://drink2nite.com/app/index.php?do=drink&act=busqueda_total_usuarios&busqueda='+inputVal+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite')+'&id='+storage.getItem('usuario_drink2nite');
     var showData2 = $('#contenido_busqueda_usuarios');
 
     var content2 = '';
@@ -411,7 +411,7 @@ function venue3(id) {
 	});
 }
 function reportar(id,tipo) {
-	mensaje = '¡Usuario reportado!'; 
+	mensaje = '¡El usuario se ha bloqueado!'; 
 	ons.notification.alert({
 	  message: mensaje,
 	  title: 'Reportar',
@@ -423,6 +423,8 @@ function reportar(id,tipo) {
 		  $.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=reportar&id="+id+"&uid="+storage.getItem('usuario_drink2nite')+"&tipo="+tipo, "dataType": "jsonp", success: function( response ) {
         modal.hide();
         document.getElementById('action-sheet-dialog').hide();
+        document.querySelector('#myNavigator').popPage();
+        tonightv2();
 		  } });
 	  }
 	});

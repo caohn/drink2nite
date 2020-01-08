@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Drink2Nite</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="viewport-fit=cover, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=400, target-densitydpi=device-dpi" />
+  <link rel="stylesheet" href="css/onsenui.css">
+  <link rel="stylesheet" href="css/dark-onsen-css-components.min.css">
+  <link rel="stylesheet" href="css/inicio.css"/>
+  <link rel="stylesheet" href="css/login_inicio.css"/>
+  <script src="cordova.js"></script>
+  <script src="js/onsenui.min.js"></script>
+  <script src="js/app_login.js"></script>
+  <script src="js/funciones_login.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyDHpSkI3_q35SfKPOOguHSjd5zm4D2QwNw"></script>
+  <script type="text/javascript" src="js/jquery2.js"></script>
+  <script type="text/javascript" src="js/mapmarker.jquery.js"></script>
+  <script type="text/javascript" src="js/login_inicio.js"></script>
+  <script type="text/javascript" src="js/FCM.js"></script>
+  <script type="text/javascript" src="js/jquery.geocomplete.marker.js"></script>
+</head>
+<body onload="onLoad()">
+  <ons-modal direction="up">
+    <div><img src="img/logo.png" style="height:35px; margin:0 0 5px 0;"></div>
+    <ons-icon icon="md-spinner" size="28px" spin></ons-icon>
+    <br>
+    <br> Por favor, espere
+    <br>Solicitud en proceso...
+  </ons-modal>
+    <ons-navigator swipeable id="myNavigator" page="tab1.html">
+
+    <ons-page id="PrincipalPage">
+        <ons-toolbar>
+            <div class="left">
+                <ons-toolbar-button>
+                    <ons-icon component="button/settings" icon="md-menu" size="28px" fixed-width="false"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+          <div class="center"><img src="img/logo.png" height="30" style="position:relative; top:8px;"> </div>
+          <div class="right">
+              <ons-toolbar-button component="button/notificacion"><ons-icon icon="md-notifications" style="position:relative;" id="notificaciones_contenedor"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button component="button/search"><ons-icon icon="md-search"></ons-icon></ons-toolbar-button>
+            <!-- <ons-toolbar-button component="button/settings"><ons-icon icon="md-settings"></ons-icon></ons-toolbar-button> -->
+      </div></ons-toolbar>
+        /*badge="7"*/
+        <ons-tabbar id="myTabbar" swipeable position="auto">
+          <ons-tab page="tab1.html" label="Inicio" icon="md-map"  active>
+          </ons-tab>
+          <ons-tab page="tab2.html" label="Locales" icon="ion-md-globe" onclick="locales_mostrar_todo()">
+          </ons-tab>
+          <ons-tab page="tab3.html" label="Tonight" icon="md-fire" onclick="tonightv2()">
+            </ons-tab>
+            <ons-tab page="tab4.html" label="Mi Cuenta" icon="ion-md-contact" onclick="login_inicio()" style="display: none;">
+                </ons-tab>
+        </ons-tabbar>
+      </ons-page>
+      
+      <template id="tab1.html">
+        <ons-page id="Tab1">
+            <ons-progress-bar style="position: absolute; top:0; left:0; right:0;" indeterminate></ons-progress-bar>
+            	<img src="img/avatar.png" class="foto_central"><div class="pulse_holder"><div class="pulse_marker"><div class="pulse_rays"></div></div></div>
+  <div id="mapa" style="height:100%; width:100%; color:#000; background:#00573d;"></div>
+  
+  <div class="cargando_datos"><i class="fa fa-circle-notch fa-spin"></i> Cargando datos</div>
+  <div id="nohay_lugar"><div style="font-size:14px; padding-top:2px;">Lo sentimos, no se encontraron resultados</div></div>
+  
+  <div class="toolbar" style="background: transparent; position:absolute; top:auto; bottom:20px; display:none;" id="seleccionar_tipo">
+      <div class="toolbar__center">
+        <div class="segment" style="width:200px;margin:7px 50px;">
+          <div class="segment__item">
+            <input type="radio" class="segment__input" name="navi-segment-a" onclick="cambiar_tipo('1')" id="bar_check">
+            <div class="segment__button"><ons-icon icon="ion-md-beer"></ons-icon> Bar</div>
+          </div>
+    
+          <div class="segment__item">
+            <input type="radio" class="segment__input" name="navi-segment-a" onclick="cambiar_tipo('2')" id="club_check">
+            <div class="segment__button"><ons-icon icon="ion-md-wine"></ons-icon> Club</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+        </ons-page>
+      </template>
+      
+      <template id="tab2.html">
+        <ons-page id="localesPage">
+            <ons-carousel swipeable auto-scroll var="carousel">
+              <div id="promo_carousel"></div>
+              </ons-carousel>
+            <ons-list id="contenido_locales_principal">
+                <p style="text-align: center; height: 40px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto; width: 100%;">
+                
+                    <ons-progress-circular indeterminate></ons-progress-circular>
+                </p>
+              </ons-list>
+        </ons-page>
+      </template>
+
+      <template id="tab3.html">
+          <ons-page id="tonightPage">
+              <div id="tonigh_contenido">
+            <p style="text-align: center; height: 40px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto; width: 100%;">
+                
+                <ons-progress-circular indeterminate></ons-progress-circular>
+            </p></div><div id="tonigh_contenido2"></div>
+          </ons-page>
+        </template>
+
+        <template id="tab4.html">
+            <ons-page id="propioPage">
+               <div style="position: absolute; top:0; bottom:0; left:0; right:0; margin:auto; height:160px; width: 70%; text-align: center;">
+                Para poder ver más opciones, crear local, organizar un venue, comentar en los locales y muchísimas funciones más. Es necesario que inicies sesión o que crees una cuenta para poder ingresar.
+              <ons-button modifier="large" class="registrar-button" onclick="login_inicio()">Iniciar sesión</ons-button>    
+            </div>
+            </ons-page>
+          </template>
+
+          <template id="recuperar.html">
+            <ons-page id="RecuperarPage">
+            
+            <ons-toolbar><div class="left"><ons-back-button></ons-back-button></div><div class="center">Recuperar Contraseña</div></ons-toolbar>
+            
+            <div style="text-align: center">
+            
+                 <div class="formarea">
+                  <div class="form-row">
+                      <ons-input id="email2" type="email" placeholder="Correo electrónico" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+                  </div>
+          
+                  <div class="lucent">
+                  <div class="notas" id="notas2"></div>
+                    <p class="note">Ingresa tu correo electrónico, por este medio te enviaremos los pasos a seguir para recuperar tu contraseña. </p>
+                  </div>
+          
+                  <div class="vspc form-row">
+                    <ons-button modifier="light" class="btn-primary width-half" onclick="recuperar()">Enviar</ons-button>
+                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Regresar</ons-button>
+                  </div>
+                </div>
+            </div>
+            </ons-page>
+            </template>
+            
+             <template id="recuperar2.html">
+               <ons-page id="Recuperar2Page">
+            <ons-toolbar><div class="left"><ons-back-button></ons-back-button></div><div class="center">Código</div></ons-toolbar>
+            
+            <div style="text-align: center">
+            
+                 <div class="formarea">
+                  <div class="form-row">
+                   
+                         <div class="form-row">
+                            <ons-input id="codigo" type="number" placeholder="Código" modifier="underbar" style="width: 100%; ont-size:28px; text-align:center; font-weight:700;" autocomplete="off"></ons-input>
+                  </div>
+                  </div>
+          
+                  <div class="lucent">
+                  <div class="notas" id="notas2"></div>
+                    <p class="note">Ingresa el código que se ha enviado a tu correo electrónico, por favor no salirse de la aplicación. </p>
+                  </div>
+          
+                  <div class="vspc form-row">
+                    <ons-button modifier="light" class="btn-primary width-half" onclick="recuperar2()">Proceder</ons-button>
+                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Cancelar</ons-button>
+                  </div>
+                </div>
+            </div>
+            </ons-page>
+            </template>
+            
+             <template id="recuperar3.html">
+               <ons-page id="Recuperar3Page">
+            <ons-toolbar><div class="left"><ons-back-button></ons-back-button></div><div class="center">Nueva Contraseña</div></ons-toolbar>
+            
+            <div style="text-align: center">
+            
+                 <div class="formarea" style="height:220px;">
+                   <div class="form-row">
+                    <input type="password" class="text-input--underbar width-full" placeholder="Nueva contraseña" value="" id="nueva_password">
+                  </div>
+                    <div class="form-row">
+                    <input type="password" class="text-input--underbar width-full" placeholder="Repetir contraseña" value="" id="nueva_password2">
+                  </div>
+          
+                  <div class="lucent">
+                  <div class="notas" id="notas2"></div>
+                    <p class="note">Ingresa tu nueva contraseña para que podamos restablecerla y que accedas a tu cuenta. </p>
+                  </div>
+          
+                  <div class="vspc form-row">
+                    <ons-button modifier="light" class="btn-primary width-half" onclick="recuperar3()">Proceder</ons-button>
+                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Cancelar</ons-button>
+                  </div>
+                </div>
+            </div>
+            </ons-page>
+            </template>
+
+      
+      </ons-navigator>
+</body>
+</html>

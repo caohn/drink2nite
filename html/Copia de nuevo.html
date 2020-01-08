@@ -1,0 +1,36 @@
+<ons-page id="nuevoPage">
+    <ons-toolbar>
+        <div class="left"><ons-back-button></ons-back-button></div>
+        <div class="center">Crear nuevo local</div>
+        </ons-toolbar>
+        <iframe src="http://drink2nite.com/movil/local.html" frameborder="0" style="position:absolute; left:0; top:0; right:0; bottom:0; width:100%; height:100%;" id="iframe_agregar"></iframe>
+  <div style="font-size:12px; padding:15px 30px; display:none;">
+  <form method="post" action="" enctype="multipart/form-data" id="formulario_agregar">
+  <label class="label_titulo">Nombre del local:</label>
+<input type="text" class="text-input--underbar" name="nombre" value="" style="display:block; width:100%;" required>
+<label class="label_titulo">Dirección del local:</label>
+<input type="text" class="text-input--underbar" name="direccion" value="" style="display:block; width:100%;" required>
+<ons-row><ons-col><label class="label_titulo">Ciudad:</label><input type="text" class="text-input--underbar" name="ciudad" id="geocomplete" value="" style="display:block; width:100%;" autocomplete="off" required>
+<input name="lat" type="hidden" value="15.5">
+<input name="lng" type="hidden" value="-88.0333">
+<input name="formatted_address" type="hidden" value="">
+<input name="id" type="hidden" value=""></ons-col>
+<ons-col>
+<label class="label_titulo" style="margin-left:10%;">Categoria:</label>
+<select class="text-input--underbar" name="categoria" style="width:90%; margin-left:10%;"><option value="1">Bar</option><option value="2">Club</option></select>
+</ons-col>
+</ons-row>
+
+<label class="label_titulo">Coloca el indicador en el mapa del negocio</label>
+<div class="map_canvas" id="mapa2"></div>
+<ons-row><ons-col><label class="label_titulo">Abierto:</label><input type="time" class="text-input--underbar" name="hora1" value="" style="display:block; width:95%; margin-right:5%" required></ons-col>
+<ons-col><label class="label_titulo" style="margin-left:10%;">Cerrado:</label><input type="time" class="text-input--underbar" name="hora2" value="" style="display:block; margin-left:5%; width:95%;" required></ons-col>
+</ons-row>
+<label class="label_titulo">Logo:</label>
+<input type="file" class="text-input--underbar" name="logo" style="margin-bottom:10px; width:100%;">
+<label class="label_titulo">Descripción del negocio:</label>
+<textarea name="descripcion" class="text-input--underbar" style="height:80px; margin-bottom:10px; width:100%;"></textarea>
+<ons-button modifier="large--cta">Agregar local</ons-button>
+  </form>
+  </div>
+</ons-page>

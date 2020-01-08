@@ -1,25 +1,28 @@
-<ons-page id="nuevoPage">
+<ons-page id="editarlocalPage">
     <ons-toolbar>
-        <div class="left"><ons-back-button></ons-back-button></div>
-        <div class="center">Crear nuevo local</div>
-        </ons-toolbar>
-        <form id="formulario_agregar" action="" method="post" enctype="multipart/form-data">
+      <div class="left"><ons-back-button></ons-back-button></div>
+      <div class="center" style="text-align: center; padding-left: 0!important;"><img src="img/logo.png" height="30" style="position:relative; top:6px; font-weight: bold;"></div>
+      <div class="right">
+        <ons-toolbar-button component="button/settings" style="display: none;"><ons-icon icon="md-notifications"></ons-icon></ons-toolbar-button>
+  </div>
+      </ons-toolbar>
+      <ons-progress-bar id="cargador_editarlocal" indeterminate></ons-progress-bar>
+        <ons-list style="background: transparent; padding-top: 20px;">
+            
+          <form id="informacion_basica" action="" method="post" enctype="multipart/form-data">
           <div style="text-align: center; padding:15px 0;">
           <div class="kt-avatar kt-avatar--outline" id="imagen">
             <div class="kt-avatar__holder" id="imagen_fondo" style="background-image: url(img/avatar.png)"></div>
             <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Agregar logo">
               <i class="fa fa-camera"></i>
-              <input type="file" id="imagen" name="logo" accept="image/*">
+              <input type="file" id="imagen" name="imagen" accept="image/*">
             </label>
             <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancelar">
               <i class="fa fa-times"></i>
             </span>
           </div>
         </div>
-        <input name="lat" type="hidden" value="">
-        <input name="lng" type="hidden" value="">
-        <input name="formatted_address" type="hidden" value="">
-        <input name="id" type="hidden" value=""></td><td>
+        
         <div style="padding: 0 25px;">
           <ons-list-header style="text-transform: uppercase; font-size:10px; background: transparent;">Información básica del local</ons-list-header>
 
@@ -27,26 +30,16 @@
       <ons-input id="nombre" name="nombre" type="text" placeholder="Nombre del Local" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
   </div>
   <div class="form-row" style="margin-top:25px;">
-    <textarea class="textarea" rows="5" id="descripcion" name="descripcion" placeholder="Descripción del Local" style="width: 100%; background:transparent; border-color:rgb(136, 136, 136);"></textarea>
+    <textarea class="textarea" rows="5" id="descripcion" name="descripcion" placeholder="Textarea" style="width: 100%; background:transparent; border-color:rgb(136, 136, 136);">
+    </textarea>
 </div>
-
-<div class="form-row" style="margin-top:25px;">
-  <label>Categoría:</label>
-  <ons-select name="categoria" style="width: 100%;"><option value="1">Bar</option><option value="2">Club</option></ons-select>
-</div>
-
-<div class="form-row" style="margin-top:25px;">
-  <ons-input id="geocomplete" name="ciudad" type="text" placeholder="Ciudad del Local" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
-</div>
-
-<div class="map_canvas" id="mapa2" style="width:100%; height:260px;"></div>
 
 <ons-row style="margin-top:25px;">
   <ons-col width="50%">
-<ons-input id="h_e" name="hora1" type="time" placeholder="Hora entrada" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+<ons-input id="h_e" name="h_e" type="time" placeholder="Hora entrada" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
 </ons-col>
 <ons-col width="50%">
-<ons-input id="h_c" name="hora2" type="time" placeholder="Hora cierre" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+<ons-input id="h_c" name="h_c" type="time" placeholder="Hora cierre" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
 </ons-col></ons-row>
 
 <div class="form-row" style="margin-top:25px;">
@@ -62,9 +55,10 @@
 </div>
 <input type="hidden" id="id_local" name="id_local" value="">
 
-  <div class="vspc form-row" style="text-align:center; margin-top:25px; margin-bottom: 30px;">
-    <button class="button button--material" onClick="enviar()">Crear nuevo local</button>
+  <div class="vspc form-row" style="text-align:center; margin-top:25px; margin-bottom: 20px;">
+    <button class="button button--material" onClick="editar_local_guardar()">Actualizar datos del local</button>
   </div>
 </form>
- 
+  </div>
+          </ons-list>
 </ons-page>

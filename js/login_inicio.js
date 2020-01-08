@@ -1,4 +1,3 @@
-var storage = window.localStorage;
 function iniciar_sesion() {
 	email = document.getElementById("email").value;
 	password = document.getElementById("password").value;

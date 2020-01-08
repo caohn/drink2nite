@@ -1,0 +1,25 @@
+<ons-page id="LoginPage" class="gradiant">
+  <ons-toolbar modifier="cover-content transparent">
+    <div class="left"><ons-back-button></ons-back-button></div>
+    </ons-toolbar>
+  <div class="login-form">
+ <img src="img/logo.png" class="logo">
+     <div class="notas" id="notas"></div>
+     <ons-input id="email" type="email" placeholder="Correo electrónico" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+     <ons-input id="password" placeholder="Contraseña" type="password" modifier="underbar" style="width: 100%;">
+</ons-input>
+     <br>
+     <ons-button modifier="large" class="login-button" onclick="iniciar_sesion()">Iniciar sesión</ons-button>
+     <ons-button modifier="large" class="registrar-button" onclick="myNavigator.pushPage('html/crear.html', { animation : 'slide' } )">Crear cuenta</ons-button>
+     <div class="otras_cuentas">Iniciar sesión ó registrarte con tu cuenta de Facebook
+     <ons-row style="display: none;">
+ <ons-col><ons-button modifier="large" class="facebook-button" onclick="loginWithFB()"><ons-icon icon="fa-facebook"></ons-icon> Facebook</ons-button></ons-col>
+ <ons-col><ons-button modifier="large" class="twitter-button" onclick="deshabilitado()"><ons-icon icon="fa-twitter"></ons-icon> Twitter</ons-button></ons-col>
+</ons-row>
+<ons-row>
+ <ons-col><ons-button modifier="large" class="facebook-button" onclick="loginWithFB()"><ons-icon icon="fa-facebook" style="margin-right: 4px;"></ons-icon> Registrarte con Facebook</ons-button></ons-col>
+</ons-row>
+</div>
+     <ons-button modifier="quiet" onclick="myNavigator.pushPage('recuperar.html', { animation : 'slide' } )" class="forgot-password">¿Olvidaste tu contraseña?</ons-button>
+   </div>
+ </ons-page>

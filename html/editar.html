@@ -1,0 +1,59 @@
+<ons-page id="editarPage">
+    <ons-toolbar>
+      <div class="left"><ons-back-button></ons-back-button></div>
+      <div class="center" style="text-align: center; padding-left: 0!important;"><img src="img/logo.png" height="30" style="position:relative; top:6px; font-weight: bold;"></div>
+      <div class="right">
+        <ons-toolbar-button component="button/settings" style="display: none;"><ons-icon icon="md-notifications"></ons-icon></ons-toolbar-button>
+  </div>
+      </ons-toolbar>
+        <ons-list style="background: transparent; padding-top: 20px;">
+            
+          <form id="informacion_basica" action="" method="post" enctype="multipart/form-data">
+          <div style="text-align: center; padding:15px 0;">
+          <div class="kt-avatar kt-avatar--outline" id="imagen">
+            <div class="kt-avatar__holder" id="imagen_fondo" style="background-image: url(img/avatar.png)"></div>
+            <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Agregar imagen">
+              <i class="fa fa-camera"></i>
+              <input type="file" id="imagen" name="imagen" accept="image/*">
+            </label>
+            <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancelar">
+              <i class="fa fa-times"></i>
+            </span>
+          </div>
+        </div>
+        
+        <div style="padding: 0 25px;">
+          <ons-list-header style="text-transform: uppercase; font-size:10px; background: transparent;">Información básica</ons-list-header>
+        <ons-row>
+          <ons-col width="50%">
+      <ons-input id="nombre" name="nombre" type="nombre" placeholder="Nombre" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+    </ons-col>
+      <ons-col width="50%">
+      <ons-input id="apellido" name="apellido" type="apellido" placeholder="Apellido" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+    </ons-col></ons-row>
+    <div class="form-row" style="margin-top:25px;">
+      <ons-input id="email" name="email" type="email" placeholder="Correo electrónico" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+  </div>
+  <div class="vspc form-row" style="text-align:center; margin-top:25px;">
+    <button class="button button--material" onClick="editar_cuenta()">Actualizar datos de cuenta</button>
+  </div>
+</form>
+
+    <ons-list-header style="text-transform: uppercase; font-size:10px; background: transparent; margin-top:25px;">Información de acceso</ons-list-header>
+    <form id="informacion_acceso" action="" method="post">
+    <div class="form-row">
+      <ons-input id="password1" name="password1" type="password" placeholder="Contraseña actual" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+  </div>
+  <div class="form-row" style="margin-top:25px;">
+    <ons-input id="password2" name="password2" type="password" placeholder="Nueva contraseña" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+</div>
+<div class="form-row" style="margin-top:25px;">
+  <ons-input id="password3" name="password3" type="password" placeholder="Repetir contraseña" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+</div>
+  <div class="vspc form-row" style="text-align:center; margin-top:25px;">
+    <button class="button button--material" onClick="editar_acceso()">Actualizar contraseña</button>
+  </div>
+</form>
+  </div>
+          </ons-list>
+</ons-page>

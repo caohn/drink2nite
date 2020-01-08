@@ -4,29 +4,23 @@
     <div class="center" id="titulo_app"><img src="img/logo.png" height="30" style="position:relative; top:10px;"></div>
     </ons-toolbar>
         <ons-progress-bar id="cargador_local" indeterminate></ons-progress-bar>
-       <div style="position: relative;"><div class="degradado_negro"></div>
-        <div id="mapa_venue" style="height:180px; width: 100%;" class="animated-background"></div></div>
-        <ons-card style="position: relative; top:-25px; margin:0; background:#181818;" id="ons-card-info">
-          
-          <ons-row style="position:relative; z-index:12; display: none;" id="datos_reales"> 
-            <ons-col width="130px" style="padding-right:10px; position: relative;"><div style="position: relative;"><img src="" class="list-item__thumbnail" style="width:110px; height:auto; position:relative; margin-top:-30px; border-radius:5px; background:transparent; padding: 4px;" id="imagen_local"><span style="position: absolute; bottom:-5px; right:0px; width: 20px; height: 20px; padding:3px; background: #08573e; border-radius:20px; border:2px solid #181818; text-align: center;" id="icono_local"></span></div></ons-col> 
-            
-            <ons-col><div class="title" style="font-size:18px;" id="titulo_local"></div><div id="valor_valoracion" style="font-size:13px;"></div><span style="font-size:13px; margin-top:15px; color:#999;" id="direccion_local"></span><br><span style="color:rgba(255,255,255,0.6); font-size:12px;" id="descripcion_local" class="profile-name2"></span><div style="padding:8px 0;" id="botones_local"></div></ons-col>
-          </ons-row>
-       
-
-        <ons-row style="min-height: 90px; position: relative; z-index:11;" id="datos_animados"> 
-          <ons-col width="130px" style="position: relative;"><div class="animated-background foto_animado" style="width:110px; height:110px; position:relative; margin-top:-30px;"></div></ons-col> 
-
-          <ons-col><div class="animated-background valoracion_animado"></div> <div class="animated-background texto_animado"></div><div class="animated-background direccion_animado"></div></ons-col>
-        </ons-row>
+        <div class="profile-card">
+          <div style="min-height: 170px; position: relative;">
+          <div style="position:relative; z-index:1; display: none;" id="datos_reales">
+                  <img src="" class="profile-image3" id="imagen_local">
+                  <div id="valor_valoracion" style="font-size:13px;"></div>
+                  <div class="profile-name2" id="descripcion_local" style="margin:5px 0 0 0;"></div>
+                  <div class="profile-id" id="direccion_local"></div>
+          </div>
+          <div style="position: absolute; left: 0; right: 0; z-index:1;" id="datos_animados">
+            <div class="animated-background foto_animado"></div>
+            <div><div class="animated-background valoracion_animado"></div></div>
+            <div><div class="animated-background texto_animado"></div></div>
+            <div class="animated-background direccion_animado"></div>
     
-        </ons-card>
-
-
-        <div class="profile-card" style="padding-top:0;">
-
-                
+                </div>
+            </div>
+                <div style="background:#000; padding:8px 20px;" id="botones_local"></div>
                 <div style="font-size:12px; padding:15px 30px;">
                 <div class="opacidad"><div id="publicador"> 
                 <form id="publicar_publicacion" action="" method="post" enctype="multipart/form-data">

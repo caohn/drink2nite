@@ -104,15 +104,6 @@ function recuperar3() {
 	}
 }
 function registro_1() {
-	checkBox = document.getElementById("acepto");
-	if (checkBox.checked != true){ 
-		ons.notification.alert({
-			message: 'Debes de aceptar los términos y condiciones',
-			title: 'Error',
-			buttonLabel: 'OK',
-			animation: 'default',
-	   }); return false;
-	}
 	nombre = document.getElementById("nombre").value;
 	apellido = document.getElementById("apellido").value;
 	email = document.getElementById("email3").value;
@@ -120,7 +111,7 @@ function registro_1() {
 	d = document.getElementById("dia").value;
 	m = document.getElementById("mes").value;
 	a = document.getElementById("year").value;
-	sexo = 1;
+	sexo = document.getElementById("sexo").value;
 	expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	if(nombre == '' || apellido == '' || email == '' || !expr.test(email) || password == '') {
 		if(nombre == '') { ons.notification.alert({
@@ -202,17 +193,3 @@ function loginWithFB() {
         alert(JSON.stringify(error));
     });
 }
-function terminos() { 
-	document.querySelector('#myNavigator').pushPage('html/terminos.html', { animation : 'slide', callback: function() {
-		$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=terminos", "dataType": "jsonp", success: 
-      function( response ) {
-          contenido = '#contenido_terminos';
-          cargador = '#cargador_terminos';
-          $(contenido).html(response.contenido);
-          $(cargador).fadeOut();
-      }
-    });
-	  }
-	   });
-    
-  }
