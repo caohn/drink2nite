@@ -15,7 +15,7 @@ function iniciar_sesion() {
 		buttonLabel: 'OK',
 		animation: 'default',
    }); return false; }
-	$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=iniciar_sesion&password="+password+"&email="+email, "dataType": "jsonp", success: function( response ) {
+	$.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=iniciar_sesion&password="+password+"&email="+email, "dataType": "jsonp", success: function( response ) {
 	if(response.mensaje == 0) { 
 	ons.notification.alert({
 		 message: 'Los datos ingresados son incorrectos',
@@ -53,7 +53,7 @@ function recuperar() {
    }); return false; }
 	var modal = document.querySelector('ons-modal');
 	modal.show();
-	$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=recuperar&email="+email, "dataType": "jsonp", success: function( response ) {
+	$.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=recuperar&email="+email, "dataType": "jsonp", success: function( response ) {
 			if(response.mensaje == 0) { 
 				ons.notification.alert({ message: 'El correo electrónico ingresado es incorrecto', title: 'Error', buttonLabel: 'OK', animation: 'default' }); 
 			} else {
@@ -82,7 +82,7 @@ function recuperar3() {
 	password2 = document.getElementById("nueva_password2").value;
 	if(password == password2) { 
 	modal.show();
-	$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=nueva_password&usuario="+localStorage["usuario_drink2nite_recuperar"]+"&password="+password, "dataType": "jsonp", success: function( response ) {
+	$.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=nueva_password&usuario="+localStorage["usuario_drink2nite_recuperar"]+"&password="+password, "dataType": "jsonp", success: function( response ) {
 		storage.setItem('usuario_drink2nite', storage.getItem('usuario_drink2nite_recuperar'));
 		storage.setItem('nombre_drink2nite', response.nombre);
 		storage.setItem('correo_drink2nite', response.correo);
@@ -148,7 +148,7 @@ function registro_1() {
 			animation: 'default',
 	   }); return false; }
 	}
-	$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=registro&nombre="+nombre+"&apellido="+apellido+"&email="+email+"&password="+password+"&d="+d+"&m="+m+"&a="+a+"&sexo="+sexo, "dataType": "jsonp", success: function( response ) {
+	$.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=registro&nombre="+nombre+"&apellido="+apellido+"&email="+email+"&password="+password+"&d="+d+"&m="+m+"&a="+a+"&sexo="+sexo, "dataType": "jsonp", success: function( response ) {
 		if(response.mensaje == 0) { 
 		storage.setItem('usuario_drink2nite', response.usuario);
 		storage.setItem('nombre_drink2nite', response.nombre);
@@ -181,7 +181,7 @@ function loginWithFB() {
 				id = userData.id;
 				var modal = document.querySelector('ons-modal');
 				modal.show();
-                $.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=login_fb&nombre="+nombre+"&email="+correo+"&fecha="+fecha+"&id="+id+"&foto="+foto, "dataType": "jsonp", success: function( response ) {
+                $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=login_fb&nombre="+nombre+"&email="+correo+"&fecha="+fecha+"&id="+id+"&foto="+foto, "dataType": "jsonp", success: function( response ) {
 					storage.setItem('usuario_drink2nite', response.usuario);
 					storage.setItem('nombre_drink2nite', response.nombre);
 					storage.setItem('correo_drink2nite', response.correo);
@@ -204,7 +204,7 @@ function loginWithFB() {
 }
 function terminos() { 
 	document.querySelector('#myNavigator').pushPage('html/terminos.html', { animation : 'slide', callback: function() {
-		$.ajax({ "url": "http://drink2nite.com/app/index.php?do=drink&act=terminos", "dataType": "jsonp", success: 
+		$.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=terminos", "dataType": "jsonp", success: 
       function( response ) {
           contenido = '#contenido_terminos';
           cargador = '#cargador_terminos';
