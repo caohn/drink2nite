@@ -1,0 +1,124 @@
+<?php
+
+$lang = array (
+
+'charset'			=>	"UTF-8",
+'wysiwyg_language'	=>  "en",
+
+'titulo' => "Administrative Panel",
+'m1' => "Users",
+'m2' => "Configuration",
+'total' => "Total of",
+'usuarios' => "users",
+'desarrollado' => "Developed by",
+'nada' => "Select a user to manage",
+'crear' => "Create a new user",
+'d1' => "User",
+'d2' => "Full name",
+'d3' => "Password",
+'us1' => "Full name",
+'us2' => "E-mail",
+'us3' => "Phone",
+'usnd' => "Not available",
+'cerrar' => "Close",
+'crear2' => "Create user",
+'deshabilitar' => "Disable",
+'habilitar' => "Enable",
+'eliminar' => "Remove account",
+'pregunta' => "Sure you want to delete your account?",
+'pregunta2' => "Sure you want to do this?",
+'ultima_conexion' => "Last connection",
+'no_reg' => "Not reported",
+'cambiar_password' => "Change password",
+'cambiar_boton' => "Change",
+'default' => "English",
+'seleccionar_idiomar' => "Selecciona el idioma",
+'i1' => "Spanish",
+'i2' => "English",
+);
+
+////////////
+// Calendario y Fechas
+$langdate = array (
+'January'		=>	"January",
+'February'		=>	"February",
+'March'			=>	"March",
+'April'			=>	"April",
+'May'			=>	"May",
+'June'			=>	"June",
+'July'			=>	"July",
+'August'		=>	"August",
+'September'	=>	"September",
+'October'		=>	"October",
+'November'		=>	"November",
+'December'		=>	"December",
+
+'Jan'		=>	"Jan",
+'Feb'		=>	"Feb",
+'Mar'		=>	"Mar",
+'Apr'		=>	"Apr",
+'Jun'		=>	"Jun",
+'Jul'		=>	"Jul",
+'Aug'		=>	"Aug",
+'Sep'		=>	"Sep",
+'Oct'		=>	"Oct",
+'Nov'		=>	"Nov",
+'Dec'		=>	"Dec",
+
+'Sunday'	=>	"Sunday",
+'Monday'	=>	"Monday",
+'Tuesday'	=>	"Tuesday",
+'Wednesday'	=>	"Wednesday",
+'Thursday'	=>	"Thursday",
+'Friday'	=>	"Friday",
+'Saturday'	=>	"Saturday",
+
+'Sun'	=>	"Sun",
+'Mon'	=>	"Mon",
+'Tue'	=>	"Tue",
+'Wed'	=>	"Wed",
+'Thu'	=>	"Thu",
+'Fri'	=>	"Fri",
+'Sat'	=>	"Sat",
+
+);
+
+# Para el Archivo o Calendario
+$f  = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+$r  = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+$langdateshortweekdays = array("Do","Lu","Ma","Mi","Ju","Vi","Sa");
+
+////////////
+// Ubicación de transcripción
+$langtranslit = array(
+'à' => 'a', 'á' => 'b', 'â' => 'v',
+'ã' => 'g', 'ä' => 'd', 'å' => 'e',
+'¸' => 'e', 'æ' => 'zh', 'ç' => 'z',
+'è' => 'i', 'é' => 'y', 'ê' => 'k',
+'ë' => 'l', 'ì' => 'm', 'í' => 'n',
+'î' => 'o', 'ï' => 'p', 'ð' => 'r',
+'ñ' => 's', 'ò' => 't', 'ó' => 'u',
+'ô' => 'f', 'õ' => 'h', 'ö' => 'c',
+'÷' => 'ch', 'ø' => 'sh', 'ù' => 'sch',
+'ü' => '', 'û' => 'y', 'ú' => '',
+'ý' => 'e', 'þ' => 'yu', 'ÿ' => 'ya',
+"¿" => "yi", "º" => "ye",
+
+'À' => 'A', 'Á' => 'B', 'Â' => 'V',
+'Ã' => 'G', 'Ä' => 'D', 'Å' => 'E',
+'¨' => 'E', 'Æ' => 'Zh', 'Ç' => 'Z',
+'È' => 'I', 'É' => 'Y', 'Ê' => 'K',
+'Ë' => 'L', 'Ì' => 'M', 'Í' => 'N',
+'Î' => 'O', 'Ï' => 'P', 'Ð' => 'R',
+'Ñ' => 'S', 'Ò' => 'T', 'Ó' => 'U',
+'Ô' => 'F', 'Õ' => 'H', 'Ö' => 'C',
+'×' => 'Ch', 'Ø' => 'Sh', 'Ù' => 'Sch',
+'Ü' => '', 'Û' => 'Y', 'Ú' => '',
+'Ý' => 'E', 'Þ' => 'Yu', 'ß' => 'Ya',
+"¯" => "yi", "ª" => "ye",
+);
+
+$relates_word = array ('e' => '[eå¸]', 'r' => '[rã]', 't' => '[tò]', 'y' => '[yó]','u' => '[uè]','i' => '[i1l!]','o' => '[oî0]','p' => '[pð]','a' => '[aà]','s' => '[s5]','w' => 'w','q' => 'q','d' => 'd','f' => 'f','g' => '[gä]','h' => '[hí]','j' => 'j','k' => '[kê]','l' => '[l1i!]','z' => 'z','x' => '[xõ%]','c' => '[cñ]','v' => '[vuè]','b' => '[bâü]','n' => '[nïë]','m' => '[mì]','é' => '[éèu]','ö' => 'ö','ó' => '[óy]','å' => '[åe¸]','í' => '[íh]','ã' => '[ãr]','ø' => '[øwù]','ù' => '[ùwø]','ç' => '[ç3ý]','õ' => '[õx%]','ú' => '[úü]','ô' => 'ô','û' => '(û|ü[i1l!]?)','â' => '[âb]','à' => '[àa]','ï' => '[ïn]','ð' => '[ðp]','î' => '[îo0]','ë' => '[ën]','ä' => 'ä','æ' => 'æ','ý' => '[ý3ç]','ÿ' => '[ÿ]','÷' => '[÷4]','ñ' => '[ñc]','ì' => '[ìm]','è' => '[èué]','ò' => '[òt]','ü' => '[üb]','á' => '[á6]','þ' => '(þ|[!1il][oî0])','¸' => '[¸åe]','1' => '[1il!]','2' => '2','3' => '[3çý]','4' => '[4÷]','5' => '[5s]','6' => '[6á]','7' => '7','8' => '8','9' => '9','0' => '[0îo]','_' => '_','#' => '#','%' => '[%x]','^' => '[^~]','(' => '[(]',')' => '[)]','=' => '=','.' => '[.]','-' => '-','[' => '[\[]');
+
+@setlocale(LC_ALL, "es");
+?>

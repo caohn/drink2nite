@@ -1,0 +1,477 @@
+[08-Oct-2019 00:27:28 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '/home3/drink2ni/public_html/app/archivos/data/dbconfig2.php' (include_path='.:/opt/php56/lib/php') in /home3/drink2ni/public_html/app/archivos/direccion2.php on line 12
+[26-Oct-2019 15:43:54 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:43:54 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:44:06 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:44:06 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:44:07 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:44:07 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:44:55 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:44:55 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:44:56 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:44:56 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:45:39 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:45:39 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:46:13 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:46:13 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:46:13 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[26-Oct-2019 15:46:13 America/Chicago] PHP Parse error:  syntax error, unexpected '$db' (T_VARIABLE) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 1082
+[07-Nov-2019 22:13:59 America/Chicago] PHP Fatal error:  Cannot redeclare foto() (previously declared in /home3/drink2ni/public_html/app/archivos/modules/functions.php:57) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 94
+[07-Nov-2019 22:20:37 America/Chicago] PHP Fatal error:  Cannot redeclare foto() (previously declared in /home3/drink2ni/public_html/app/archivos/modules/functions.php:57) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 94
+[07-Nov-2019 22:22:24 America/Chicago] PHP Fatal error:  Cannot redeclare foto() (previously declared in /home3/drink2ni/public_html/app/archivos/modules/functions.php:57) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 94
+[07-Nov-2019 22:22:31 America/Chicago] PHP Fatal error:  Cannot redeclare foto() (previously declared in /home3/drink2ni/public_html/app/archivos/modules/functions.php:57) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 94
+[07-Nov-2019 22:27:13 America/Chicago] PHP Fatal error:  Cannot redeclare foto() (previously declared in /home3/drink2ni/public_html/app/archivos/modules/functions.php:57) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 94
+[07-Nov-2019 22:27:40 America/Chicago] PHP Fatal error:  Cannot redeclare foto() (previously declared in /home3/drink2ni/public_html/app/archivos/modules/functions.php:57) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 94
+[07-Nov-2019 22:33:11 America/Chicago] PHP Fatal error:  Cannot redeclare foto() (previously declared in /home3/drink2ni/public_html/app/archivos/modules/functions.php:57) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 94
+[07-Nov-2019 22:33:26 America/Chicago] PHP Fatal error:  Cannot redeclare foto() (previously declared in /home3/drink2ni/public_html/app/archivos/modules/functions.php:57) in /home3/drink2ni/public_html/app/archivos/modules/drink.php on line 94
+[14-Nov-2019 19:46:32 America/Chicago] PHP Deprecated:  preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead in /home3/drink2ni/public_html/app/archivos/classes/parse.class.php on line 200
+[15-Nov-2019 14:20:13 America/Chicago] PHP Deprecated:  preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead in /home3/drink2ni/public_html/app/archivos/classes/parse.class.php on line 200
+[15-Nov-2019 14:29:56 America/Chicago] PHP Deprecated:  preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead in /home3/drink2ni/public_html/app/archivos/classes/parse.class.php on line 200
+[21-Nov-2019 22:29:15 America/Chicago] PHP Deprecated:  preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead in /home3/drink2ni/public_html/app/archivos/classes/parse.class.php on line 200
+[21-Nov-2019 22:30:45 America/Chicago] PHP Deprecated:  preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead in /home3/drink2ni/public_html/app/archivos/classes/parse.class.php on line 200
+[21-Nov-2019 22:36:10 America/Chicago] PHP Deprecated:  preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead in /home3/drink2ni/public_html/app/archivos/classes/parse.class.php on line 200
+[21-Nov-2019 22:39:41 America/Chicago] PHP Deprecated:  preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead in /home3/drink2ni/public_html/app/archivos/classes/parse.class.php on line 200
+[23-Nov-2019 17:38:50 America/Chicago] PHP Deprecated:  preg_replace(): The /e modifier is deprecated, use preg_replace_callback instead in /home3/drink2ni/public_html/app/archivos/classes/parse.class.php on line 200
+[02-Jan-2020 23:11:16 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:11:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:11:16 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:11:16 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(810): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:11:24 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:11:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(136): db->query('UPDATE usuarios...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:11:24 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:11:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT nombre, ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(162): db->super_query('SELECT nombre, ...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:11:36 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:11:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT nombre, ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(162): db->super_query('SELECT nombre, ...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:11:36 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:11:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(136): db->query('UPDATE usuarios...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:11:36 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:11:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:11:36 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:11:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(810): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:12:02 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:12:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:12:02 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:12:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(810): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:12:04 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:12:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT bloquead...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(895): db->super_query('SELECT bloquead...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:15:09 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:15:09 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:15:17 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:15:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(136): db->query('UPDATE usuarios...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:15:17 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:15:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT nombre, ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(162): db->super_query('SELECT nombre, ...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:26:56 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:26:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:26:56 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:26:56 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(810): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:27:47 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:27:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(810): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[02-Jan-2020 23:27:47 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[02-Jan-2020 23:27:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:47:27 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:47:27 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:47:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(810): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:47:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:47:28 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:47:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(136): db->query('UPDATE usuarios...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:47:28 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:47:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT nombre, ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(162): db->super_query('SELECT nombre, ...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:47:52 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:47:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(930): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:47:52 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:47:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT bloquead...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(895): db->super_query('SELECT bloquead...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:06 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(810): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:06 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:42 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(810): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:42 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:43 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(136): db->query('UPDATE usuarios...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:43 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT nombre, ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(162): db->super_query('SELECT nombre, ...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:52 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(834): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:52 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(810): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:57 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT bloquead...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(895): db->super_query('SELECT bloquead...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 00:48:57 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 00:48:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(930): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 01:02:42 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 01:02:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(930): db->query('SELECT (6371 * ...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#5 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 01:02:42 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 01:02:42 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT bloquead...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(895): db->super_query('SELECT bloquead...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 01:04:24 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
+[23-Jan-2020 01:04:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT favorito...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(412): db->super_query('SELECT favorito...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 01:07:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT favorito...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(409): db->super_query('SELECT favorito...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 01:07:14 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php:21
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(55): db->connect('caohn_drink2nit...', 'C0pias26', 'caohn_drink2nit...', 'localhost')
+#1 /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php(104): db->query('SELECT favorito...')
+#2 /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php(409): db->super_query('SELECT favorito...')
+#3 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include('/home1/caohn/ot...')
+#4 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#5 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#6 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/classes/mysql.class.php on line 21
+[23-Jan-2020 01:13:13 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_num_rows() in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php:373
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include()
+#1 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#2 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#3 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php on line 373
+[23-Jan-2020 01:13:26 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_num_rows() in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php:373
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include()
+#1 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#2 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#3 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php on line 373
+[23-Jan-2020 01:13:52 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_num_rows() in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php:373
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include()
+#1 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#2 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#3 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php on line 373
+[23-Jan-2020 01:13:57 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_num_rows() in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php:373
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include()
+#1 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#2 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#3 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php on line 373
+[23-Jan-2020 01:15:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_num_rows() in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php:373
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include()
+#1 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#2 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#3 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php on line 373
+[23-Jan-2020 01:15:33 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_num_rows() in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php:373
+Stack trace:
+#0 /home1/caohn/otros/drink2nite/app/archivos/motor.php(26): include()
+#1 /home1/caohn/otros/drink2nite/app/archivos/direccion.php(39): require_once('/home1/caohn/ot...')
+#2 /home1/caohn/otros/drink2nite/app/index.php(18): require_once('/home1/caohn/ot...')
+#3 {main}
+  thrown in /home1/caohn/otros/drink2nite/app/archivos/modules/drink.php on line 373
+[01-Feb-2020 02:59:03 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; class_image has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/modules/disminucion.php on line 6
+[02-Feb-2020 15:36:00 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; ParseFilter has a deprecated constructor in /home1/caohn/otros/drink2nite/app/archivos/classes/parse.class.php on line 6
