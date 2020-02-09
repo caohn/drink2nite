@@ -13,12 +13,12 @@
           <ons-list-header style="text-transform: uppercase; font-size:10px;">Configuración de Locales</ons-list-header>
             <ons-list-item modifier="chevron" onclick="nuevo()" tappable>Agregar local</ons-list-item>
             <ons-list-item modifier="chevron" onclick="mis_locales('','contenido_mislocales','cargador_mislocales')" tappable>Mis locales</ons-list-item>
-            <ons-list-item modifier="chevron" tappable>Promociones</ons-list-item>
+            <ons-list-item modifier="chevron" onclick="document.querySelector('#myNavigator').pushPage('html/mispromos.html', {data: {title: 'Mis Locales'}, animation: 'slide', callback: function() { mis_promos(); } });" tappable>Mis promociones</ons-list-item>
           </ons-list>
 
           <ons-list-header style="text-transform: uppercase; font-size:10px;">Configuración de Usuario</ons-list-header>
           <ons-list-item modifier="chevron" onclick="editar_perfil()" tappable>Editar perfil</ons-list-item>
             <ons-list-item modifier="chevron" onclick="cerrar_sesion()" tappable>Cerrar sesión</ons-list-item>
           </ons-list>
-          <div style="color:rgba(255,255,255,0.5); font-size:12px; text-align: center; padding: 10px;">Drink2Nite v.1.0. / Creada en Honduras</div>
+          <div style="color:rgba(255,255,255,0.5); font-size:12px; text-align: center; padding: 10px;">Drink2Nite v.1.1.2. / Creada en Honduras</div>
 </ons-page>
