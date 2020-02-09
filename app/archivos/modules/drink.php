@@ -131,12 +131,18 @@ Estimado <b style="color:#666;">'.$verificar['nombre'].'</b>, hemos recibido tu 
 	return $foto;
 	}
 	$db->query("UPDATE usuarios_drink2nite set latitud='".$_REQUEST['latitud']."', longitud='".$_REQUEST['longitud']."' where id='".$_REQUEST['id']."'"); 
-	$busqueda_db = $db->query( "SELECT id, nombre, latitud, longitud, tipo, logo, (6371 * ACOS( 
+	/* $busqueda_db = $db->query( "SELECT id, nombre, latitud, longitud, tipo, logo, (6371 * ACOS( 
 									SIN(RADIANS(latitud)) * SIN(RADIANS(".$_REQUEST['latitud'].")) 
 									+ COS(RADIANS(longitud - ".$_REQUEST['longitud'].")) * COS(RADIANS(latitud)) 
 									* COS(RADIANS(".$_REQUEST['latitud']."))
 									)
-					   ) AS distance FROM locales WHERE tipo = '".$_REQUEST['tipo']."' HAVING distance < 10 ORDER BY distance ASC" );
+					   ) AS distance FROM locales WHERE tipo = '".$_REQUEST['tipo']."' HAVING distance < 10 ORDER BY distance ASC" ); */
+					   $busqueda_db = $db->query( "SELECT id, nombre, latitud, longitud, tipo, logo, (6371 * ACOS( 
+						SIN(RADIANS(latitud)) * SIN(RADIANS(".$_REQUEST['latitud'].")) 
+						+ COS(RADIANS(longitud - ".$_REQUEST['longitud'].")) * COS(RADIANS(latitud)) 
+						* COS(RADIANS(".$_REQUEST['latitud']."))
+						)
+		   ) AS distance FROM locales HAVING distance < 10 ORDER BY distance ASC" );
 	while ( $row = $db->get_row($busqueda_db) ) {
 	$venue = $db->super_query( "SELECT id, usuario FROM venue WHERE id_l = '".$row['id']."' AND usuario = '".$_REQUEST['id']."' AND activo = '1'");
 	if($row['logo']) { $logo_url = 'http://www.drink2nite.com/subidas/logos/'.$row['logo']; $logo = foto($logo_url); }else {
@@ -150,7 +156,9 @@ Estimado <b style="color:#666;">'.$verificar['nombre'].'</b>, hemos recibido tu 
 	}
 	$datos = $db->super_query( "SELECT nombre, apellido, sexo FROM usuarios_drink2nite WHERE id = '".$_COOKIE['usuario_drink2nite']."'");
 	if($datos['sexo'] == 1 || $datos['sexo'] == 0) { $icon_u = 'img/user.png'; } else { $icon_u = 'img/user1.png'; }
-	$accion[] = array("latitude" => $_REQUEST['latitud'], "longitude" => $_REQUEST['longitud'], "icon" => $icon_u, "logo" => "", "nombre" => "", "distancia" => "", "baloon_text" => '<div class="burbuja"><b style="display:block; text-align:center;"><span>Bienvenido,</span> '.$datos['nombre'].'</b></div>');
+
+	if($_REQUEST['id'] != 'undefined') { $baloon = '<div class="burbuja"><button class="button button--material" onclick="nuevo()"><i class="fa fa-plus"></i> Agregar nuevo local</button></div>'; } else { $baloon = '<div class="burbuja"><button class="button button--material" onclick="login_inicio()" style="background:#009900;"><i class="fa fa-user"></i> Iniciar sesión</button></div>'; }
+	$accion[] = array("latitude" => $_REQUEST['latitud'], "longitude" => $_REQUEST['longitud'], "icon" => $icon_u, "logo" => "", "nombre" => "", "distancia" => "", "baloon_text" => $baloon);
 	$accion = $_GET['callback'].'('.json_encode($accion).')';
 	break;
 	
@@ -732,6 +740,21 @@ if(!$eventos) { $eventos = 0; } else { $eventos = $eventos;}
 	$accion = array("eventos" => $eventos, "boton" => $final_boton);
 	$accion = $_GET['callback'].'('.json_encode($accion).')';
 	break;
+
+	case 'listado_locales':
+		$id = $_REQUEST['id'];
+		$someArray = [];
+		$locales_db = $db->query( "SELECT id, nombre FROM locales WHERE propietario = '".$id."'");
+		while ( $row = $db->get_row($locales_db) ) {
+			
+	array_push($someArray, [
+	  'nombre'   => $row['nombre'],
+	  'id' => $row['id']
+	]);
+  }
+
+$accion = json_encode($someArray);
+		break;
 	
 	case 'agregar_local':
 function getExtension($str) {
@@ -1152,6 +1175,27 @@ case 'tonightv2':
 	$accion = json_encode($someArray);
 	break;
 
+	case 'mispromos':
+		$id = $_REQUEST['id'];
+	
+		$someArray = [];
+	
+		$locales_db = $db->query( "SELECT promos.id, promos.imagen, locales.nombre, locales.logo, locales.id as id_l FROM promos INNER JOIN locales ON locales.id = promos.id_l WHERE locales.propietario = '".$id."'" );
+	
+		while ( $row = $db->get_row($locales_db) ) {
+					
+						array_push($someArray, [
+						  'nombre'   => $row['nombre'],
+						  'logo' => $row['logo'],
+						  'imagen' => $row['imagen'],
+						  'id_l' => $row['id_l'],
+						  'id' => $row['id']
+						]);
+					  
+					}
+		$accion = json_encode($someArray);
+		break;
+
 	case 'chat_venue':
 	$id = $_REQUEST['id'];
 
@@ -1311,6 +1355,77 @@ case 'tonightv2':
 		$accion = array("mensaje" => $accion);
 		$accion = $_GET['callback'].'('.json_encode($accion).')';
 	break;
+
+	case 'guardar_promo':
+		function getExtension($str) {
+			 $i = strrpos($str,".");
+			 if (!$i) { return ""; } 
+			 $l = strlen($str) - $i;
+			 $ext = substr($str,$i+1,$l);
+			 return $ext;
+		}
+		$file = $_FILES['imagen']['name'];
+		
+		$local = $_POST['locales-select'];
+		if($file) {
+			$ext = getExtension($file);
+			$archivo_final = md5($file.time());
+			$archivo = $archivo_final.'.'.$ext;
+			move_uploaded_file($_FILES['imagen']['tmp_name'],"../subidas/promos/".$archivo);
+			$db->query( "INSERT INTO promos (id_l, imagen, estado) values ('{$local}','{$archivo}','1')" );
+			$accion = '1';
+		} else {
+			$accion = 0;
+		}
+		
+		$accion = $_GET['callback'].'('.json_encode($accion).')';
+		
+		break;
+
+		case 'eliminar_promo':
+			$id = $_REQUEST['id'];
+			$row = $db->super_query( "SELECT imagen FROM promos WHERE id = '".$id."'");
+			unlink('../subidas/promos/'.$row['imagen'].'');
+			$db->query("DELETE FROM promos WHERE id='".$id. "'");
+				$accion = 1;
+				$accion = array("mensaje" => $accion);
+				$accion = $_GET['callback'].'('.json_encode($accion).')';
+			break;
+
+			case 'actualizar_promo':
+				function getExtension($str) {
+					 $i = strrpos($str,".");
+					 if (!$i) { return ""; } 
+					 $l = strlen($str) - $i;
+					 $ext = substr($str,$i+1,$l);
+					 return $ext;
+				}
+				$file = $_FILES['imagen']['name'];
+				
+				$id = $_POST['id_promo'];
+				$row = $db->super_query( "SELECT imagen FROM promos WHERE id = '".$id."'");
+				unlink('../subidas/promos/'.$row['imagen'].'');
+				if($file) {
+					$ext = getExtension($file);
+					$archivo_final = md5($file.time());
+					$archivo = $archivo_final.'.'.$ext;
+					move_uploaded_file($_FILES['imagen']['tmp_name'],"../subidas/promos/".$archivo);
+					$db->query("UPDATE promos set imagen='".$archivo."' where id='".$id."'");
+					$accion = '1';
+				} else {
+					$accion = 0;
+				}
+				
+				$accion = $_GET['callback'].'('.json_encode($accion).')';
+				
+				break;
+
+				case 'ip':
+					$accion = array("ip" => $_SERVER['REMOTE_ADDR']);
+					
+					$accion = $_GET['callback'].'('.json_encode($accion).')';
+					
+					break;
 }
 
 $tpl->result['main'] = utf8_encode($accion);
