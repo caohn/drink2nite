@@ -24,15 +24,39 @@ function localizar(posicion) {
       center	: latlng,
       markers	: myMarkers
     }); } else { 
-    $('#nohay_lugar').fadeIn();
+    var myToast = document.querySelector('myToast');
+    myToast.toggle();
     $("#mapa").mapmarker({
       zoom	: 15,
       center	: latlng
     });
     }
     $('#recargador').removeClass('fa-spin');
-    $('#seleccionar_tipo').fadeIn();
+    /* $('#seleccionar_tipo, #fab_ref').fadeIn(); */
+    $('#fab_ref').fadeIn();
+    $('#icono_refrescar_vueltas').hide();
+    $('#icono_refrescar').show();
     $('.cargando_datos, .foto_central, .pulse_holder, ons-progress-bar').fadeOut(); } });
+  }
+  function refrescar() {
+    $('#icono_refrescar').hide();
+    $('#icono_refrescar_vueltas').show();
+    
+    ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Cargando datos', { timeout: 1000, animation: 'ascend' });
+      if (navigator.geolocation) {
+        var options = {
+          enableHighAccuracy: false,
+          timeout: 50000,
+          maximumAge: 0
+        };
+        navigator.geolocation.getCurrentPosition(localizar, error, options); 
+        visita = storage.getItem('visita_drink2nite');
+        if(!visita) {
+          storage.setItem('visita_drink2nite', 1);
+          window.location ="inicio.html";
+        }
+      }  
+        else { alert('No soportado!'); }
   }
   function editar_perfil() {
     document.querySelector('#myNavigator').pushPage('html/editar.html', { animation : 'slide', callback: function() {
@@ -61,10 +85,54 @@ function localizar(posicion) {
   }
 
   function error(mensaje)  {
-    console.log("Codigo de error: "+mensaje.code+" msj:"+mensaje.message);
-    window.location ="inicio_login.html";
+      /* window.location ="inicio.html"; 
+    location.reload(); */
+    ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Tiempo de espera agotado, obteniendo datos de tu IP.', { timeout: 1000, animation: 'ascend' });
+    localizar_ip();
   }
-  
+  function localizar_ip() {
+    ip = storage.getItem('ip_drink2nite');
+    $.ajax({ "url": "http://api.ipstack.com/"+ip+"?access_key=6a1bbce76235bb02c84cd913d1d1671b", "dataType": "jsonp", success: function( response ) {
+      tipo = storage.getItem('tipo'); 
+      if(tipo == null) { tipo = 1; }
+      if(tipo == 1) { $('#bar_check').attr('checked','checked'); }
+      if(tipo == 2) { $('#club_check').attr('checked','checked'); }
+      $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=datos&id="+localStorage["usuario_drink2nite"]+"&latitud="+response.latitude+"&longitud="+response.longitude+"&tipo="+tipo, "dataType": "jsonp", success: 			function( response2 ) { 
+      
+      storage.setItem('fecha_drink2nite', response2.fecha);
+      storage.setItem('zoom_drink2nite', response2.zoom);
+      storage.setItem('latitud_drink2nite', response.latitude);
+      storage.setItem('longitud_drink2nite', response.longitude);
+      storage.setItem('nombres_drink2nite', response2.nombres);
+      storage.setItem('apellidos_drink2nite', response2.apellidos);
+      storage.setItem('foto_drink2nite', response2.foto);
+      if(response2.notificacion > 0){ $('#notificaciones_contenedor').html('<span class="notification" style="position: absolute; top: 10px; left:6px;">'+response2.notificacion+'</span>'); } else { $('#notificaciones_contenedor').html(''); }
+      $('.foto_central').attr('src',response2.foto);
+      } });
+      var latlng = new google.maps.LatLng(response.latitude, response.longitude);
+      $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=locales&tipo="+tipo+"&latitud="+response.latitude+"&longitud="+response.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
+      if(response != null) { 
+      var myMarkers = {"markers": response};
+      $("#mapa").mapmarker({
+        zoom	: parseFloat(storage.getItem('zoom_drink2nite')),
+        center	: latlng,
+        markers	: myMarkers
+      }); } else { 
+      var myToast = document.querySelector('myToast');
+      myToast.toggle();
+      $("#mapa").mapmarker({
+        zoom	: 15,
+        center	: latlng
+      });
+      }
+      $('#recargador').removeClass('fa-spin');
+      /* $('#seleccionar_tipo, #fab_ref').fadeIn(); */
+      $('#fab_ref').fadeIn();
+      $('#icono_refrescar_vueltas').hide();
+      $('#icono_refrescar').show();
+      $('.cargando_datos, .foto_central, .pulse_holder, ons-progress-bar').fadeOut(); } });
+    } });
+  }
   function html(id, contenido, cargador) { 
     $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act="+id, "dataType": "jsonp", success: 
       function( response ) {

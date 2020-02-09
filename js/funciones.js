@@ -24,14 +24,18 @@ function localizar(posicion) {
       center	: latlng,
       markers	: myMarkers
     }); } else { 
-    $('#nohay_lugar').fadeIn();
+    var myToast = document.querySelector('myToast');
+    myToast.toggle();
     $("#mapa").mapmarker({
       zoom	: 15,
       center	: latlng
     });
     }
     $('#recargador').removeClass('fa-spin');
-    $('#seleccionar_tipo').fadeIn();
+    /* $('#seleccionar_tipo, #fab_ref').fadeIn(); */
+    $('#fab_ref').fadeIn();
+    $('#icono_refrescar_vueltas').hide();
+    $('#icono_refrescar').show();
     $('.cargando_datos, .foto_central, .pulse_holder, ons-progress-bar').fadeOut(); } });
   }
   function editar_perfil() {
@@ -43,7 +47,26 @@ function localizar(posicion) {
     }
      });
   }
+function refrescar() {
+  $('#icono_refrescar').hide();
+  $('#icono_refrescar_vueltas').show();
 
+  ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Cargando datos', { timeout: 1000, animation: 'ascend' });
+    if (navigator.geolocation) {
+      var options = {
+        enableHighAccuracy: false,
+        timeout: 50000,
+        maximumAge: 0
+      };
+      navigator.geolocation.getCurrentPosition(localizar, error, options); 
+      visita = storage.getItem('visita_drink2nite');
+      if(!visita) {
+        storage.setItem('visita_drink2nite', 1);
+        window.location ="inicio.html";
+      }
+    }  
+      else { alert('No soportado!'); }
+}
   function ayuda() {
     document.querySelector('#myNavigator').pushPage('html/ayuda.html', { animation : 'slide' });
   }
@@ -60,11 +83,91 @@ function localizar(posicion) {
     document.querySelector('#myNavigator').pushPage('html/nuevo.html', { animation : 'slide' });
   }
 
-  function error(mensaje)  {
-    console.log("Codigo de error: "+mensaje.code+" msj:"+mensaje.message);
-    window.location ="inicio.html";
+  function agregar_promo() {
+    document.querySelector('#myNavigator').pushPage('html/crearpromo.html', { animation : 'slide', callback: function() {
+      var modal = document.querySelector('ons-modal');
+      modal.show();
+      
+      var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=listado_locales&id='+storage.getItem('usuario_drink2nite');
+      var showData = $('#locales-select');
+
+
+    $.getJSON(apiSrc, function(data) {
+        console.log(data);
+
+        var content = '';
+
+        $.each(data, function(i, item) {
+
+          content += '<option value="'+item.id+'">' + item.nombre + '</option>';
+            //alert(item.title);
+        })
+
+        showData.empty();
+        showData.append(content);
+        modal.hide();
+        if(!content) {
+          ons.notification.alert({
+            message: '¡Debes de tener locales agregados a tu cuenta para continuar!',
+            title: 'Error',
+            buttonLabel: 'OK',
+            animation: 'default'
+          });
+          document.querySelector('#myNavigator').popPage();
+        }
+    });
+    } });
   }
-  
+
+  function error(mensaje)  {
+    /* window.location ="inicio.html"; 
+    location.reload(); */
+    ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Tiempo de espera agotado, obteniendo datos de tu IP.', { timeout: 1000, animation: 'ascend' });
+    localizar_ip();
+  }
+  function localizar_ip() {
+    ip = storage.getItem('ip_drink2nite');
+    $.ajax({ "url": "http://api.ipstack.com/"+ip+"?access_key=6a1bbce76235bb02c84cd913d1d1671b", "dataType": "jsonp", success: function( response ) {
+      tipo = storage.getItem('tipo'); 
+      if(tipo == null) { tipo = 1; }
+      if(tipo == 1) { $('#bar_check').attr('checked','checked'); }
+      if(tipo == 2) { $('#club_check').attr('checked','checked'); }
+      $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=datos&id="+localStorage["usuario_drink2nite"]+"&latitud="+response.latitude+"&longitud="+response.longitude+"&tipo="+tipo, "dataType": "jsonp", success: 			function( response2 ) { 
+      
+      storage.setItem('fecha_drink2nite', response2.fecha);
+      storage.setItem('zoom_drink2nite', response2.zoom);
+      storage.setItem('latitud_drink2nite', response.latitude);
+      storage.setItem('longitud_drink2nite', response.longitude);
+      storage.setItem('nombres_drink2nite', response2.nombres);
+      storage.setItem('apellidos_drink2nite', response2.apellidos);
+      storage.setItem('foto_drink2nite', response2.foto);
+      if(response2.notificacion > 0){ $('#notificaciones_contenedor').html('<span class="notification" style="position: absolute; top: 10px; left:6px;">'+response2.notificacion+'</span>'); } else { $('#notificaciones_contenedor').html(''); }
+      $('.foto_central').attr('src',response2.foto);
+      } });
+      var latlng = new google.maps.LatLng(response.latitude, response.longitude);
+      $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=locales&tipo="+tipo+"&latitud="+response.latitude+"&longitud="+response.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
+      if(response != null) { 
+      var myMarkers = {"markers": response};
+      $("#mapa").mapmarker({
+        zoom	: parseFloat(storage.getItem('zoom_drink2nite')),
+        center	: latlng,
+        markers	: myMarkers
+      }); } else { 
+      var myToast = document.querySelector('myToast');
+      myToast.toggle();
+      $("#mapa").mapmarker({
+        zoom	: 15,
+        center	: latlng
+      });
+      }
+      $('#recargador').removeClass('fa-spin');
+      /* $('#seleccionar_tipo, #fab_ref').fadeIn(); */
+      $('#fab_ref').fadeIn();
+      $('#icono_refrescar_vueltas').hide();
+      $('#icono_refrescar').show();
+      $('.cargando_datos, .foto_central, .pulse_holder, ons-progress-bar').fadeOut(); } });
+    } });
+  }
   function html(id, contenido, cargador) { 
     $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act="+id, "dataType": "jsonp", success: 
       function( response ) {
@@ -481,7 +584,7 @@ function seguidores(id, contenedor, cargador){
   
         showData.empty();
         showData.append(content);
-        if(!content) showData.html('<div style="padding:20px; text-align:center;">No hay usuarios</div>');
+        if(!content) showData.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No hay usuarios</ons-button></div>');
         $(cargador2).fadeOut();
   
     });
@@ -511,7 +614,7 @@ function seguidos(id, contenedor, cargador){
   
         showData.empty();
         showData.append(content);
-        if(!content) showData.html('<div style="padding:20px; text-align:center;">No hay usuarios</div>');
+        if(!content) showData.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No hay usuarios</ons-button></div>');
         $(cargador2).fadeOut();
   
     });
@@ -601,7 +704,7 @@ function notificacion(){
   
         showData.empty();
         showData.append(content);
-        if(!content) showData.html('<div style="padding:20px; text-align:center;">No hay notificaciones</div>');
+        if(!content) showData.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No hay notificaciones</ons-button></div>');
         $(cargador2).fadeOut();
   
     
@@ -762,7 +865,7 @@ function mis_venues() {
         })
         showData2.empty();
         showData2.append(content2);
-        if(!content2) showData2.html('<div style="padding:20px; text-align:center;">No se encontraron venues</div>');
+        if(!content2) showData2.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No se encontraron venues</ons-button></div>');
         cargador2.hide();
     });
   }});
@@ -783,7 +886,7 @@ function mis_favoritos() {
         })
         showData2.empty();
         showData2.append(content2);
-        if(!content2) showData2.html('<div style="padding:20px; text-align:center;">No se encontraron favoritos</div>');
+        if(!content2) showData2.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No se encontraron favoritos</ons-button></div>');
         cargador2.hide();
     });
   }});
@@ -809,12 +912,41 @@ function mis_locales(id, contenedor, cargador){
   
         showData.empty();
         showData.append(content);
-        if(!content) showData.html('<div style="padding:20px; text-align:center;">No hay locales en tu cuenta</div>');
+        if(!content) showData.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No hay locales en tu cuenta</ons-button></div>');
         $(cargador2).fadeOut();
   
     });
   } 
   });
+  
+
+}
+function mis_promos(id){ 
+  if(!id) id = storage.getItem('usuario_drink2nite');
+  
+    var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=mispromos&id='+id;
+    var showData = $('#contenido_mispromos');
+    var cargador2 = $('#cargador_mispromos');
+  
+  
+    $.getJSON(apiSrc, function(data) {
+        console.log(data);
+  
+        var content = '';
+  
+        $.each(data, function(i, item) {
+          
+          content += '<ons-list-item><div class="center"><span class="list-item__title"><img class="list-item__thumbnail" style="display:inline-block; margin-top:-6px;" align="middle" src="https://drink2nite.com/subidas/logos/'+ item.logo +'" onclick="local(\''+ item.id_l +'\', \''+ item.nombre +'\')"> <span style="margin:0 0 0 5px; display:inline-block;">' + item.nombre + '</span></span><span class="list-item__subtitle"><img src="https://drink2nite.com/subidas/promos/'+ item.imagen +'" style="width:100%; margin-top:5px; border-radius:10px;"><div style="margin-top:7px;"><ons-button modifier="material" onclick="editar_promo(\''+ item.id +'\', \'https://drink2nite.com/subidas/promos/'+ item.imagen +'\')"><i class="fa fa-pencil"></i> Editar</ons-button> <ons-button modifier="material" onclick="eliminar_promo(\''+ item.id +'\')"><i class="fa fa-trash"></i> Eliminar</ons-button></div></span></div></ons-list-item>';
+            //alert(item.title);
+        })
+  
+        showData.empty();
+        showData.append(content);
+        if(!content) showData.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No hay promociones en tu cuenta</ons-button></div>');
+        $(cargador2).fadeOut();
+  
+    });
+  
   
 
 }
@@ -977,8 +1109,7 @@ function eliminar_local(id, nombre) {
     case 1: 
     var modal = document.querySelector('ons-modal');
     modal.show();
-    $.ajax({ url: "https://drink2nite.com/app/index.php?do=drink&act=eliminar_local&id="+id, type:"POST", data: new FormData(this), contentType: false, cache: false, processData:false,
-    success: function(data) {
+    $.ajax({ url: "https://drink2nite.com/app/index.php?do=drink&act=eliminar_local&id="+id, "dataType": "jsonp", success: function( response ) {
       modal.hide();
       document.querySelector('#myNavigator').popPage();
     } });
@@ -1002,4 +1133,81 @@ function enviar() {
 			} });
 			event.preventDefault();
 	});
+}
+function crear_promo() {
+  $("#informacion_promo").submit(function( event ) {
+    event.preventDefault();
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    $.ajax({ url: "https://drink2nite.com/app/index.php?do=drink&act=guardar_promo", type:"POST", data: new FormData(this), contentType: false, cache: false, processData:false,
+    success: function(data) {
+      console.log(data);
+      modal.hide();
+      if(data == '("0")') {
+        ons.notification.alert({
+          message: '¡Las dimensiones enviadas no son válidas!',
+          title: 'Inválido',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+      }
+      else {
+        ons.notification.alert({
+          message: '¡La promo se ha cargado con éxito!',
+          title: 'Creado',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+        document.querySelector('#myNavigator').popPage();
+        mis_promos();
+      }
+    } });
+  });
+}
+function eliminar_promo(id) {
+  ons.notification.confirm({message:'¿Seguro que quieres eliminar esta promoción?', callback: function(answer) { switch (answer) { 
+    case 1: 
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    $.ajax({ url: "https://drink2nite.com/app/index.php?do=drink&act=eliminar_promo&id="+id, "dataType": "jsonp", success: function( response ) {
+      modal.hide();
+      mis_promos();
+    } });
+    break; }}});
+}
+function editar_promo(id, imagen) {
+  document.querySelector('#myNavigator').pushPage('html/editarpromo.html', { animation : 'slide', callback: function() {
+    $('#id_promo').val(id);
+    $('#imagen_fondo').css('background-image', 'url(' + imagen + ')');
+  } });
+}
+function actualizar_promo() {
+  $("#informacion_promo").submit(function( event ) {
+    event.preventDefault();
+    var modal = document.querySelector('ons-modal');
+    modal.show();
+    $.ajax({ url: "https://drink2nite.com/app/index.php?do=drink&act=actualizar_promo", type:"POST", data: new FormData(this), contentType: false, cache: false, processData:false,
+    success: function(data) {
+      console.log(data);
+      modal.hide();
+      if(data == '("0")') {
+        ons.notification.alert({
+          message: '¡Las dimensiones enviadas no son válidas!',
+          title: 'Inválido',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+      }
+      else {
+        ons.notification.alert({
+          message: '¡La promo se ha actualizado con éxito!',
+          title: 'Creado',
+          buttonLabel: 'OK',
+          animation: 'default'
+        });
+        document.querySelector('#myNavigator').popPage();
+        mis_promos();
+      }
+    } });
+  });
 }

@@ -12,6 +12,11 @@ document.addEventListener('init', function(event) {
 myApp.controllers = {
 
   PrincipalPage: function(page) {
+    ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Cargando datos', { timeout: 1000, animation: 'ascend' });
+
+    $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=ip", "dataType": "jsonp", success: function( response ) {
+        storage.setItem('ip_drink2nite', response.ip);
+    } });
 
     if (navigator.geolocation) {
       var options = {
@@ -71,6 +76,12 @@ editarPage: function(page) {
   KTWizard1.init();
 },
 editarlocalPage: function(page) {
+    KTWizard1.init();
+},
+crearpromoPage: function(page) {
+    KTWizard1.init();
+},
+editarpromoPage: function(page) {
     KTWizard1.init();
 },
 nuevoPage: function(page) {

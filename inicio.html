@@ -58,15 +58,24 @@
       <template id="tab1.html">
         <ons-page id="Tab1">
             <ons-progress-bar style="position: absolute; top:0; left:0; right:0;" indeterminate></ons-progress-bar>
-            	<img src="img/avatar.png" class="foto_central"><div class="pulse_holder"><div class="pulse_marker"><div class="pulse_rays"></div></div></div>
-  <div id="mapa" style="height:100%; width:100%; color:#000; background:#00573d;"></div>
+            	<img src="res/android/icon/drawable-xxxhdpi-icon.png" class="foto_central"><ons-progress-circular indeterminate style="position: absolute; width:100px; height: 100px; top:-49px; bottom: 0; left:0; right: 0; margin:auto;"></ons-progress-circular>
+  <!--  <div id="mapa" style="height:100%; width:100%; color:#000; background:#212121;"></div>-->
+              <div id="mapa" style="height:100%; width:100%; color:#000; background: url(img/fondo.jpg) no-repeat center center fixed; -webkit-background-size: cover; background-size: cover;"></div>
   
-  <div class="cargando_datos"><i class="fa fa-circle-notch fa-spin"></i> Cargando datos</div>
-  <div id="nohay_lugar"><div style="font-size:14px; padding-top:2px;">Lo sentimos, no se encontraron resultados</div></div>
-  
-  <div class="toolbar" style="background: transparent; position:absolute; top:auto; bottom:20px; display:none;" id="seleccionar_tipo">
-      <div class="toolbar__center">
-        <div class="segment" style="width:200px;margin:7px 50px;">
+  <!-- <div class="cargando_datos"><i class="fa fa-circle-notch fa-spin"></i> Cargando datos</div> 
+  <div id="nohay_lugar"><div style="font-size:14px; padding-top:2px;">Lo sentimos, no se encontraron resultados</div></div> -->
+
+  <ons-toast id="myToast" animation="ascend">
+    Lo sentimos, no se encontraron resultados
+    <button onclick="myToast.hide()">ok</button>
+  </ons-toast>
+  <ons-fab position="bottom right" id="fab_ref" style="display: none;" onclick="refrescar()">
+    <ons-icon icon="md-refresh" id="icono_refrescar" style="display: none;"></ons-icon>
+    <ons-icon icon="md-refresh" id="icono_refrescar_vueltas" spin></ons-icon>
+  </ons-fab>
+  <div class="toolbar" style="background: transparent; position:absolute; top:auto; bottom:27px; display:none; left:20px; width: auto;" id="seleccionar_tipo">
+      <div class="toolbar__center" style="width: auto;">
+        <div class="segment" style="width:200px;margin:7px 50px 7px 0;">
           <div class="segment__item">
             <input type="radio" class="segment__input" name="navi-segment-a" onclick="cambiar_tipo('1')" id="bar_check">
             <div class="segment__button"><ons-icon icon="ion-md-beer"></ons-icon> Bar</div>
