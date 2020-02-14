@@ -1,0 +1,38 @@
+<ons-page id="crearpromoPage">
+    <ons-toolbar>
+      <div class="left"><ons-back-button></ons-back-button></div>
+      <div class="center" style="text-align: center; padding-left: 0!important;"><img src="img/logo.png" height="30" style="position:relative; top:6px; font-weight: bold;"></div>
+      <div class="right">
+        <ons-toolbar-button component="button/settings" style="display: none;"><ons-icon icon="md-notifications"></ons-icon></ons-toolbar-button>
+  </div>
+      </ons-toolbar>
+        <ons-list style="background: transparent; padding-top: 20px;">
+            
+          <form id="informacion_promo" action="" method="post" enctype="multipart/form-data">
+          <div style="text-align: center; padding:15px 0;">
+          <div class="kt-avatar kt-avatar--outline" id="imagen">
+            <div class="kt-avatar__holder" id="imagen_fondo" style="background-image: url(img/promo.jpg); border-radius:10px; width:315px; height:140px;"></div>
+            <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Agregar imagen" style="right: -10px; top:-10px;">
+              <i class="fa fa-camera"></i>
+              <input type="file" id="imagen" name="imagen" accept="image/*">
+            </label>
+            <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Cancelar" style="bottom:-10px; right:-8px;">
+              <i class="fa fa-times"></i>
+            </span>
+          </div>
+          <span style="display: block; text-align:center; font-size:10px; color:rgba(255,255,255,0.3);">Las medidas del banner son de 945px de ancho y 420px de alto</span>
+        </div>
+        
+        <div style="padding: 0 25px;">
+          <ons-list-header style="text-transform: uppercase; font-size:10px; background: transparent;">Seleccionar local</ons-list-header>
+     
+    <div class="form-row">
+      <select id="locales-select" style="width: 100%; color:#FFF; padding:7px; text-align: center; font-size:16px; background: rgba(0,0,0,0.3);" name="locales-select"></select>
+  </div>
+  <div class="vspc form-row" style="text-align:center; margin-top:25px;">
+    <button class="button button--material" onClick="crear_promo()">Crear promoción</button>
+  </div>
+</form>
+  </div>
+          </ons-list>
+</ons-page>
