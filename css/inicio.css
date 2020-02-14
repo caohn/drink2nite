@@ -1,4 +1,84 @@
-wq.drink2 {
+.gm-style .gm-style-iw-c {
+	background-color: transparent;
+	box-shadow: none;
+	top:15px;
+}
+.gm-style .gm-style-iw-t::after {
+	background: transparent;
+	box-shadow: none;
+}
+.gm-style .gm-style-iw {
+	overflow: visible;
+}
+.gm-style-iw-d {
+	overflow: visible!important;
+	position: relative;
+	top:-50px;
+	left:-7px;
+	animation-duration: 0.3s;
+  	animation-name: entrada;
+}
+.fab.fab--mini {
+	background: #212121; /* e14339 */
+	position: relative!important;
+	top:15px;
+	transform: scale(1);
+	-webkit-transition:all 0.5s ease;
+	transition:tranallsform 0.5s ease;
+}
+.fab-centro {
+	background: #e14339!important;
+	color:#FFF!important;
+	transform: scale(1);
+	-webkit-transition:all 0.5s ease;
+	font-size: 28px!important;
+	transition:all 0.5s ease;
+}
+.fab.fab--mini:hover, .fab-centro:hover {
+	transform: scale(1.1);
+}
+.fab.fab--mini.activo {
+	background: #1a9d42!important;
+}
+.local_drink2nite {
+	text-align: center;
+}
+.local_drink2nite img {
+	width: 22px;
+	height: 22px;
+	border-radius:30px;
+	padding: 1px;
+	background: #FFF;
+	box-shadow: 1px 2px 2px rgba(0,0,0,0.6);
+}
+.local_drink2nite span {
+	display: block;
+	margin:2px 0 3px 0;
+	font-weight: bold;
+	color:#FFF;
+}
+/* Boton para cerrar */
+.gm-ui-hover-effect {
+	background: #FFF!important;
+	border-radius:30px!important;
+	opacity:1!important;
+	margin:auto!important;
+	left:-6px;
+	bottom:-60px!important;
+	/* transform: scale(0.7); */
+}
+@keyframes entrada {
+	from {
+	  opacity: 0.4;
+	  transform: scale(0.2);
+	}
+  
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+  }
+.drink2 {
 	background-image:radial-gradient(#292f3f,#0f1015);
 	border-color:#000000;
 	position:fixed;
@@ -193,7 +273,7 @@ wq.drink2 {
 #valor_valoracion {
 	font-size:13px;
 }
-#valor_valoracion i {
+#valor_valoracion i, #color_valoracion i {
 	color:#FC0;
 }
 /* Perfil */
@@ -332,11 +412,14 @@ wq.drink2 {
 .sugerencias_item .categorias span {
 	margin:0 5px;
 }
-.sugerencias_item .categorias .c1, .profile-name2 .c1 {
+.sugerencias_item .categorias .c1, .profile-name2 .c1, ons-card .c1 {
 	color:#090;
 }
 .sugerencias_item .categorias .c2, .profile-name2 .c2 {
 	color:#fff;
+}
+ons-card .c2 {
+	color: #e14339;
 }
 .sugerencias_item .direccion {
 	font-size:13px;
@@ -947,4 +1030,26 @@ wq.drink2 {
 		right: 0;
 		height: 80px;
 		z-index: 10;
+	}
+	.opciones_abajo {
+		position: absolute;
+		bottom: -200px;
+		height: 250px;
+		width: 300px;
+		border-radius:5px;
+		z-index: 999999999;
+		left:20px;
+		background: #212121;
+		-webkit-transition:bottom 0.5s ease;
+		transition:bottom 0.5s ease;
+	}
+	.opciones_abajo .titulo {
+		padding: 12px;
+	}
+	.opciones_abajo .titulo img {
+		height: 25px;
+	}
+	.opciones_abajo .contenido {
+		padding: 15px 12px;
+		background: #FFF;
 	}
