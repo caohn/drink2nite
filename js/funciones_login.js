@@ -16,7 +16,7 @@ function localizar(posicion) {
     $('.foto_central').attr('src',response2.foto);
     } });
     var latlng = new google.maps.LatLng(posicion.coords.latitude, posicion.coords.longitude);
-    $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=locales&tipo="+tipo+"&latitud="+posicion.coords.latitude+"&longitud="+posicion.coords.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
+    $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=localesn&tipo="+tipo+"&latitud="+posicion.coords.latitude+"&longitud="+posicion.coords.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
     if(response != null) { 
     var myMarkers = {"markers": response};
     $("#mapa").mapmarker({
@@ -46,17 +46,44 @@ function localizar(posicion) {
       if (navigator.geolocation) {
         var options = {
           enableHighAccuracy: false,
-          timeout: 50000,
+          timeout: 25000,
           maximumAge: 0
         };
         navigator.geolocation.getCurrentPosition(localizar, error, options); 
         visita = storage.getItem('visita_drink2nite');
         if(!visita) {
           storage.setItem('visita_drink2nite', 1);
-          window.location ="inicio.html";
+          window.location ="inicio_login.html";
         }
       }  
         else { alert('No soportado!'); }
+  }
+  function login_google() {
+    window.plugins.googleplus.login(
+        {},
+        function (obj) {
+        correo = obj.email;
+				nombre = obj.displayName;
+				foto = obj.imageUrl;
+				id = obj.userId;
+				var modal = document.querySelector('ons-modal');
+				modal.show();
+       $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=login_google&nombre="+nombre+"&email="+correo+"&id="+id+"&foto="+foto, "dataType": "jsonp", success: function( response ) {
+					storage.setItem('usuario_drink2nite', response.usuario);
+					storage.setItem('nombre_drink2nite', response.nombre);
+					storage.setItem('correo_drink2nite', response.correo);
+					storage.setItem('foto_drink2nite', response.foto);
+					storage.setItem('seguidos_drink2nite', response.seguidos);
+					storage.setItem('seguidores_drink2nite', response.seguidores);
+					modal.hide();
+					window.location ="inicio.html";
+					}
+        });
+        },
+        function (msg) {
+          alert("error: " + msg);
+        }
+    );
   }
   function editar_perfil() {
     document.querySelector('#myNavigator').pushPage('html/editar.html', { animation : 'slide', callback: function() {
@@ -87,7 +114,7 @@ function localizar(posicion) {
   function error(mensaje)  {
       /* window.location ="inicio.html"; 
     location.reload(); */
-    ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Tiempo de espera agotado, obteniendo datos de tu IP.', { timeout: 1000, animation: 'ascend' });
+    ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Tiempo agotado, obteniendo datos de tu IP.', { timeout: 1000, animation: 'ascend' });
     localizar_ip();
   }
   function localizar_ip() {
@@ -110,7 +137,7 @@ function localizar(posicion) {
       $('.foto_central').attr('src',response2.foto);
       } });
       var latlng = new google.maps.LatLng(response.latitude, response.longitude);
-      $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=locales&tipo="+tipo+"&latitud="+response.latitude+"&longitud="+response.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
+      $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=localesn&tipo="+tipo+"&latitud="+response.latitude+"&longitud="+response.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
       if(response != null) { 
       var myMarkers = {"markers": response};
       $("#mapa").mapmarker({
@@ -155,7 +182,7 @@ function localizar(posicion) {
 
         $.each(data, function(i, item) {
 
-          content += '<ons-card onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> <ons-row> <ons-col width="100px" style="padding-right:10px;"><img src="https://drink2nite.com/subidas/logos/'+ item.logo +'" style="width: 100%; border-radius:3px;"> </ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.lugar +'<br>'+ item.distancia +'km</span></ons-col> </ons-row></ons-card>';
+          content += '<ons-card onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> <ons-row> <ons-col width="100px" style="padding-right:10px;"><img src="https://drink2nite.com/subidas/logos/'+ item.logo +'" style="width: 100%; border-radius:3px;"> </ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.lugar +'<br><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-walk" style="color:#999; margin-right:3px; position:relative; top:-2px;"></ons-icon> '+ item.distancia +'km </button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;" id="color_valoracion">'+ item.valoracion +'</button></span></ons-col> </ons-row></ons-card>';
             //alert(item.title);
         })
 
@@ -365,7 +392,7 @@ function recargar() {
 }
 function cerrar_sesion() {
   storage.removeItem('usuario_drink2nite');
-	window.location ="login.html";
+	window.location ="inicio_login.html";
 }
 function locales_mostrar_todo() {
   promo('promo_carousel');
@@ -555,4 +582,7 @@ function enviar() {
 }
 function login_inicio() {
   document.querySelector('#myNavigator').pushPage('html/login.html', {data: {title: 'Login'}, animation: 'slide'});
+}
+function crear_evento(id) {
+  login_inicio();
 }

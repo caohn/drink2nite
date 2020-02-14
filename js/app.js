@@ -12,6 +12,8 @@ document.addEventListener('init', function(event) {
 myApp.controllers = {
 
   PrincipalPage: function(page) {
+    
+
     ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Cargando datos', { timeout: 1000, animation: 'ascend' });
 
     $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=ip", "dataType": "jsonp", success: function( response ) {
@@ -21,7 +23,7 @@ myApp.controllers = {
     if (navigator.geolocation) {
       var options = {
         enableHighAccuracy: false,
-        timeout: 50000,
+        timeout: 25000,
         maximumAge: 0
       };
       navigator.geolocation.getCurrentPosition(localizar, error, options); 

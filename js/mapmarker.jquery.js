@@ -45,7 +45,23 @@
                 "color": "#00573d"
             }
         ]
-    },
+    },{
+		"featureType" : "water",
+		"elementType" : "geometry",
+		"stylers" : [{
+			"color" : "#b6d9ff"
+		}, {
+			"lightness" : 17
+		}]
+	}, /* {
+		"featureType" : "road",
+		"elementType" : "geometry",
+		"stylers" : [{
+			"color" : "#999999"
+		}, {
+			"lightness" : 17
+		}]
+	}, */
 	{
         "elementType": "labels.icon",
         "stylers": [

@@ -21,7 +21,7 @@ myApp.controllers = {
     if (navigator.geolocation) {
       var options = {
         enableHighAccuracy: false,
-        timeout: 50000,
+        timeout: 40000,
         maximumAge: 0
       };
       navigator.geolocation.getCurrentPosition(localizar, error, options); 
