@@ -54,6 +54,83 @@ function enviar_push($titulo, $mensaje, $a){
 	$response = curl_exec( $ch );
 	}
 
+	function enviar_push_t($titulo, $mensaje, $a, $tipo, $id_t, $titulo_t){
+		$url = 'https://fcm.googleapis.com/fcm/send';
+		$fcm_api_key = 'AIzaSyCf03RwRVix6GrfsiGSQVd0z7tnisX7RZw';
+		$title = $titulo;
+		$body = $mensaje;
+		$topic = $a;
+		if($tipo == 1) {
+		$data_string = '{
+			"notification": {
+				"title": "'.$title.'",
+				"body": "'.$body.'",
+				"sound": "default",
+				"click_action": "FCM_PLUGIN_ACTIVITY",
+				"icon": ""
+			},
+			"data": {
+				"tipo": "'.$tipo.'",
+				"id_e": "'.$id_t.'",
+				"titulo": "'.$titulo_t.'"
+			},
+		 
+			"to": "/topics/'.$topic.'",
+			"priority": "high",
+			"restricted_package_name": ""
+		}';
+	} elseif($tipo == 2) {
+		$data_string = '{
+			"notification": {
+				"title": "'.$title.'",
+				"body": "'.$body.'",
+				"sound": "default",
+				"click_action": "FCM_PLUGIN_ACTIVITY",
+				"icon": ""
+			},
+			"data": {
+				"tipo": "'.$tipo.'",
+				"id_v": "'.$id_t.'"
+			},
+		 
+			"to": "/topics/'.$topic.'",
+			"priority": "high",
+			"restricted_package_name": ""
+		}';
+	} elseif($tipo == 3) {
+		$data_string = '{
+			"notification": {
+				"title": "'.$title.'",
+				"body": "'.$body.'",
+				"sound": "default",
+				"click_action": "FCM_PLUGIN_ACTIVITY",
+				"icon": ""
+			},
+			"data": {
+				"tipo": "'.$tipo.'",
+				"id_l": "'.$id_t.'",
+				"titulo": "'.$titulo_t.'"
+			},
+		 
+			"to": "/topics/'.$topic.'",
+			"priority": "high",
+			"restricted_package_name": ""
+		}';
+	}
+		$ch = curl_init(  );
+		curl_setopt( $ch, CURLOPT_URL, $url);
+		curl_setopt( $ch, CURLOPT_POST, true);
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $data_string);
+		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
+			'Content-Type: application/json',
+			'Authorization: key='.$fcm_api_key
+		));
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+		$response = curl_exec( $ch );
+		}
+
 function foto($fotom) {
 		global $config;
 	$lug = 'perfil/'; $tam = '170';
@@ -164,6 +241,49 @@ function hace($fecha){
                 
     return $hace; 
 }
+function hace2($fecha){
+    $fecha = $fecha; 
+    $ahora = time();
+    $tiempo = $ahora-$fecha; 
+     if(round($tiempo / 31536000) <= 0){ 
+        if(round($tiempo / 2678400) <= 0){ 
+             if(round($tiempo / 86400) <= 0){ 
+                 if(round($tiempo / 3600) <= 0){ 
+                    if(round($tiempo / 60) <= 0){ 
+                if($tiempo <= 60){ $hace = "Hace poco"; } 
+                } else  
+                { 
+                    $can = round($tiempo / 60); 
+                    if($can <= 1) {    $word = "minuto"; } else { $word = "min"; } 
+                    $hace = $can. " ".$word; 
+                } 
+                } else  
+                { 
+                    $can = round($tiempo / 3600); 
+                    if($can <= 1) {    $word = "hora"; } else {    $word = "horas"; } 
+                    $hace = $can. " ".$word; 
+                } 
+                } else  
+                { 
+                    $can = round($tiempo / 86400); 
+                    if($can <= 1) {    $word = "d&iacute;a"; } else {    $word = "d&iacute;as"; } 
+                    $hace = $can. " ".$word;
+                } 
+                } else  
+                { 
+                    $can = round($tiempo / 2678400);  
+                    if($can <= 1) {    $word = "mes"; } else { $word = "meses"; } 
+                    $hace = $can. " ".$word; 
+                } 
+                } else  
+                { 
+                    $can = round($tiempo / 31536000); 
+                    if($can <= 1) {    $word = "a&ntilde;o";} else { $word = "a&ntilde;os"; } 
+                    $hace = $can. " ".$word; 
+                }
+                
+    return $hace; 
+}
 function flooder($ip, $news_time = false) {
 	global $config, $db;
 	
@@ -258,6 +378,31 @@ $mes = array ("1" => "Enero", "2" => "Febrero", "3" => "Marzo", "4" => "Abril", 
 $valor = strtr( $id, $mes );
 	return $valor;
 }
+function mesc($id) {
+	$mes = array ("1" => "Ene", "2" => "Feb", "3" => "Mar", "4" => "Abr", "5" => "May", "6" => "Jun", "7" => "Jul", "8" => "Ago", "9" => "Sep", "10" => "Oct", "11" => "Nov", "12" => "Dic");
+	$valor = strtr( $id, $mes );
+		return $valor;
+}
+
+function diac($id) {
+	$mes = array ("1" => "Lun", "2" => "Mar", "3" => "Mie", "4" => "Jue", "5" => "Vie", "6" => "Sab", "7" => "Dom");
+	$valor = strtr( $id, $mes );
+		return $valor;
+}
+
+function getGCalendarUrl($event){ 
+	$titulo = urlencode($event['titulo']); 
+	$descripcion = urlencode($event['descripcion']); 
+	$localizacion = urlencode($event['localizacion']); 
+	$start=new DateTime($event['fecha_inicio'].' '.$event['hora_inicio'].' '.date_default_timezone_get()); 
+	$end=new DateTime($event['fecha_fin'].' '.$event['hora_fin'].' '.date_default_timezone_get()); 
+	$dates = urlencode($start->format("Ymd\THis")) . "/" . urlencode($end->format("Ymd\THis")); 
+	$name = urlencode($event['nombre']); 
+	$url = urlencode($event['url']); 
+	$gCalUrl = "http://www.google.com/calendar/event?action=TEMPLATE&text=$titulo&dates=$dates&details=$descripcion&location=$localizacion&trp=false&sprop=$url&sprop=name:$name"; 
+	return ($gCalUrl); 
+}
+
 function set_vars($file, $data) {
 	
 	$fp = fopen( ENGINE_DIR . '/cache/system/' . $file . '.php', 'wb+' );
