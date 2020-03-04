@@ -1,0 +1,147 @@
+<ons-page id="eventoPage">
+  <ons-toolbar modifier="cover-content">
+    <div class="left"><ons-back-button></ons-back-button></div>
+    <div class="center" id="titulo_app"><img src="img/logo.png" height="30" style="position:relative; top:10px;"></div>
+    <div class="right" id="boton_right"></div>
+    </ons-toolbar>
+        <ons-progress-bar id="cargador_local" indeterminate></ons-progress-bar>
+       <div style="position: relative;"><div class="degradado_negro"></div>
+        <div id="mapa_venue" style="height:180px; width: 100%;" class="animated-background"></div></div>
+        <ons-card style="position: relative; top:-25px; margin:0; background:#181818;" id="ons-card-info">
+          
+          <ons-row style="position:relative; z-index:12; display: none;" id="datos_reales"> 
+            <ons-col width="130px" style="padding-right:10px; position: relative;"><div style="position: relative;"><img src="" class="list-item__thumbnail" style="width:110px; height:auto; position:relative; margin-top:-30px; border-radius:5px; background:transparent; padding: 4px;" id="imagen_local"></div></ons-col> 
+            
+            <ons-col><div class="title" style="font-size:18px;" id="titulo_evento"></div><div class="title" style="font-size:16px;" id="titulo_local"></div><div id="valor_valoracion" style="font-size:13px;"></div><span style="font-size:13px; margin-top:15px; color:#999;" id="direccion_local"></span><br><span style="font-size:13px; margin-top:15px; color:#999;" id="distancia_local"></span><br><span style="color:rgba(255,255,255,0.6); font-size:12px;" id="descripcion_local" class="profile-name2"></span><div style="padding:8px 0;" id="botones_local"></div></ons-col>
+          </ons-row>
+       
+
+        <ons-row style="min-height: 90px; position: relative; z-index:11;" id="datos_animados"> 
+          <ons-col width="130px" style="position: relative;"><div class="animated-background foto_animado" style="width:110px; height:110px; position:relative; margin-top:-30px;"></div></ons-col> 
+
+          <ons-col><div class="animated-background valoracion_animado"></div> <div class="animated-background texto_animado"></div><div class="animated-background direccion_animado"></div></ons-col>
+        </ons-row>
+    
+        </ons-card>
+
+        <ons-card style="position: relative; top:-25px; margin:0; background:#181818; border-top:1px solid rgba(255,255,25,0.1); padding-top:5px;" id="ons-card-info">
+          
+          <ons-row style="margin-top:20px;"><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-chatboxes" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;" id="n_comentarios">0</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-6px; color:#999;">Comentarios</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-contacts" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;" id="n_invitados">0</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Invitados</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-body" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;" id="n_confirmados">0</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Confirmados</span></ons-col></ons-row>
+    
+        </ons-card>
+
+        <ons-card style="position: relative; top:-25px; margin:0; background:#181818; border-top:1px solid rgba(255,255,25,0.1); padding-top:5px;" id="ons-card-info">
+          
+          <div class="countdown" style="padding: 10px 0 0 0; text-align: center; font-size: 20px; font-weight: bold;">
+            <span style="font-size:9px; font-weight:normal; display:block;">TIEMPO RESTANTE PARA FINALIZAR</span>
+            <span id="clock"></span>
+          </div>
+    
+        </ons-card>
+
+        <ons-card style="position: relative; top:-25px; margin:0; background:#181818; border-top:1px solid rgba(255,255,25,0.1);" id="ons-card-info">
+          
+          <ons-row style="position:relative; z-index:12; " id="datos_reales2"> 
+            <ons-col width="50%" style="padding-right:10px; position: relative;">
+              <ons-list modifier="inset" style="margin-top:-10px; margin:0;">
+                <ons-list-header>Organizado por</ons-list-header>
+                <div id="autor_evento" style="font-size: 12px; padding:5px 10px;"><p style="text-align: center; height: 40px; padding: 0; margin: auto; width: 100%;">
+                    
+                  <ons-progress-circular indeterminate></ons-progress-circular>
+              </p></div>
+              </ons-list>
+            
+            </ons-col> 
+            
+            <ons-col>
+
+              <ons-list modifier="inset" style="margin-top:-10px; margin:0;">
+                <ons-list-header>Inicio/Fin</ons-list-header>
+                <div id="fecha_evento" style="font-size: 12px; padding:5px 10px;"><p style="text-align: center; height: 40px; padding: 0; margin: auto; width: 100%;">
+                    
+                  <ons-progress-circular indeterminate></ons-progress-circular>
+              </p></div>
+              </ons-list>
+            
+            </ons-col>
+          </ons-row>
+       
+
+        <ons-row style="min-height: 90px; position: relative; z-index:11; display: none;" id="datos_animados2"> 
+          <ons-col width="130px" style="position: relative;"><div class="animated-background foto_animado" style="width:110px; height:110px; position:relative; margin-top:-30px;"></div></ons-col> 
+
+          <ons-col><div class="animated-background valoracion_animado"></div> <div class="animated-background texto_animado"></div><div class="animated-background direccion_animado"></div></ons-col>
+        </ons-row>
+    
+        </ons-card>
+        
+        <ons-card style="position: relative; top:-25px; margin:0; background:#181818; border-top:1px solid rgba(255,255,25,0.1);" id="ons-card-info">
+          
+          <ons-row style="position:relative; z-index:12; " id="datos_reales3"> 
+            <ons-col width="100%" style="position: relative;">
+
+              <ons-list modifier="inset" style="margin-top:-10px; margin:0;">
+                <ons-list-header>Descripción del Evento</ons-list-header>
+                <div id="descripcion_evento" style="font-size: 14px; padding:8px 10px;"><p style="text-align: center; height: 40px; padding: 0; margin: auto; width: 100%;">
+                    
+                  <ons-progress-circular indeterminate></ons-progress-circular>
+              </p></div>
+              </ons-list>
+            
+            </ons-col> 
+          </ons-row>
+       
+
+        <ons-row style="min-height: 90px; position: relative; z-index:11; display: none;" id="datos_animados2"> 
+          <ons-col width="130px" style="position: relative;"><div class="animated-background foto_animado" style="width:110px; height:110px; position:relative; margin-top:-30px;"></div></ons-col> 
+
+          <ons-col><div class="animated-background valoracion_animado"></div> <div class="animated-background texto_animado"></div><div class="animated-background direccion_animado"></div></ons-col>
+        </ons-row>
+    
+        </ons-card>
+
+        <ons-card style="position: relative; top:-25px; margin:0; background:#181818; border-top:1px solid rgba(255,255,25,0.1);" id="ons-card-info">
+          
+          <ons-row style="position:relative; z-index:12; " id="datos_reales4"> 
+            <ons-col width="100%" style="position: relative; text-align: center;" id="botones_evento">
+            
+              
+            </ons-col> 
+          </ons-row>
+       
+
+        <ons-row style="min-height: 90px; position: relative; z-index:11; display: none;" id="datos_animados2"> 
+          <ons-col width="130px" style="position: relative;"><div class="animated-background foto_animado" style="width:110px; height:110px; position:relative; margin-top:-30px;"></div></ons-col> 
+
+          <ons-col><div class="animated-background valoracion_animado"></div> <div class="animated-background texto_animado"></div><div class="animated-background direccion_animado"></div></ons-col>
+        </ons-row>
+    
+        </ons-card>
+
+
+        <div class="profile-card" style="padding-top:0;">
+
+                
+                <div style="font-size:12px; padding:15px 30px;">
+                <div class="opacidad"><div id="publicador"> 
+                <form id="publicar_comentario" action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="evento_id" value="" name="evento_id">
+                <input type="hidden" id="usuario_id" value="" name="usuario_id">
+                <input type="hidden" id="usuario_nombre" value="" name="usuario_nombre">
+                <input type="hidden" id="usuario_foto" value="" name="usuario_foto"><div class="titulo"><i class="fa fa-times" onClick="cerrar_publicar()"></i>Comentar</div><div class="publicante"><img src="img/avatar.png" id="foto_persona2"><div id="nombre_persona2" style="text-shadow:none;"></div><div id="ciudad_publicante"></div><div class="triangulo2"></div><div class="triangulo"></div></div><div class="textarea_dentro"><textarea placeholder="Escribir alún comentario sobre el evento..." id="texto" name="texto"></textarea></div><div class="botones_accion"><input type="file" class="custom-file-input" id="foto" name="foto" accept="image/*" capture="camera"><button class="publicar" onclick="escribir_comentario()">Comentar</button></div></div></form></div>
+
+
+                <div class="que_piensas"><img src="img/avatar.png" id="foto_persona"><div id="nombre_persona"></div>
+                <textarea name="texto2" id="texto2" placeholder="Escribe algo sobre el evento..." onClick="publicar()"></textarea>
+                <div class="opciones" style="display:none;"><input type="file" id="foto" name="foto" accept="image/*" capture="camera" onchange="nombre2(this.value)" style="display:none;" /><button type="button" class="btn btn-default" onclick="chooseFile()">Adjuntar foto</button><span class="blanco">O</span><button class="btn btn-primary" onclick="escribir_comentario()">Publicar</button>
+                <label id="nombre_archivo" style="margin:2px 0 0 3px; display:inline-block;"></label></div>
+                </div>
+
+                
+                <div style="text-align:center;"><button class="publicar_boton" onClick="publicar()" >Publicar comentario</button></div>
+            </div>
+             <div id="publicacion_nueva"></div>
+             <div id="publicaciones_10"></div>
+             <div id="acciones_menu"></div>
+             <div id="acciones_menu2"></div>
+</ons-page>

@@ -3,7 +3,7 @@
         <div class="left"><ons-back-button></ons-back-button></div>
         <div class="center">Crear evento</div>
         </ons-toolbar>
-        <form id="formulario_creare" action="" method="post" enctype="multipart/form-data">
+        <form id="formulario_modificare" action="" method="post" enctype="multipart/form-data">
 
           <div style="text-align: center; padding:15px 0;">
             <div class="kt-avatar kt-avatar--outline">
@@ -13,7 +13,7 @@
 
           <div style="text-align: center; padding:15px 0;">
             <div class="kt-avatar kt-avatar--outline" id="imagen">
-              <div class="kt-avatar__holder" style="background-image: url(img/promo2.jpg); border-radius:10px; width:315px; height:140px;"></div>
+              <div class="kt-avatar__holder" id="imagen_evento" style="background-image: url(img/promo2.jpg); border-radius:10px; width:315px; height:140px;"></div>
               <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Agregar imagen" style="right: -10px; top:-10px;">
                 <i class="fa fa-camera"></i>
                 <input type="file" id="imagen" name="imagen" accept="image/*">
@@ -38,11 +38,11 @@
 <ons-row style="margin-top:25px;">
   <ons-col width="50%">
     <label>Tipo de evento:</label>
-  <ons-select name="tipo" style="width: 100%;"><option value="1">Público</option><option value="2">Privado</option></ons-select>
+  <ons-select name="tipo" id="tipo" style="width: 100%;"><option value="1">Público</option><option value="2">Privado</option></ons-select>
 </ons-col>
 <ons-col width="50%">
   <label>Comentarios:</label>
-  <ons-select name="comentar" style="width: 100%;"><option value="1">Si</option><option value="0">No</option></ons-select>
+  <ons-select name="comentar" id="comentar" style="width: 100%;"><option value="1">Si</option><option value="0">No</option></ons-select>
 </ons-col></ons-row>
 
 <ons-list-header style="text-transform: uppercase; font-size:10px; background: transparent;">Inicio del evento</ons-list-header>
@@ -54,7 +54,7 @@
 </ons-col>
 <ons-col width="50%">
   <label>Fecha:</label>
-<ons-input id="fecha" name="fecha" type="date" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+<ons-input id="fecha1" name="fecha" type="date" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
 </ons-col></ons-row>
 
 <ons-list-header style="text-transform: uppercase; font-size:10px; background: transparent;">Finalización del evento</ons-list-header>
@@ -69,11 +69,11 @@
 <ons-input id="fecha2" name="fecha2" type="date" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
 </ons-col></ons-row>
 
-<input type="hidden" id="id_local" name="id_local" value="">
+<input type="hidden" id="id_evento" name="id_evento" value="">
 <input type="hidden" id="usuario_nombre" name="usuario_nombre" value="">
 
   <div class="vspc form-row" style="text-align:center; margin-top:25px; margin-bottom: 30px;">
-    <button class="button button--material" onClick="crear_ahora()">Crear evento</button>
+    <button class="button button--material" onClick="modificar_evento()">Modificar evento</button>
   </div>
         </div>
 </form>
