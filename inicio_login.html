@@ -111,6 +111,9 @@
 
       <template id="tab3.html">
           <ons-page id="tonightPage">
+            <ons-carousel swipeable auto-scroll var="carousel" style="background: transparent;">
+              <div id="eventos_carousel"></div>
+              </ons-carousel>
               <div id="tonigh_contenido">
             <p style="text-align: center; height: 40px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto; width: 100%;">
                 
@@ -123,7 +126,7 @@
             <ons-page id="propioPage">
                <div style="position: absolute; top:0; bottom:0; left:0; right:0; margin:auto; height:160px; width: 70%; text-align: center;">
                 Para poder ver más opciones, crear local, organizar un venue, comentar en los locales y muchísimas funciones más. Es necesario que inicies sesión o que crees una cuenta para poder ingresar.
-              <ons-button modifier="large" class="registrar-button" onclick="login_inicio()">Iniciar sesión</ons-button>    
+              <ons-button modifier="large material" class="registrar-button" onclick="login_inicio()">Iniciar sesión</ons-button>    
             </div>
             </ons-page>
           </template>
@@ -137,17 +140,16 @@
             
                  <div class="formarea">
                   <div class="form-row">
-                      <ons-input id="email2" type="email" placeholder="Correo electrónico" modifier="underbar" style="width: 100%;" autocomplete="off"></ons-input>
+                      <ons-input id="email2" type="email" class="recuperar" placeholder="Correo electrónico" modifier="underbar" style="width: 100%; background: #222; overflow: hidden; border-radius: 5px; border: 1px solid #444; border-bottom:0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);" autocomplete="off"></ons-input>
                   </div>
           
                   <div class="lucent">
                   <div class="notas" id="notas2"></div>
-                    <p class="note">Ingresa tu correo electrónico, por este medio te enviaremos los pasos a seguir para recuperar tu contraseña. </p>
+                    <p class="note">Ingresa tu correo electrónico que tienes registrado en tu cuenta de Drink2Nite. </p>
                   </div>
           
                   <div class="vspc form-row">
-                    <ons-button modifier="light" class="btn-primary width-half" onclick="recuperar()">Enviar</ons-button>
-                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Regresar</ons-button>
+                    <ons-button modifier="large material" onclick="recuperar()">Enviar</ons-button>
                   </div>
                 </div>
             </div>
@@ -162,20 +164,28 @@
             
                  <div class="formarea">
                   <div class="form-row">
-                   
-                         <div class="form-row">
-                            <ons-input id="codigo" type="number" placeholder="Código" modifier="underbar" style="width: 100%; ont-size:28px; text-align:center; font-weight:700;" autocomplete="off"></ons-input>
+                         <div class="form-row codigo_g">
+                            <ons-input id="codigo1" name="codigo1" type="text" placeholder="X" modifier="underbar" style="width: 13%; font-size:28px; text-align:center; font-weight:700; background: #222; overflow: hidden; border-radius: 5px; border: 1px solid #444; border-bottom:0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);" autocomplete="off"></ons-input> 
+                            
+                            <ons-input id="codigo2" name="codigo2" type="text" placeholder="X" modifier="underbar" style="width: 13%; font-size:28px; text-align:center; font-weight:700; background: #222; overflow: hidden; border-radius: 5px; border: 1px solid #444; border-bottom:0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);" autocomplete="off"></ons-input> 
+                            
+                            <ons-input id="codigo3" name="codigo3" type="text" placeholder="X" modifier="underbar" style="width: 13%; font-size:28px; text-align:center; font-weight:700; background: #222; overflow: hidden; border-radius: 5px; border: 1px solid #444; border-bottom:0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);" autocomplete="off"></ons-input> 
+                            
+                            <ons-input id="codigo4" name="codigo4" type="text" placeholder="X" modifier="underbar" style="width: 13%; font-size:28px; text-align:center; font-weight:700; background: #222; overflow: hidden; border-radius: 5px; border: 1px solid #444; border-bottom:0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);" autocomplete="off"></ons-input> 
+                            
+                            <ons-input id="codigo5" name="codigo5" type="text" placeholder="X" modifier="underbar" style="width: 13%; font-size:28px; text-align:center; font-weight:700; background: #222; overflow: hidden; border-radius: 5px; border: 1px solid #444; border-bottom:0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);" autocomplete="off"></ons-input> 
+                            
+                            <ons-input id="codigo6" name="codigo6" type="text" placeholder="X" modifier="underbar" style="width: 13%; font-size:28px; text-align:center; font-weight:700; background: #222; overflow: hidden; border-radius: 5px; border: 1px solid #444; border-bottom:0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);" autocomplete="off"></ons-input> 
                   </div>
                   </div>
           
                   <div class="lucent">
                   <div class="notas" id="notas2"></div>
-                    <p class="note">Ingresa el código que se ha enviado a tu correo electrónico, por favor no salirse de la aplicación. </p>
+                    <p class="note">Ingresa el código que se le ha enviado, por favor no salirse de la aplicación. </p>
                   </div>
           
                   <div class="vspc form-row">
-                    <ons-button modifier="light" class="btn-primary width-half" onclick="recuperar2()">Proceder</ons-button>
-                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Cancelar</ons-button>
+                    <ons-button modifier="large material" onclick="recuperar2()">Proceder</ons-button>
                   </div>
                 </div>
             </div>
@@ -190,10 +200,10 @@
             
                  <div class="formarea" style="height:220px;">
                    <div class="form-row">
-                    <input type="password" class="text-input--underbar width-full" placeholder="Nueva contraseña" value="" id="nueva_password">
+                    <ons-input id="nueva_password" type="password" class="recuperar" placeholder="Nueva contraseña" modifier="underbar" style="width: 100%; background: #222; overflow: hidden; border-radius: 5px; border: 1px solid #444; border-bottom:0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);"></ons-input>
                   </div>
                     <div class="form-row">
-                    <input type="password" class="text-input--underbar width-full" placeholder="Repetir contraseña" value="" id="nueva_password2">
+                      <ons-input id="nueva_password2" type="password" class="recuperar" placeholder="Repetir contraseña" modifier="underbar" style="width: 100%; background: #222; overflow: hidden; border-radius: 5px; border: 1px solid #444; border-bottom:0; box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);"></ons-input>
                   </div>
           
                   <div class="lucent">
@@ -202,8 +212,7 @@
                   </div>
           
                   <div class="vspc form-row">
-                    <ons-button modifier="light" class="btn-primary width-half" onclick="recuperar3()">Proceder</ons-button>
-                    <ons-button modifier="light" onclick="myNavigator.popPage()" class="btn-default width-half">Cancelar</ons-button>
+                    <ons-button modifier="large material" onclick="recuperar3()">Proceder</ons-button>
                   </div>
                 </div>
             </div>

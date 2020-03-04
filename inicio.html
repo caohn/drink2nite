@@ -17,7 +17,10 @@
   <script type="text/javascript" src="js/jquery2.js"></script>
   <script type="text/javascript" src="js/mapmarker.jquery.js"></script>
   <script type="text/javascript" src="js/FCM.js"></script>
+  <script type="text/javascript" src="js/Calendar.js"></script>
+  <script type="text/javascript" src="js/jquery.countdown.min.js"></script>
   <script type="text/javascript" src="js/jquery.geocomplete.marker.js"></script>
+  <script type="text/javascript" src="https://drink2nite.com/m/avanzado.js"></script>
 </head>
 <body onload="onLoad()">
   <ons-modal direction="up">
@@ -27,7 +30,7 @@
     <br> Por favor, espere
     <br>Solicitud en proceso...
   </ons-modal>
-    <ons-navigator swipeable id="myNavigator" page="tab1.html">
+    <ons-navigator id="myNavigator" page="tab1.html">
 
     <ons-page id="PrincipalPage">
         <ons-toolbar>
@@ -38,12 +41,13 @@
             </div>
           <div class="center"><img src="img/logo.png" height="30" style="position:relative; top:8px;"> </div>
           <div class="right">
+            <ons-toolbar-button component="button/eventos" style="display: none;"><ons-icon icon="md-drink" style="position:relative;" id="eventos_contenedor"></ons-icon></ons-toolbar-button>
               <ons-toolbar-button component="button/notificacion"><ons-icon icon="md-notifications" style="position:relative;" id="notificaciones_contenedor"></ons-icon></ons-toolbar-button>
             <ons-toolbar-button component="button/search"><ons-icon icon="md-search"></ons-icon></ons-toolbar-button>
             <!-- <ons-toolbar-button component="button/settings"><ons-icon icon="md-settings"></ons-icon></ons-toolbar-button> -->
       </div></ons-toolbar>
         /*badge="7"*/
-        <ons-tabbar id="myTabbar" swipeable position="auto">
+        <ons-tabbar id="myTabbar" position="auto">
           <ons-tab page="tab1.html" label="Inicio" icon="md-map"  active>
           </ons-tab>
           <ons-tab page="tab2.html" label="Locales" icon="ion-md-globe" onclick="locales_mostrar_todo()">
@@ -108,6 +112,9 @@
 
       <template id="tab3.html">
           <ons-page id="tonightPage">
+            <ons-carousel swipeable auto-scroll var="carousel" style="background: transparent;">
+              <div id="eventos_carousel"></div>
+              </ons-carousel>
               <div id="tonigh_contenido">
             <p style="text-align: center; height: 40px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto; width: 100%;">
                 
@@ -130,7 +137,7 @@
                   <ons-list>
                     <ons-list-item>
                       <ons-row>
-                        <ons-col class="info-col">
+                        <ons-col class="info-col" onclick="mis_venues()">
                           <div class="info-num" id="oon1">0</div>
                           <div class="info-unit">Check In</div>
                         </ons-col>
@@ -150,6 +157,10 @@
             
                     <ons-list-item modifier="chevron" onclick="editar_perfil()">
                       Editar perfil
+                    </ons-list-item>
+
+                    <ons-list-item modifier="chevron" onclick="mis_eventos()">
+                      Mis eventos
                     </ons-list-item>
             
                     <ons-list-item modifier="chevron" onclick="mis_favoritos()">
