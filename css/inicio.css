@@ -880,12 +880,21 @@ ons-card .c2 {
 .kt-avatar {
 	position: relative;
 	display: inline-block; }
-	.kt-avatar .kt-avatar__holder {
+	.kt-avatar .kt-avatar__holder, .kt-avatar .kt-avatar__holderl, .logo_local, .logo_local2 {
 	  width: 120px;
 	  height: 120px;
 	  border-radius: 100px;
 	  background-repeat: no-repeat;
+	  background-position: center;
 	  background-size: cover; }
+	  .logo_local {
+		  width: 80px;
+		  height: 80px;
+	  }
+	  .logo_local2 {
+		width: 50px!important;
+		height: 50px!important;
+	}
 	.kt-avatar .kt-avatar__upload {
 	  cursor: pointer;
 	  display: -webkit-box;
@@ -1010,18 +1019,62 @@ ons-card .c2 {
 	.kt-avatar.kt-avatar--circle .kt-avatar__cancel {
 	  right: 3px;
 	  bottom: 10px; }
-	.kt-avatar.kt-avatar--outline .kt-avatar__holder {
+	.kt-avatar.kt-avatar--outline .kt-avatar__holder, .kt-avatar.kt-avatar--outline .kt-avatar__holderl, .logo_local {
 	  border: 3px solid #ffffff;
 	  -webkit-box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.1);
 	  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.1); }
-	
-	.degradado_negro {
+	.logo_local, .logo_local2 {
+		border:1px solid #ffffff;
+	}
+	.degradado_negro, .degradado_negro2 {
 		background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 		background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 		background-image: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0)));
 		background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 		background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 		background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+		background-repeat: repeat-y;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(0, 0, 0, 0.5)', endColorstr='rgba(0, 0, 0, 0)', GradientType=1);
+		position:absolute;
+		bottom: 25px;
+		left:0;
+		right: 0;
+		height: 80px;
+		z-index: 10;
+	}
+	.degradado_negro2 {
+		bottom: 0;
+		background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+		background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+		background-image: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
+		background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+		background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+		background-image: linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+		height: 110px;
+	}
+	.degradado_negro_top {
+		background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+		background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+		background-image: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.5)));
+		background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+		background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+		background-image: linear-gradient(bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+		background-repeat: repeat-y;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(0, 0, 0, 0)', endColorstr='rgba(0, 0, 0, 0.5)', GradientType=1);
+		position:absolute;
+		top: 0;
+		left:0;
+		right: 0;
+		height: 80px;
+		z-index: 10;
+	}
+	.degradado_negro4 {
+		background-image: -moz-linear-gradient(bottom, rgba(66, 66, 66, 1), rgba(0, 0, 0, 0));
+		background-image: -ms-linear-gradient(bottom, rgba(66, 66, 66, 1), rgba(0, 0, 0, 0));
+		background-image: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(66, 66, 66, 1)), to(rgba(0, 0, 0, 0)));
+		background-image: -webkit-linear-gradient(bottom, rgba(66, 66, 66, 1), rgba(0, 0, 0, 0));
+		background-image: -o-linear-gradient(bottom, rgba(66, 66, 66, 1), rgba(0, 0, 0, 0));
+		background-image: linear-gradient(bottom, rgba(66, 66, 66, 1), rgba(0, 0, 0, 0));
 		background-repeat: repeat-y;
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(0, 0, 0, 0.5)', endColorstr='rgba(0, 0, 0, 0)', GradientType=1);
 		position:absolute;

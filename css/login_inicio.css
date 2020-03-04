@@ -18,7 +18,25 @@
 }
 .text-input {
   padding:25px 0;
-  margin-bottom: 15px;
+}
+.recuperar .text-input {
+  padding:25px 15px;
+}
+.codigo_g .text-input {
+  font-size: 36px;
+  text-align: center;
+}
+.codigo_g .text-input__label {
+  font-size: 36px;
+  top: 1px;
+  left:7px;
+  text-align: center;
+}
+.sl_input .text-input--underbar {
+  border-color:#666;
+}
+.recuperar .text-input__label {
+  left:15px;
 }
 .login-button {
 	background:#fd3b3b;
