@@ -14,6 +14,33 @@ function onDeviceReady() {
   });
   
   FCMPlugin.subscribeToTopic(localStorage["usuario_drink2nite"]);
+
+
+  FCMPlugin.onNotification(function(data){
+    if(data.wasTapped){
+      //Notification was received on device tray and tapped by the user.
+      if(data.tipo == 1) {
+        ver_evento(data.id_e, data.titulo);
+      } 
+      if(data.tipo == 2) {
+        venue_ir(data.id_v);
+      } 
+      if(data.tipo == 3) {
+        local(data.id_l, data.titulo);
+      } 
+    }else{
+      //Notification was received in foreground. Maybe the user needs to be notified.
+      if(data.tipo == 1) {
+        ver_evento(data.id_e, data.titulo);
+      } 
+      if(data.tipo == 2) {
+        venue_ir(data.id_v);
+      }
+      if(data.tipo == 3) {
+        local(data.id_l, data.titulo);
+      } 
+    }
+});
 }
 function onPause() {
 }

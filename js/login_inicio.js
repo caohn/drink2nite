@@ -54,18 +54,31 @@ function recuperar() {
 	modal.show();
 	$.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=recuperar&email="+email, "dataType": "jsonp", success: function( response ) {
 			if(response.mensaje == 0) { 
-				ons.notification.alert({ message: 'El correo electrónico ingresado es incorrecto', title: 'Error', buttonLabel: 'OK', animation: 'default' }); 
+				ons.notification.alert({ message: 'El correo electrónico ingresado es incorrecto.', title: 'Error', buttonLabel: 'OK', animation: 'default' }); 
 			} else {
-				storage.setItem('usuario_drink2nite_recuperar', response.mensaje);
-				storage.setItem('codigo_drink2nite', response.generado);
-				myNavigator.pushPage('recuperar2.html', { animation : 'slide' } ); 
+				if(response.tipo == 2) {
+					ons.notification.alert({ message: 'Se ha enviado un código a tu correo electrónico.', title: 'Enviado', buttonLabel: 'OK', animation: 'default' });
+					storage.setItem('usuario_drink2nite_recuperar', response.mensaje);
+					storage.setItem('codigo_drink2nite', response.generado);
+					myNavigator.pushPage('recuperar2.html', { animation : 'slide' } ); 
+					modal.hide();
+				} else {
+					ms = 'Tú código es: '+response.generado;
+					$.ajax({ "url": "https://drink2nite.com/app/index.php?do=enviar_sms&t="+ms+"&n="+response.telefono, "dataType": "jsonp", success: function( response2 ) {
+						ons.notification.alert({ message: 'Se ha enviado un código a tu teléfono.', title: 'Enviado', buttonLabel: 'OK', animation: 'default' });
+						storage.setItem('usuario_drink2nite_recuperar', response.mensaje);
+						storage.setItem('codigo_drink2nite', response.generado);
+						myNavigator.pushPage('recuperar2.html', { animation : 'slide' } ); 
+						modal.hide();
+					}});
+				}
 			}
-			modal.hide();
+			
 		}
 	});
 }
 function recuperar2() {
-	codigo = document.getElementById("codigo").value;
+	codigo = document.getElementById("codigo1").value+document.getElementById("codigo2").value+document.getElementById("codigo3").value+document.getElementById("codigo4").value+document.getElementById("codigo5").value+document.getElementById("codigo6").value;
 	if(localStorage["codigo_drink2nite"] == codigo) { myNavigator.pushPage('recuperar3.html', { animation : 'slide' } ); } else {
 		ons.notification.alert({
 					 message: 'El código ingresado es incorrecto',
@@ -73,17 +86,19 @@ function recuperar2() {
 					 buttonLabel: 'OK',
 					 animation: 'default'
 				}); 
-		document.getElementById("codigo").focus();
 	}
 }
 function recuperar3() {
 	password = document.getElementById("nueva_password").value;
 	password2 = document.getElementById("nueva_password2").value;
 	if(password == password2) { 
+	var modal = document.querySelector('ons-modal');
 	modal.show();
 	$.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=nueva_password&usuario="+localStorage["usuario_drink2nite_recuperar"]+"&password="+password, "dataType": "jsonp", success: function( response ) {
 		storage.setItem('usuario_drink2nite', storage.getItem('usuario_drink2nite_recuperar'));
 		storage.setItem('nombre_drink2nite', response.nombre);
+		storage.setItem('nombres_drink2nite', response.nombres);
+		storage.setItem('apellidos_drink2nite', response.apellidos);
 		storage.setItem('correo_drink2nite', response.correo);
 		storage.setItem('foto_drink2nite', response.foto);
 		storage.setItem('seguidos_drink2nite', response.seguidos);
@@ -99,7 +114,6 @@ function recuperar3() {
 					 buttonLabel: 'OK',
 					 animation: 'default'
 				}); 
-		document.getElementById("codigo").focus();
 	}
 }
 function registro_1() {
@@ -119,6 +133,8 @@ function registro_1() {
 	d = document.getElementById("dia").value;
 	m = document.getElementById("mes").value;
 	a = document.getElementById("year").value;
+	codigo_n = document.getElementById("codigo_n").value;
+	telefono = document.getElementById("telefono").value;
 	sexo = 1;
 	expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	if(nombre == '' || apellido == '' || email == '' || !expr.test(email) || password == '') {
@@ -147,7 +163,7 @@ function registro_1() {
 			animation: 'default',
 	   }); return false; }
 	}
-	$.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=registro&nombre="+nombre+"&apellido="+apellido+"&email="+email+"&password="+password+"&d="+d+"&m="+m+"&a="+a+"&sexo="+sexo, "dataType": "jsonp", success: function( response ) {
+	$.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=registro&nombre="+nombre+"&apellido="+apellido+"&email="+email+"&password="+password+"&d="+d+"&m="+m+"&a="+a+"&sexo="+sexo+"&telefono="+codigo_n+telefono, "dataType": "jsonp", success: function( response ) {
 		if(response.mensaje == 0) { 
 		storage.setItem('usuario_drink2nite', response.usuario);
 		storage.setItem('nombre_drink2nite', response.nombre);

@@ -74,6 +74,8 @@ localesPage: function(page) {
 buscarPage: function(page) {
   locales('contenido_busqueda');
 },
+miseventosPage: function(page) {
+},
 editarPage: function(page) {
   KTWizard1.init();
 },
@@ -84,6 +86,9 @@ crearpromoPage: function(page) {
     KTWizard1.init();
 },
 editarpromoPage: function(page) {
+    KTWizard1.init();
+},
+nuevoeventoPage: function(page) {
     KTWizard1.init();
 },
 nuevoPage: function(page) {

@@ -47,7 +47,29 @@ myApp.controllers = {
 },
 
 ayudaPage: function(page) {
-  html('ayuda', 'contenido_ayuda', 'cargador_ayuda');
+    html('ayuda', 'contenido_ayuda', 'cargador_ayuda');
+  },
+  
+
+  Recuperar2Page: function(page) {
+    $('.codigo_g input').attr("maxlength",1);
+    var container = document.getElementsByClassName("codigo_g")[0];
+    container.onkeyup = function(e) {
+        var target = e.srcElement;
+        var maxLength = parseInt(target.attributes["maxlength"].value, 10);
+        var myLength = target.value.length;
+        if (myLength >= maxLength) {
+            var next = target;
+            while (next = next.nextElementSibling) {
+                if (next == null)
+                    break;
+                if (next.tagName.toLowerCase() == "input") {
+                    next.focus();
+                    break;
+                }
+            }
+        }
+    }
 },
 
 terminosPage: function(page) {
