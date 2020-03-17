@@ -1,3 +1,142 @@
+.speed-dial.fab--bottom__right, button.fab--bottom__right, ons-fab.fab--bottom__right {
+	top:57px!important;
+	left:auto!important;
+	bottom: auto!important;
+	right: 10px!important;
+	border-radius: 2px;
+	height: 40px;
+	width: 40px;
+	color:#666;
+}
+fab.fab--material, ons-speed-dial-item {
+	line-height: 340px;
+	padding-top:2px;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+}
+button.fab--material, ons-fab.fab--material, ons-speed-dial-item.fab--material {
+	line-height:40px;
+}
+#lugares_proximos {
+	position: fixed;
+	bottom: -240px;
+	color:#FFF;
+	left:20px;
+	right: 20px;
+	z-index: 10002;
+	-webkit-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+#realizar_checkin {
+	border:1px solid rgba(255,255,255,0.1);
+	border-radius:10px 10px 0 0;
+	overflow: hidden;
+}
+#lugares_proximos .contenedor, #realizar_checkin .contenedor {
+	height: 240px;
+	background: rgba(33,33,33,0.9);
+	border-radius:10px 10px 0 0;
+	overflow: hidden;
+}
+#realizar_checkin .contenedor {
+	background: none;
+	height: auto;
+}
+#lugares_proximos .titulo, #realizar_checkin .titulo {
+	font-size:16px;
+	font-weight: 500;
+	height: 34px;
+	padding: 15px 18px;
+	background: #212121;
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+#realizar_checkin .titulo {
+	height: 20px;
+	font-weight: 600;
+}
+#lugares_proximos .brecha {
+	width: 60px;
+	height: 7px;
+	border-radius:40px;
+	background:rgba(255,255,255,0.7);
+	position: relative;
+	left:0;
+	right: 0;
+	top:-5px;
+	margin: auto;
+	-webkit-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	margin-bottom: 15px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+/*
+#lugares_proximos .brecha {
+	width: 70px;
+	height: 12px;
+	border-radius:40px;
+	background:rgba(255,255,255,0.7);
+	position: absolute;
+	top:-45px;
+	left:0;
+	right: 0;
+	margin: auto;
+	-webkit-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+} */
+#lugares_proximos .item, #realizar_checkin .item {
+	height: 70px;
+	padding:7px 15px 10px 15px;
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+#lugares_proximos .item button {
+	border-color:#FFF;
+	color:#FFF;
+}
+#lugares_proximos .item:last-child, #realizar_checkin .item:last-child {
+	border:none;
+}
+#lugares_proximos.arriba {
+	bottom: 0;
+}
+ #lugares_proximos.arriba .brecha, #lugares_proximos.medio .brecha, #lugares_proximos.medio2 .brecha {
+	top: 0;
+} /*
+#lugares_proximos.arriba .brecha, #lugares_proximos.medio .brecha, #lugares_proximos.medio2 .brecha {
+	top: -20px;
+} */
+#lugares_proximos.medio {
+	bottom: -98px;
+}
+#lugares_proximos.medio2 {
+	bottom: -180px;
+}
+.button-favorito {
+	position: absolute;
+	top: -45px;
+	right: 0;
+}
+.button-favorito .fab {
+	color:#FF7373;
+	background: #34343C;
+}
+.c_item_user {
+	text-align: left;
+}
+.c_item_user img {
+	width: 32px;
+	margin-bottom: 3px;
+}
+.c_item_user span {
+	display: block;
+	text-align: left;
+	font-size:17px;
+	font-weight: 600;
+}
+.tabbar--material__item.active {
+	font-weight: bold;
+}
+.tabbar__icon+.tabbar__label { 
+	font-weight: 500;
+}
 .gm-style .gm-style-iw-c {
 	background-color: transparent;
 	box-shadow: none;
@@ -1044,12 +1183,12 @@ ons-card .c2 {
 	}
 	.degradado_negro2 {
 		bottom: 0;
-		background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-		background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-		background-image: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
-		background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-		background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-		background-image: linear-gradient(bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+		background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+		background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+		background-image: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0, 0, 0, 0.6)), to(rgba(0, 0, 0, 0)));
+		background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+		background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+		background-image: linear-gradient(bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
 		height: 110px;
 	}
 	.degradado_negro_top {
