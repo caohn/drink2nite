@@ -214,7 +214,9 @@ Estimado <b style="color:#666;">'.$verificar['nombre'].'</b>, hemos recibido tu 
 	$id = $_REQUEST['id'];
 	$uid = $_REQUEST['uid'];
 	$fecha = time();
-	$db->query( "INSERT INTO venue (id_l, usuario, activo, fecha) values ('{$id}','{$uid}','1','".$fecha."')" );
+	$fecha1 = date('Y-m-d H:i:s', time());
+	$fecha2 = date('Y-m-d H:i:s', (strtotime ("+23 Hours")));
+	$db->query( "INSERT INTO venue (id_l, usuario, activo, fecha, fecha_inicio, fecha_fin) values ('{$id}','{$uid}','1','".$fecha."','".$fecha1."','".$fecha2."')" );
 
 	$row = $db->super_query( "SELECT seguidores, nombre FROM usuarios_drink2nite WHERE id = '".$uid."'");
 	$row2 = $db->super_query( "SELECT venue.id, locales.nombre FROM venue INNER JOIN locales ON venue.id_l = locales.id WHERE venue.id_l = '".$id."' AND venue.usuario = '".$uid."' AND venue.fecha = '".$fecha."'");
@@ -404,7 +406,7 @@ Estimado <b style="color:#666;">'.$verificar['nombre'].'</b>, hemos recibido tu 
 		$descripcion2 = number_format($row['distance'],2).'km';
 	}
 	
-	$venue = $db->super_query( "SELECT id, usuario FROM venue WHERE id_l = '".$_REQUEST['id']."' AND usuario = '".$_REQUEST['uid']."' AND activo = '1'");
+	$venue = $db->super_query( "SELECT id, usuario FROM venue WHERE id_l = '".$_REQUEST['id']."' AND usuario = '".$_REQUEST['uid']."' AND fecha_fin >= '".date('Y-m-d H:i:s', time())."' AND activo = '1'");
 	if($venue['id'] != 0) { $sd1 = ' style="display:none;"'; $sd2 = ''; } else { $sd1 = ''; $sd2 = ' style="display:none;"'; }
 	$member_id = $db->super_query( "SELECT favoritos, seguidosl FROM usuarios_drink2nite WHERE id = '".$_REQUEST['uid']."'");
 	$fav_arr = explode( ',', $member_id['favoritos'] );
@@ -422,8 +424,10 @@ Estimado <b style="color:#666;">'.$verificar['nombre'].'</b>, hemos recibido tu 
 	$total = $suma_val/$cuenta;
 	if($cuenta > 0) { $valoracion2 = round($total,0); for($i=1;$i<=5;$i++) { if($i <= $valoracion2){$valoracion .= '<i class="fa fa-star"></i>';}else{$valoracion .= '<i class="fa fa-star-o"></i>';}} if($cuenta == 1) { $valoracion .= ' ('.$cuenta.' persona)'; } else { $valoracion .= ' ('.$cuenta.' personas)'; } } else {
 	$valoracion = 'Sin valoración'; }
+		/*
+	$botones = '<div class="button-bar" style="width:100%;"><div class="button-bar__item"><button class="button-bar__button" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'">Check In</button><button class="button-bar__button nvenue" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'">Check Out</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="favoritos(\''.$row['id'].'\',\'1\')" id="favorito'.$row['id'].'"'.$fd1.'>Favorito</button><button class="button-bar__button nfavoritos" onclick="favoritos(\''.$row['id'].'\',2)" '.$fd2.'id="nfavorito'.$row['id'].'">Favorito</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="seguir(\''.$row['id'].'\',\'1\')" id="seguir'.$row['id'].'"'.$ss1.'>Seguir</button><button class="button-bar__button nseguir" onclick="seguir(\''.$row['id'].'\',2)" '.$ss2.'id="nseguir'.$row['id'].'">Seguir</button></div></div>'; */
 
-	$botones = '<div class="button-bar" style="width:100%;"><div class="button-bar__item"><button class="button-bar__button" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'">Check In</button><button class="button-bar__button nvenue" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'">Check Out</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="favoritos(\''.$row['id'].'\',\'1\')" id="favorito'.$row['id'].'"'.$fd1.'>Favorito</button><button class="button-bar__button nfavoritos" onclick="favoritos(\''.$row['id'].'\',2)" '.$fd2.'id="nfavorito'.$row['id'].'">Favorito</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="seguir(\''.$row['id'].'\',\'1\')" id="seguir'.$row['id'].'"'.$ss1.'>Seguir</button><button class="button-bar__button nseguir" onclick="seguir(\''.$row['id'].'\',2)" '.$ss2.'id="nseguir'.$row['id'].'">Seguir</button></div></div>';
+	$botones = '<div class="button-bar" style="width:100%;"><div class="button-bar__item"><button class="button-bar__button" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'">Check In</button><button class="button-bar__button nvenue" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'">Check Out</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="favoritos(\''.$row['id'].'\',\'1\')" id="favorito'.$row['id'].'"'.$fd1.'>Favorito</button><button class="button-bar__button nfavoritos" onclick="favoritos(\''.$row['id'].'\',2)" '.$fd2.'id="nfavorito'.$row['id'].'">Favorito</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="crear_evento(\''.$row['id'].'\',\''.$logo.'\')">Crear evento</button></div></div>';
 
 	/* $botones = '<div class="button-bar" style="width:100%;"><div class="button-bar__item"><button class="button-bar__button" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'">Venue</button><button class="button-bar__button nvenue" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'">No Venue</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="favoritos(\''.$row['id'].'\',\'1\')" id="favorito'.$row['id'].'"'.$fd1.'>Favorito</button><button class="button-bar__button nfavoritos" onclick="favoritos(\''.$row['id'].'\',2)" '.$fd2.'id="nfavorito'.$row['id'].'">Favorito</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="seguir(\''.$row['id'].'\',\'1\')" id="seguir'.$row['id'].'"'.$ss1.'>Seguir</button><button class="button-bar__button nseguir" onclick="seguir(\''.$row['id'].'\',2)" '.$ss2.'id="nseguir'.$row['id'].'">Seguir</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="publicar()">Check In</button></div></div>'; */
 	
@@ -440,7 +444,7 @@ Estimado <b style="color:#666;">'.$verificar['nombre'].'</b>, hemos recibido tu 
 		if($usuario['foto']) { $foto = 'https://drink2nite.com/subidas/avatar/'.$usuario['foto']; } else { $foto = 'img/avatar.png'; }
 $publicaciones .= '<div class="post" onclick="perfil_ver(\''.$row2['usuario'].'\',\''.$tipo.'\')"><div class="titulo"><img src="'.$foto.'">'.$usuario['nombre'].' '.$usuario['apellido'].'<span>'.$row2['lugar'].'</span></div>'.$imagen.'<div class="texto">'.$row2['texto'].'</div><div class="abajo">'.hace($row2['fechat']).$ratingm.'</div></div>';
 	}
-if(!$publicaciones) { $publicaciones = '<div style="padding:20px; text-align:center;">No se encontraron publicaciones</div>'; }
+if(!$publicaciones) { $publicaciones = '<div style="padding:20px 20px 40px 20px; text-align:center;">No se encontraron publicaciones</div>'; }
 
 $promociones_db = $db->query( "SELECT imagen FROM promos WHERE id_l = '".$_REQUEST['id']."' AND estado = '1' ORDER by id DESC LIMIT 0,3");
 	while ( $row3 = $db->get_row($promociones_db) ) {
@@ -450,6 +454,80 @@ $promociones_db = $db->query( "SELECT imagen FROM promos WHERE id_l = '".$_REQUE
 	$accion = array("titulo" => $row['nombre'], "logo" => $logo, "latitud" => $row['latitud'], "longitud" => $row['longitud'], "tipo" => $row['tipo'], "direccion" => $row['direccion'], "descripcion" => $descripcion, "descripcion2" => $descripcion2, "botones" => $botones, "calificacion" => $cali, "valoracion"=>$valoracion, "publicaciones" => $publicaciones, "promo" => $promo);
 	$accion = $_GET['callback'].'('.json_encode($accion).')';
 	break;
+
+	case 'local2':
+		$id = $_REQUEST['id'];
+		$tipo = $_REQUEST['tipo'];
+		$lat = $_REQUEST['lat'];
+		$lon = $_REQUEST['lon'];
+		if($tipo == 5) $tipo = 2;
+		$row = $db->super_query( "SELECT (6371 * ACOS( 
+			SIN(RADIANS(latitud)) * SIN(RADIANS(".$lat.")) 
+			+ COS(RADIANS(longitud - ".$lon.")) * COS(RADIANS(latitud)) 
+			* COS(RADIANS(".$lat."))
+			)
+	) AS distance, logo, tipo, h_e, h_c, nombre, lugar, direccion, descripcion, id, pagina, numero, latitud, longitud FROM locales WHERE id = '".$id."'" );
+		if($row['logo']) { $logo = 'https://drink2nite.com/subidas/logos/'.$row['logo']; } else { $logo = 'https://drink2nite.com/subidas/logos/local.png'; }
+		if($row['tipo'] == 1) { $tipo = 'Bar'; } if($row['tipo'] == 2) { $tipo = 'Club'; }
+		if($row['h_e'] <= date('H:i',time()) and $row['h_c'] >= date('H:i',time())) { $estado = '<b class="c1">Abierto</b>'; } else { $estado = '<b class="c2">	Cerrado</b>'; }
+		$descripcion = $tipo.'<span>•</span>De '.$row['h_e'].' a las '.$row['h_c'].'<span>•</span>'.$estado;
+		if($row['h_e']) {
+			$descripcion2 = number_format($row['distance'],2).'km<span>•</span>De '.$row['h_e'].' a las '.$row['h_c'].'<span>•</span>'.$estado;
+		} else {
+			$descripcion2 = number_format($row['distance'],2).'km';
+		}
+		
+		$venue = $db->super_query( "SELECT id, usuario FROM venue WHERE id_l = '".$_REQUEST['id']."' AND usuario = '".$_REQUEST['uid']."' AND fecha_fin >= '".date('Y-m-d H:i:s', time())."' AND activo = '1'");
+		if($venue['id'] != 0) { $sd1 = ' style="display:none;"'; $sd2 = ''; } else { $sd1 = ''; $sd2 = ' style="display:none;"'; }
+		$member_id = $db->super_query( "SELECT favoritos, seguidosl FROM usuarios_drink2nite WHERE id = '".$_REQUEST['uid']."'");
+		$fav_arr = explode( ',', $member_id['favoritos'] );
+		if( in_array( $id, $fav_arr ) ) { $fd1 = ' style="display:none;"'; $fd2 = '';} else { $fd1 = ''; $fd2 = ' style="display:none;"'; }
+		$seg_arr = explode( ',', $member_id['seguidosl'] );
+		if( in_array( $id, $seg_arr ) ) { $ss1 = ' style="display:none;"'; $ss2 = '';} else { $ss1 = ''; $ss2 = ' style="display:none;"'; }
+		$cal = $db->super_query( "SELECT id FROM valoracion WHERE usuario = '".$_REQUEST['uid']."' AND local = '".$_REQUEST['id']."'");
+		if($cal['id']) { $cali = 1; } else { $cali = 0; }
+		$val_db = $db->query( "SELECT valoracion FROM valoracion WHERE local = '".$_REQUEST['id']."'");
+		$cuenta = 0;
+		while ( $row2 = $db->get_row($val_db) ) {
+			$cuenta++;
+			$suma_val = $suma_val+$row2['valoracion'];
+		}
+		$total = $suma_val/$cuenta;
+		if($cuenta > 0) { $valoracion2 = round($total,0); for($i=1;$i<=5;$i++) { if($i <= $valoracion2){$valoracion .= '<i class="fa fa-star"></i>';}else{$valoracion .= '<i class="fa fa-star-o"></i>';}} if($cuenta == 1) { $valoracion .= ' ('.$cuenta.' persona)'; } else { $valoracion .= ' ('.$cuenta.' personas)'; } } else {
+		$valoracion = 'Sin valoración'; }
+			/*
+		$botones = '<div class="button-bar" style="width:100%;"><div class="button-bar__item"><button class="button-bar__button" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'">Check In</button><button class="button-bar__button nvenue" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'">Check Out</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="favoritos(\''.$row['id'].'\',\'1\')" id="favorito'.$row['id'].'"'.$fd1.'>Favorito</button><button class="button-bar__button nfavoritos" onclick="favoritos(\''.$row['id'].'\',2)" '.$fd2.'id="nfavorito'.$row['id'].'">Favorito</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="seguir(\''.$row['id'].'\',\'1\')" id="seguir'.$row['id'].'"'.$ss1.'>Seguir</button><button class="button-bar__button nseguir" onclick="seguir(\''.$row['id'].'\',2)" '.$ss2.'id="nseguir'.$row['id'].'">Seguir</button></div></div>'; */
+	
+		$botones = '<div class="button-bar" style="width:100%;"><div class="button-bar__item"><button class="button-bar__button" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'">Check In</button><button class="button-bar__button nvenue" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'">Check Out</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="crear_evento(\''.$row['id'].'\',\''.$logo.'\')">Crear evento</button></div></div>
+		
+		<div class="button-favorito"><button class="fab" onclick="favoritos(\''.$row['id'].'\',\'1\')" id="favorito'.$row['id'].'"'.$fd1.'><i class="zmdi zmdi-favorite-outline"></i></button><button class="fab nfavoritos" onclick="favoritos(\''.$row['id'].'\',2)" '.$fd2.'id="nfavorito'.$row['id'].'"><i class="zmdi zmdi-favorite"></i></button></div>
+		';
+	
+		/* $botones = '<div class="button-bar" style="width:100%;"><div class="button-bar__item"><button class="button-bar__button" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'">Venue</button><button class="button-bar__button nvenue" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'">No Venue</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="favoritos(\''.$row['id'].'\',\'1\')" id="favorito'.$row['id'].'"'.$fd1.'>Favorito</button><button class="button-bar__button nfavoritos" onclick="favoritos(\''.$row['id'].'\',2)" '.$fd2.'id="nfavorito'.$row['id'].'">Favorito</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="seguir(\''.$row['id'].'\',\'1\')" id="seguir'.$row['id'].'"'.$ss1.'>Seguir</button><button class="button-bar__button nseguir" onclick="seguir(\''.$row['id'].'\',2)" '.$ss2.'id="nseguir'.$row['id'].'">Seguir</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="publicar()">Check In</button></div></div>'; */
+		
+		$publicaciones_db = $db->query( "SELECT * FROM publicaciones WHERE a = '".$_REQUEST['id']."' AND tipo = '0' ORDER by id DESC LIMIT 0,10");
+		while ( $row2 = $db->get_row($publicaciones_db) ) {
+			$rating = '';
+			$usuario = $db->super_query( "SELECT nombre, apellido, foto FROM usuarios_drink2nite WHERE id = '".$row2['usuario']."'");
+			if($row2['imagen']) $imagen = '<img src="https://drink2nite.com/subidas/locales/'.$row2['imagen'].'" class="imagen">'; else $imagen = '';
+			if($row2['rating'] > 0) { for($i=1; $i<=5; $i++) { if($row2['rating'] >= $i) { $rating .= '<i class="fa fa-star"></i>'; } else { $rating .= '<i class="fa fa-star-o"></i>'; } }
+			
+			$ratingm = '<div class="rating_right">'.$rating.'</div>'; } else {
+				$rating = ''; $ratingm = '';
+			}
+			if($usuario['foto']) { $foto = 'https://drink2nite.com/subidas/avatar/'.$usuario['foto']; } else { $foto = 'img/avatar.png'; }
+	$publicaciones .= '<div class="post" onclick="perfil_ver(\''.$row2['usuario'].'\',\''.$tipo.'\')"><div class="titulo"><img src="'.$foto.'">'.$usuario['nombre'].' '.$usuario['apellido'].'<span>'.$row2['lugar'].'</span></div>'.$imagen.'<div class="texto">'.$row2['texto'].'</div><div class="abajo">'.hace($row2['fechat']).$ratingm.'</div></div>';
+		}
+	if(!$publicaciones) { $publicaciones = '<div style="padding:20px 20px 40px 20px; text-align:center;">No se encontraron publicaciones</div>'; }
+	
+	$promociones_db = $db->query( "SELECT imagen FROM promos WHERE id_l = '".$_REQUEST['id']."' AND estado = '1' ORDER by id DESC LIMIT 0,3");
+		while ( $row3 = $db->get_row($promociones_db) ) {
+			$promo .= '<ons-carousel-item><img src="https://drink2nite.com/subidas/promos/'.$row3['imagen'].'" style="width: 100%; border-radius:3px;"> </ons-carousel-item>';
+		}
+		
+		$accion = array("titulo" => $row['nombre'], "logo" => $logo, "latitud" => $row['latitud'], "longitud" => $row['longitud'], "tipo" => $row['tipo'], "direccion" => $row['direccion'], "descripcion" => $descripcion, "descripcion2" => $descripcion2, "botones" => $botones, "calificacion" => $cali, "valoracion"=>$valoracion, "publicaciones" => $publicaciones, "promo" => $promo);
+		$accion = $_GET['callback'].'('.json_encode($accion).')';
+		break;
 
 	case 'favoritos':
 	$tipo = $_REQUEST['tipo'];
@@ -906,6 +984,8 @@ function getExtension($str) {
 	break;
 
 	case 'locales_cerca':
+		$pagina = $_REQUEST['pagina'];
+		if(!$pagina) { $pagina = 0; }
 		$lat = $_REQUEST['lat'];
 		$lon = $_REQUEST['lon'];
 		$someArray = [];
@@ -914,7 +994,7 @@ function getExtension($str) {
 									+ COS(RADIANS(longitud - ".$lon.")) * COS(RADIANS(latitud)) 
 									* COS(RADIANS(".$lat."))
 									)
-					   ) AS distance, nombre, logo, lugar, id, h_e, h_c FROM locales ORDER BY distance ASC LIMIT 0,10" );
+					   ) AS distance, nombre, logo, lugar, id, h_e, h_c FROM locales ORDER BY distance ASC LIMIT ".$pagina.",10" );
 		
 					   while ( $row = $db->get_row($busqueda_db) ) {
 						if($row['h_e'] <= date('H:i',time()) and $row['h_c'] >= date('H:i',time())) { $estado = '<b class="c1">Abierto</b>'; } else { $estado = '<b class="c2">	Cerrado</b>'; }
@@ -949,6 +1029,96 @@ function getExtension($str) {
 		$accion = json_encode($someArray);
 	break;
 
+	case 'locales_cerca2':
+		$lat = $_REQUEST['lat'];
+		$lon = $_REQUEST['lon'];
+		$someArray = [];
+		$busqueda_db = $db->query( "SELECT (6371 * ACOS( 
+									SIN(RADIANS(latitud)) * SIN(RADIANS(".$lat.")) 
+									+ COS(RADIANS(longitud - ".$lon.")) * COS(RADIANS(latitud)) 
+									* COS(RADIANS(".$lat."))
+									)
+					   ) AS distance, nombre, logo, lugar, id, h_e, h_c FROM locales ORDER BY distance ASC LIMIT 0,2" );
+		
+					   while ( $row = $db->get_row($busqueda_db) ) {
+						if($row['h_e'] <= date('H:i',time()) and $row['h_c'] >= date('H:i',time())) { $estado = '<b class="c1">Abierto</b>'; } else { $estado = '<b class="c2">	Cerrado</b>'; }
+	$valoracion = '';
+	$val_db = $db->query( "SELECT valoracion FROM valoracion WHERE local = '".$row['id']."'");
+	$cuenta = 0;
+	$suma_val = 0;
+	while ( $row2 = $db->get_row($val_db) ) {
+		$cuenta++;
+		$suma_val = $suma_val+$row2['valoracion'];
+	}
+	$total = $suma_val/$cuenta;
+	if($cuenta > 0) { 
+		$valoracion2 = round($total,0); 
+		for($i=1;$i<=5;$i++) { 
+			if($i <= $valoracion2){$valoracion .= '<i class="fa fa-star"></i>';}
+			else{$valoracion .= '<i class="fa fa-star-o"></i>';}
+		} 
+	 } else { $valoracion = 'Sin valoración'; }
+	 if(!$row['logo']) { $row['logo'] = 'local.png'; }
+						array_push($someArray, [
+						  'nombre'   => $row['nombre'],
+						  'distancia' => number_format($row['distance'],2),
+						  'logo' => $row['logo'],
+						  'estado' => $estado,
+						  'valoracion' => $valoracion,
+						  'lugar' => utf8_decode($row['lugar']),
+						  'id' => $row['id']
+						]);
+					  }
+
+		$accion = json_encode($someArray);
+	break;
+	
+	case 'locales_cerca3':
+		$pagina = $_REQUEST['pagina'];
+		if(!$pagina || $pagina == 1) { $pagina = 0; $tpagina = 0; } else { $tpagina = ($pagina-1)*5; }
+		$lat = $_REQUEST['lat'];
+		$lon = $_REQUEST['lon'];
+		$someArray = [];
+		$busqueda_db = $db->query( "SELECT (6371 * ACOS( 
+									SIN(RADIANS(latitud)) * SIN(RADIANS(".$lat.")) 
+									+ COS(RADIANS(longitud - ".$lon.")) * COS(RADIANS(latitud)) 
+									* COS(RADIANS(".$lat."))
+									)
+					   ) AS distance, nombre, logo, lugar, id, h_e, h_c FROM locales ORDER BY distance ASC LIMIT ".$tpagina.",5" );
+		
+					   while ( $row = $db->get_row($busqueda_db) ) {
+						if($row['h_e'] <= date('H:i',time()) and $row['h_c'] >= date('H:i',time())) { $estado = '<b class="c1">Abierto</b>'; } else { $estado = '<b class="c2">	Cerrado</b>'; }
+	$valoracion = '';
+	$val_db = $db->query( "SELECT valoracion FROM valoracion WHERE local = '".$row['id']."'");
+	$cuenta = 0;
+	$suma_val = 0;
+	while ( $row2 = $db->get_row($val_db) ) {
+		$cuenta++;
+		$suma_val = $suma_val+$row2['valoracion'];
+	}
+	$total = $suma_val/$cuenta;
+	if($cuenta > 0) { 
+		$valoracion2 = round($total,0); 
+		for($i=1;$i<=5;$i++) { 
+			if($i <= $valoracion2){$valoracion .= '<i class="fa fa-star"></i>';}
+			else{$valoracion .= '<i class="fa fa-star-o"></i>';}
+		} 
+	 } else { $valoracion = 'Sin valoración'; }
+	 if(!$row['logo']) { $row['logo'] = 'local.png'; }
+						array_push($someArray, [
+						  'nombre'   => $row['nombre'],
+						  'distancia' => number_format($row['distance'],2),
+						  'logo' => $row['logo'],
+						  'estado' => $estado,
+						  'valoracion' => $valoracion,
+						  'lugar' => utf8_decode($row['lugar']),
+						  'id' => $row['id']
+						]);
+					  }
+
+		$accion = json_encode($someArray);
+	break;
+	
 	case 'promos_cerca':
 	$lat = $_REQUEST['lat'];
 	$lon = $_REQUEST['lon'];
@@ -958,12 +1128,14 @@ function getExtension($str) {
 								+ COS(RADIANS(locales.longitud - ".$lon.")) * COS(RADIANS(locales.latitud)) 
 								* COS(RADIANS(".$lat."))
 								)
-				   ) AS distance, locales.id, locales.nombre, promos.imagen FROM locales INNER JOIN promos ON promos.id_l = locales.id ORDER BY distance ASC LIMIT 0,3" );
+				   ) AS distance, locales.id, locales.nombre, promos.imagen, locales.logo FROM locales INNER JOIN promos ON promos.id_l = locales.id ORDER BY distance ASC LIMIT 0,3" );
 	
 				   while ( $row = $db->get_row($busqueda_db) ) {
+					if(!$row['logo']) { $row['logo'] = 'local.png'; }
 					array_push($someArray, [
 					  'imagen'   => $row['imagen'],
 					  'nombre'   => $row['nombre'],
+					  'logo' => $row['logo'],
 					  'id' => $row['id']
 					]);
 				  }
@@ -1046,6 +1218,10 @@ case 'seguidos_usuario':
 break;
 
 case 'tonightv2':
+	$pagina = $_REQUEST['pagina'];
+	$cnt = $_REQUEST['cantidad'];
+	if(!$cnt || $cnt == 0) { $cnt = 4; }
+	if(!$pagina || $pagina == 1) { $pagina = 0; $tpagina = 0; } else { $tpagina = ($pagina-1)*$cnt; }
 	$id = $_REQUEST['id'];
 	$lat = $_REQUEST['lat'];
 	$lon = $_REQUEST['lon'];
@@ -1059,7 +1235,7 @@ case 'tonightv2':
 		+ COS(RADIANS(longitud - ".$lon.")) * COS(RADIANS(latitud)) 
 		* COS(RADIANS(".$lat."))
 		)
-) AS distance, nombre, apellido, correo, seguidos_n, seguidores_n, id, CONCAT(nombre, ' ' ,apellido) AS completo, foto FROM usuarios_drink2nite WHERE ".$where." ORDER BY distance ASC LIMIT 0,5" );
+) AS distance, nombre, apellido, correo, seguidos_n, seguidores_n, id, CONCAT(nombre, ' ' ,apellido) AS completo, foto FROM usuarios_drink2nite WHERE ".$where." ORDER BY distance ASC LIMIT ".$tpagina.",".$cnt."" );
 	
 				   while ( $row = $db->get_row($busqueda_db) ) {
 					if($row['foto']) { $foto = 'https://drink2nite.com/subidas/avatar/'.$row['foto']; } else { $foto = 'img/avatar.png'; }
@@ -1076,6 +1252,10 @@ case 'tonightv2':
 	break;
 
 	case 'tonightv3':
+	$pagina = $_REQUEST['pagina'];
+	$cnt = $_REQUEST['cantidad'];
+	if(!$cnt) { $cnt = 4; }
+	if(!$pagina || $pagina == 1) { $pagina = 0; $tpagina = 0; } else { $tpagina = ($pagina-1)*$cnt; }
 	$id = $_REQUEST['id'];
 	$lat = $_REQUEST['lat'];
 	$lon = $_REQUEST['lon'];
@@ -1086,12 +1266,13 @@ case 'tonightv2':
 		+ COS(RADIANS(locales.longitud - ".$lon.")) * COS(RADIANS(locales.latitud)) 
 		* COS(RADIANS(".$lat."))
 		)
-) AS distance, usuarios_drink2nite.id, CONCAT(usuarios_drink2nite.nombre, ' ' ,usuarios_drink2nite.apellido) AS completo, usuarios_drink2nite.foto, venue.id, locales.logo, locales.nombre, venue.fecha, venue.activo, venue.id_l FROM venue INNER JOIN usuarios_drink2nite ON usuarios_drink2nite.id = venue.usuario INNER JOIN locales ON locales.id = venue.id_l WHERE venue.activo = '1' ORDER BY distance ASC LIMIT 0,5" );
+) AS distance, usuarios_drink2nite.id, CONCAT(usuarios_drink2nite.nombre, ' ' ,usuarios_drink2nite.apellido) AS completo, usuarios_drink2nite.foto, venue.id, locales.logo, locales.nombre, venue.fecha, venue.activo, venue.id_l FROM venue INNER JOIN usuarios_drink2nite ON usuarios_drink2nite.id = venue.usuario INNER JOIN locales ON locales.id = venue.id_l WHERE venue.activo = '1' AND venue.fecha_fin >= '".date('Y-m-d H:i:s', time())."' ORDER BY distance ASC LIMIT ".$tpagina.",".$cnt."" );
 	
 				   while ( $row = $db->get_row($busqueda_db) ) {
 
 					/* if(strlen($row['completo']) >= 13) { $row['completo'] = substr($row['completo'], 0, 8).'...'; } else { $row['completo'] = $row['completo']; } */
 					if($row['foto']) { $foto = 'https://drink2nite.com/subidas/avatar/'.$row['foto']; } else { $foto = 'img/avatar.png'; }
+					if(!$row['logo']) { $row['logo'] = 'local.png'; }
 					array_push($someArray, [
 					  'completo'   => $row['completo'],
 					  'local'   => $row['nombre'],
@@ -1106,6 +1287,52 @@ case 'tonightv2':
 
 	$accion = json_encode($someArray);
 	break;
+
+	case 'tonightv32':
+		$pagina = $_REQUEST['pagina'];
+		$cnt = $_REQUEST['cantidad'];
+		if(!$cnt) { $cnt = 4; }
+		if(!$pagina || $pagina == 1) { $pagina = 0; $tpagina = 0; } else { $tpagina = ($pagina-1)*$cnt; }
+		$id = $_REQUEST['id'];
+		$lat = $_REQUEST['lat'];
+		$lon = $_REQUEST['lon'];
+	
+		$someArray = [];
+		$busqueda_db = $db->query( "SELECT (6371 * ACOS( 
+			SIN(RADIANS(locales.latitud)) * SIN(RADIANS(".$lat.")) 
+			+ COS(RADIANS(locales.longitud - ".$lon.")) * COS(RADIANS(locales.latitud)) 
+			* COS(RADIANS(".$lat."))
+			)
+	) AS distance, usuarios_drink2nite.id, CONCAT(usuarios_drink2nite.nombre, ' ' ,usuarios_drink2nite.apellido) AS completo, usuarios_drink2nite.foto, venue.id, locales.logo, locales.latitud, locales.longitud, locales.nombre, venue.fecha, venue.fecha_fin, venue.activo, venue.id_l FROM venue INNER JOIN usuarios_drink2nite ON usuarios_drink2nite.id = venue.usuario INNER JOIN locales ON locales.id = venue.id_l WHERE venue.activo = '1' AND venue.fecha_fin >= '".date('Y-m-d H:i:s', time())."' ORDER BY distance ASC LIMIT ".$tpagina.",".$cnt."" );
+		
+					   while ( $row = $db->get_row($busqueda_db) ) {
+	
+						/* if(strlen($row['completo']) >= 13) { $row['completo'] = substr($row['completo'], 0, 8).'...'; } else { $row['completo'] = $row['completo']; } */
+						if($row['foto']) { $foto = 'https://drink2nite.com/subidas/avatar/'.$row['foto']; } else { $foto = 'img/avatar.png'; }
+						if(!$row['logo']) { $row['logo'] = 'local.png'; }
+
+						$row2 = $db->super_query( "SELECT COUNT(*) total FROM asistencia WHERE id_v = '".$row['id']."'" );
+						$row3 = $db->super_query( "SELECT COUNT(*) total FROM chat WHERE id_v = '".$row['id']."'" );
+
+						array_push($someArray, [
+						  'completo'   => $row['completo'],
+						  'local'   => $row['nombre'],
+						  'logo' => $row['logo'],
+						  'latitud' => $row['latitud'],
+						  'longitud' => $row['longitud'],
+						  'chat' => $row3['total'],
+						  'asistencia' => $row2['total'],
+						  'foto' => $foto,
+						  'hace' => hace($row['fecha']),
+						  'distancia'   => number_format($row['distance'],2),
+						  'id' => $row['id_l'],
+						  'fechac' => date('Y/m/d H:i:s',strtotime($row['fecha_fin'])),
+						  'id_v' => $row['id']
+						]);
+					  }
+	
+		$accion = json_encode($someArray);
+		break;
 
 	case 'notificaciones_todas':
 	$id = $_REQUEST['id'];
@@ -1160,7 +1387,7 @@ case 'tonightv2':
 		+ COS(RADIANS(locales.longitud - ".$lon.")) * COS(RADIANS(locales.latitud)) 
 		* COS(RADIANS(".$lat."))
 		)
-) AS distance, usuarios_drink2nite.id, CONCAT(usuarios_drink2nite.nombre, ' ' ,usuarios_drink2nite.apellido) AS completo, locales.logo, locales.latitud, locales.longitud, locales.nombre, venue.fecha, venue.activo, venue.id_l, locales.descripcion, locales.lugar, locales.direccion FROM venue INNER JOIN usuarios_drink2nite ON usuarios_drink2nite.id = venue.usuario INNER JOIN locales ON locales.id = venue.id_l WHERE venue.id = '".$id."'" );
+) AS distance, usuarios_drink2nite.id, CONCAT(usuarios_drink2nite.nombre, ' ' ,usuarios_drink2nite.apellido) AS completo, locales.logo, locales.latitud, locales.longitud, locales.nombre, venue.fecha, venue.activo, venue.id_l, locales.descripcion, locales.lugar, locales.direccion, venue.fecha_fin FROM venue INNER JOIN usuarios_drink2nite ON usuarios_drink2nite.id = venue.usuario INNER JOIN locales ON locales.id = venue.id_l WHERE venue.id = '".$id."'" );
 	
 				   while ( $row = $db->get_row($busqueda_db) ) {
 					if(!$row['logo']) { $row['logo'] = 'local.png'; }
@@ -1170,13 +1397,13 @@ case 'tonightv2':
 						$row['descripcion'] = $row['descripcion'].'<br>'.$row['direccion'];
 					}
 
-					$venue_db = $db->query( "SELECT id FROM asistencia WHERE id_v = '".$id."'" );
+					$venue_db = $db->query( "SELECT id FROM asistencia WHERE id_v = '".$id."' AND invitado != '1'" );
 		
 					   while ( $row2 = $db->get_row($venue_db) ) {
 							$i++;
 					}  
-
-					$row2 = $db->super_query( "SELECT asistencia FROM asistencia WHERE id_v = '".$id."' AND id_u = '".$id_u."' ORDER BY id DESC" );
+					if($row['fecha_fin'] <= date('Y-m-d H:i:s', time())) { $row['activo'] = 0; }
+					$row2 = $db->super_query( "SELECT asistencia FROM asistencia WHERE id_v = '".$id."' AND id_u = '".$id_u."' AND invitado !='1' ORDER BY id DESC" );
 					if(!$row2['asistencia']) $row2['asistencia'] = 0;
 					array_push($someArray, [
 					  'completo'   => $row['completo'],
@@ -1190,6 +1417,7 @@ case 'tonightv2':
 					  'distancia'   => number_format($row['distance'],2),
 					  'asistencia' => $row2['asistencia'],
 					  'cantidad' => $i,
+					  'fechac' => date('Y/m/d H:i:s',strtotime($row['fecha_fin'])),
 					  'id' => $row['id_l'],
 					  'id_u' => $row['id']
 					]);
@@ -1238,10 +1466,38 @@ case 'tonightv2':
 			$accion = $_GET['callback'].'('.json_encode($accion).')';
 		break;
 
+		case 'asistir_local_acepto':
+			$id = $_REQUEST['id'];
+			$uid = $_REQUEST['uid'];
+			$tipo = $_REQUEST['tipo'];
+			$invitado = $_REQUEST['invitado'];
+			/* $db->query( "INSERT INTO invitaciones_local (id_l, id_u, asistencia) values ('{$id}','{$uid}','{$tipo}')" ); */
+			if($tipo == 3) {
+				$db->query("UPDATE asistencia set invitado='0', asistencia='3' where id_v='".$id."' AND id_u='".$uid."'"); 
+			}
+			$loc = $db->super_query( "SELECT id_l FROM venue WHERE id = '".$id."'" );
+			$row = $db->super_query( "SELECT nombre FROM locales WHERE id = '".$loc['id_l']."'" );
+			$row3 = $db->super_query( "SELECT propietario FROM notificaciones WHERE tipo = '12' AND user='".$uid. "' AND local='".$loc['id_l']. "'" );
+			$prop = $row3['propietario'];
+
+			$db->query( "INSERT INTO notificaciones (user, tipo, fecha, propietario, local, respuesta, venue) values ('".$prop."', '13', '".time()."', '".$uid."', '".$loc['id_l']."', '".$tipo."', '".$id."')" );
+			
+			$db->query("UPDATE usuarios_drink2nite set notificacion=notificacion+1 where id='".$prop."'"); 
+			$db->query("DELETE FROM notificaciones WHERE tipo = '12' AND user='".$uid. "' AND venue='".$id. "'");
+			if($uid != $row['id_u'] and $tipo != 4) {
+				$row2 = $db->super_query( "SELECT nombre FROM usuarios_drink2nite WHERE id = '".$uid."'");
+				enviar_push($row['nombre'],$row2['nombre'].' acaba de confirmar la invitación al local '.$row['nombre'],''.$prop.'');
+			}
+		
+				$accion = 1;
+				$accion = array("mensaje" => $accion);
+				$accion = $_GET['callback'].'('.json_encode($accion).')';
+			break;
+
 	case 'asistencia_todas':
 		$id = $_REQUEST['id'];
 		$someArray = [];
-		$busqueda = $db->query( "SELECT CONCAT(usuarios_drink2nite.nombre, ' ' ,usuarios_drink2nite.apellido) AS completo, asistencia.asistencia, asistencia.id_u, usuarios_drink2nite.foto FROM asistencia INNER JOIN usuarios_drink2nite ON usuarios_drink2nite.id = asistencia.id_u WHERE asistencia.id_v = '".$id."' ORDER BY asistencia.id DESC" );
+		$busqueda = $db->query( "SELECT CONCAT(usuarios_drink2nite.nombre, ' ' ,usuarios_drink2nite.apellido) AS completo, asistencia.asistencia, asistencia.id_u, usuarios_drink2nite.foto FROM asistencia INNER JOIN usuarios_drink2nite ON usuarios_drink2nite.id = asistencia.id_u WHERE asistencia.id_v = '".$id."' AND asistencia.invitado = '0' ORDER BY asistencia.id DESC" );
 		
 					   while ( $row = $db->get_row($busqueda_db) ) {
 						if($row['foto']) { $foto = 'https://drink2nite.com/subidas/avatar/'.$row['foto']; } else { $foto = 'img/avatar.png'; }
@@ -1306,13 +1562,15 @@ case 'tonightv2':
 		+ COS(RADIANS(locales.longitud - ".$lon.")) * COS(RADIANS(locales.latitud)) 
 		* COS(RADIANS(".$lat."))
 		)
-) AS distance, usuarios_drink2nite.id, CONCAT(usuarios_drink2nite.nombre, ' ' ,usuarios_drink2nite.apellido) AS completo, venue.id, locales.logo, locales.direccion, locales.nombre, venue.fecha, venue.activo, venue.id_l FROM venue INNER JOIN usuarios_drink2nite ON usuarios_drink2nite.id = venue.usuario INNER JOIN locales ON locales.id = venue.id_l WHERE venue.usuario = '".$id."' ORDER BY venue.id DESC" );
+) AS distance, usuarios_drink2nite.id, CONCAT(usuarios_drink2nite.nombre, ' ' ,usuarios_drink2nite.apellido) AS completo, venue.id, locales.logo, locales.direccion, locales.nombre, venue.fecha, venue.activo, venue.id_l, venue.fecha_fin FROM venue INNER JOIN usuarios_drink2nite ON usuarios_drink2nite.id = venue.usuario INNER JOIN locales ON locales.id = venue.id_l WHERE venue.usuario = '".$id."' ORDER BY venue.id DESC" );
 	
 				   while ( $row = $db->get_row($busqueda_db) ) {
 					if(!$row['logo']) { $row['logo'] = 'local.png'; }
 					
 					$row2 = $db->super_query( "SELECT COUNT(*) total FROM asistencia WHERE id_v = '".$row['id']."'" );
 					$row3 = $db->super_query( "SELECT COUNT(*) total FROM chat WHERE id_v = '".$row['id']."'" );
+
+					if($row['fecha_fin'] <= date('Y-m-d H:i:s', time())) { $row['activo'] = 0; }
 
 					array_push($someArray, [
 					  'completo'   => $row['completo'],
@@ -1661,10 +1919,51 @@ case 'tonightv2':
 						if($rowe['id']) {
 							$icentro = '<button class="fab fab--mini" onclick="ver_evento(\''.$rowe['id'].'\', \''.$rowe['titulo'].'\')"><i class="zmdi zmdi-drink"></i></button> <button class="fab fab--material fab-centro" onclick="invitar_evento(\''.$rowe['id'].'\')"><i class="zmdi zmdi-accounts-add"></i></button>';
 						} else {
-							$icentro = '<button class="fab fab--mini" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'"><i class="zmdi zmdi-pin-drop"></i></button><button class="fab fab--mini activo" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'"><i class="zmdi zmdi-pin-drop"></i></button> <button class="fab fab--material fab-centro" onclick="crear_evento(\''.$row['id'].'\', \'https://drink2nite.com/subidas/logos/'.$row['logo'].'\')"><i class="zmdi zmdi-plus"></i></button>';
+							$icentro = '<button class="fab fab--mini" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'"><i class="zmdi zmdi-pin-drop"></i></button><button class="fab fab--mini activo" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'"><i class="zmdi zmdi-pin-drop"></i></button> <button class="fab fab--material fab-centro" onclick="crear_evento(\''.$row['id'].'\', \'https://drink2nite.com/subidas/logos/'.$row['logo'].'\')"><i class="zmdi zmdi-plus"></i></button>'; 
 						}
 
 					$accion[] = array("id" => $row['id'], "latitude" => $row['latitud'], "longitude" => $row['longitud'], "icon" => $icono, "logo" => $logo, "nombre" => $row['nombre'], "distancia" => number_format($row['distance'],2), "baloon_text" => '<div class="local_drink2nite"><img src="https://drink2nite.com/subidas/logos/'.$row['logo'].'"><span>'.$row['nombre'].'</span></div>'.$icentro.' <button class="fab fab--mini" onclick="local(\''.$row['id'].'\', \''.$row['nombre'].'\')"><i class="zmdi zmdi-store"></i></button>');
+						
+					$temp = $row['distance'];
+				}
+				$datos = $db->super_query( "SELECT nombre, apellido, sexo, foto FROM usuarios_drink2nite WHERE id = '".$_REQUEST['id']."'");
+				if($datos['sexo'] == 1 || $datos['sexo'] == 0) { $icon_u = 'img/user.png'; } else { $icon_u = 'img/user1.png'; }
+					
+				if($_REQUEST['id'] != 'undefined') { 
+					if($datos['foto']) { $foto = 'https://drink2nite.com/subidas/avatar/'.$datos['foto']; } else { $foto = 'img/avatar.png'; }
+					$baloon = '<div style="margin-bottom:50px;"><div class="local_drink2nite" style="position:relative; top:35px;"><img src="'.$foto.'"><span>'.$datos['nombre'].'</span></div><button class="button button--material" onclick="nuevo()" style="position:relative; top:35px;"><i class="fa fa-plus"></i> Agregar nuevo local</button></div>'; } else { $baloon = '<div class="burbuja" style="margin-bottom:60px;"><button class="button button--material" onclick="login_inicio()" style="background:#009900; position:relative; top:60px;"><i class="fa fa-user"></i> Iniciar sesión</button></div>'; }
+				
+				$accion[] = array("latitude" => $_REQUEST['latitud'], "longitude" => $_REQUEST['longitud'], "icon" => $icon_u, "logo" => "", "nombre" => "", "distancia" => "", "baloon_text" => $baloon);
+				$accion = $_GET['callback'].'('.json_encode($accion).')';
+				
+			break;
+
+			case 'localesn2':
+				
+				$db->query("UPDATE usuarios_drink2nite set latitud='".$_REQUEST['latitud']."', longitud='".$_REQUEST['longitud']."' where id='".$_REQUEST['id']."'"); 
+					
+				$busqueda_db = $db->query( "SELECT id, nombre, latitud, longitud, tipo, logo, (6371 * ACOS( SIN(RADIANS(latitud)) * SIN(RADIANS(".$_REQUEST['latitud'].")) + COS(RADIANS(longitud - ".$_REQUEST['longitud'].")) * COS(RADIANS(latitud)) * COS(RADIANS(".$_REQUEST['latitud']."))) ) AS distance FROM locales HAVING distance < 10 ORDER BY distance ASC" );
+				
+				while ( $row = $db->get_row($busqueda_db) ) {
+					$venue = $db->super_query( "SELECT id, usuario FROM venue WHERE id_l = '".$row['id']."' AND usuario = '".$_REQUEST['id']."' AND activo = '1'");
+					if($row['logo']) { $logo_url = 'https://www.drink2nite.com/subidas/logos/'.$row['logo']; $logo = foto($logo_url); }else {$logo = 'https://www.drink2nite.com/subidas/logos/local.png'; $row['logo'] = 'local.png'; } 
+					if($row['tipo'] == 1) { if($venue['id'] == 0) { $icono = "img/bar_i.png"; } else { $icono = "img/vbar_i.png"; }  }
+					if($row['tipo'] == 2) { if($venue['id'] == 0) { $icono = "img/club_i.png"; } else { $icono = "img/vclub_i.png"; } }
+					if($venue['id'] != 0) { $sd1 = ' style="display:none;"'; $sd2 = ''; } else { $sd1 = ''; $sd2 = ' style="display:none;"'; }
+					if($venue['usuario'] != $_REQUEST['id'] and $venue['id'] != 0) { $sd1 = ' style="display:none;"'; $sd2 = ' style="display:none;"'; }
+					if($row['logo']) { $logo = 'https://drink2nite.com/subidas/logos/'.$row['logo']; } else { $logo = 'https://drink2nite.com/subidas/logos/local.png'; }
+					/* $accion[] = array("id" => $row['id'], "latitude" => $row['latitud'], "longitude" => $row['longitud'], "icon" => $icono, "logo" => $logo, "nombre" => $row['nombre'], "distancia" => number_format($row['distance'],2), "baloon_text" => '<div class="burbuja"><b style="display:block; text-align:center; margin-bottom:5px;">'.$row['nombre'].' <span>('.number_format($row['distance'],1).'km)</span></b><div style="width:210px;"><div class="button-bar" style="width:210px;"><div class="button-bar__item"><button class="button-bar__button" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'">Venue</button><button class="button-bar__button nvenue" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'">No Venue</button></div><div class="button-bar__item"><button class="button-bar__button" onclick="local(\''.$row['id'].'\', \''.$row['nombre'].'\')">Detalles</button></div></div></div></div>'); */
+					$rowe = $db->super_query( "SELECT id, titulo FROM eventos WHERE id_l = '".$row['id']."' AND id_u = '".$_REQUEST['id']."' AND fecha_2 >= '".date('Y-m-d H:i:s',time())."'");
+						if($rowe['id']) {
+							$icentro = '<button class="fab fab--mini" onclick="ver_evento(\''.$rowe['id'].'\', \''.$rowe['titulo'].'\')"><i class="zmdi zmdi-drink"></i></button> <button class="fab fab--material fab-centro" onclick="invitar_evento(\''.$rowe['id'].'\')"><i class="zmdi zmdi-accounts-add"></i></button>';
+						} else {
+							/*
+							$icentro = '<button class="fab fab--mini" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'"><i class="zmdi zmdi-pin-drop"></i></button><button class="fab fab--mini activo" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'"><i class="zmdi zmdi-pin-drop"></i></button> <button class="fab fab--material fab-centro" onclick="crear_evento(\''.$row['id'].'\', \'https://drink2nite.com/subidas/logos/'.$row['logo'].'\')"><i class="zmdi zmdi-plus"></i></button>'; */
+
+							$icentro = '<button class="fab fab--mini" onclick="venue(\''.$row['id'].'\')" '.$sd1.'id="venue'.$row['id'].'"><i class="zmdi zmdi-pin-drop"></i></button><button class="fab fab--mini activo" onclick="venue2(\''.$row['id'].'\')" '.$sd2.'id="nvenue'.$row['id'].'"><i class="zmdi zmdi-pin-drop"></i></button> <button class="fab fab--material fab-centro" onclick="invitar_local(\''.$row['id'].'\')"><i class="zmdi zmdi-accounts-add"></i></button>';
+						}
+
+					$accion[] = array("id" => $row['id'], "latitude" => $row['latitud'], "longitude" => $row['longitud'], "icon" => $icono, "logo" => $logo, "nombre" => $row['nombre'], "distancia" => number_format($row['distance'],2), "baloon_text" => '<div class="local_drink2nite"><img src="https://drink2nite.com/subidas/logos/'.$row['logo'].'"><span>'.$row['nombre'].'</span></div>'.$icentro.' <button class="fab fab--mini" onclick="local(\''.$row['id'].'\', \''.$row['nombre'].'\', \''.$logo.'\')"><i class="zmdi zmdi-store"></i></button>');
 						
 					$temp = $row['distance'];
 				}
@@ -1871,6 +2170,39 @@ case 'tonightv2':
 	$accion = json_encode($someArray);
 					break;
 
+					case 'invitar_local':
+						$id_l = $_REQUEST['id'];
+						$id = $_REQUEST['idu'];
+						$lat = $_REQUEST['lat'];
+						$lon = $_REQUEST['lon'];
+						$someArray = [];
+	
+						$row = $db->super_query( "SELECT seguidores FROM usuarios_drink2nite WHERE id = '".$id."'");
+						if($row['seguidores']) {
+							$list = explode( ",", $row['seguidores'] );
+							foreach ( $list as $daten ) {
+								$row2 = $db->super_query( "SELECT (6371 * ACOS( 
+									SIN(RADIANS(latitud)) * SIN(RADIANS(".$lat.")) 
+									+ COS(RADIANS(longitud - ".$lon.")) * COS(RADIANS(latitud)) 
+									* COS(RADIANS(".$lat."))
+									)
+							) AS distance, CONCAT(nombre, ' ' ,apellido) AS completo, foto FROM usuarios_drink2nite WHERE id = '".$daten."'");
+								if($row2['foto']) { $foto = 'https://drink2nite.com/subidas/avatar/'.$row2['foto']; } else { $foto = 'img/avatar.png'; }
+								$row3 = $db->super_query( "SELECT asistencia.asistencia FROM asistencia INNER JOIN venue ON venue.id = asistencia.id_v WHERE venue.id_l = '".$id_l."' AND venue.usuario = '".$id."' AND asistencia.id_u = '".$daten."'");
+								array_push($someArray, [
+									'nombre'   => $row2['completo'],
+									'foto' => $foto,
+									'invitado' => $row3['asistencia'],
+									'distancia' => number_format($row2['distance'],2),
+									'id' => $daten
+								  ]);
+							}
+						}
+	
+						
+		$accion = json_encode($someArray);
+						break;
+
 					case 'invitar_usuario':
 					
 						$id = $_REQUEST['id'];
@@ -1891,11 +2223,57 @@ case 'tonightv2':
 						$accion = $_GET['callback'].'('.json_encode($accion).')';
 						
 						break;
+
+						case 'invitar_usuario2':
+					
+							$id = $_REQUEST['id'];
+							$id_u = $_REQUEST['usuario'];
+							$id_u2 = $_REQUEST['usuario2'];
+
+							$venue = $db->super_query( "SELECT id, usuario FROM venue WHERE id_l = '".$id."' AND usuario = '".$id_u2."' AND activo = '1'");
+							if($venue['id']) {
+								$idv = $venue['id'];
+							} else {
+								$fecha = time();
+								$fecha11 = date('Y-m-d H:i:s', time());
+								$fecha22 = date('Y-m-d H:i:s', (strtotime ("+24 Hours")));
+								$db->query( "INSERT INTO venue (id_l, usuario, activo, fecha, fecha_inicio, fecha_fin) values ('{$id}','{$id_u2}','1','".$fecha."','".$fecha11."','".$fecha22."')" );
+								$row = $db->super_query( "SELECT seguidores, nombre FROM usuarios_drink2nite WHERE id = '".$id_u2."'");
+								$row4 = $db->super_query( "SELECT venue.id, locales.nombre FROM venue INNER JOIN locales ON venue.id_l = locales.id WHERE venue.id_l = '".$id."' AND venue.usuario = '".$id_u2."' AND venue.fecha = '".$fecha."'");
+								$idv = $row4['id'];
+								if($row['seguidores']) {
+									$list = explode( ",", $row['seguidores'] );
+									foreach ( $list as $daten ) {
+									$db->query( "INSERT INTO notificaciones (user, tipo, fecha, propietario, local, venue, respuesta) values ('".$daten."', '1', '".$fecha."', '".$id_u2."', '".$id."', '".$idv."', '')" );
+									$db->query("UPDATE usuarios_drink2nite set notificacion=notificacion+1 where id='".$daten."'");
+									enviar_push_t($row4['nombre'],$row['nombre'].' acaba de realizar un check in en este local',''.$daten.'','3',''.$id.'',''.$row4['nombre'].'');
+									}
+								}
+							}
+			
+							$db->query( "INSERT INTO invitaciones_local (id_l, id_u, invitado, tipo) values ('{$id}','{$id_u}','{$id_u2}','2')" );
+							$db->query( "INSERT INTO asistencia (id_v, id_u, asistencia, invitado) values ('{$idv}','{$id_u}','0', '1')" );
+			
+							$row2 = $db->super_query( "SELECT nombre FROM locales WHERE id = '".$id."'");
+							$row3 = $db->super_query( "SELECT nombre FROM usuarios_drink2nite WHERE id = '".$id_u2."'");
+							$fecha2 = time();
+							$db->query( "INSERT INTO notificaciones (user, tipo, fecha, propietario, local, respuesta, venue) values ('".$id_u."', '12', '".$fecha2."', '".$id_u2."', '".$id."', '0', '".$idv."')" );
+							enviar_push_t('Invitación a Local',$row3['nombre'].' acaba de invitarte al local '.$row2['nombre'],''.$id_u.'','3',''.$id.'',''.$row2['nombre'].'');
+							$db->query("UPDATE usuarios_drink2nite set notificacion=notificacion+1 where id='".$id_u."'");
+							
+							$accion[] = array("id" => $id, "titulo" => $row2['titulo']);
+							$accion = $_GET['callback'].'('.json_encode($accion).')';
+							
+							break;
 	
 						case 'cancelar_asistencia':
 			$id = $_REQUEST['id'];
 			$tipo = $_REQUEST['tipo'];
 			$usuario = $_REQUEST['usuario'];
+
+			$row2 = $db->super_query( "SELECT propietario FROM notificaciones WHERE tipo = '12' AND user='".$usuario. "' AND local='".$id. "'");
+			$prop = $row2['propietario'];
+
 			$db->query("DELETE FROM invitaciones WHERE id_u='".$usuario. "' AND id_e='".$id. "'");
 			$db->query("DELETE FROM notificaciones WHERE tipo = '10' AND user='".$usuario. "' AND evento='".$id. "'");
 			if($tipo == 1) { 
@@ -1903,6 +2281,30 @@ case 'tonightv2':
 			} else {
 				$db->query("UPDATE eventos set invitados=invitados-1 where id='".$id."'"); 
 			}
+
+			$row = $db->super_query( "SELECT nombre FROM usuarios_drink2nite WHERE id = '".$usuario."'");
+
+			enviar_push('Rechazó de invitación',$row['nombre'].' rechazó tu invitación al evento',''.$prop.'');
+			$accion = 1;		
+			$accion = $_GET['callback'].'('.json_encode($accion).')';
+							
+		break;
+
+		case 'cancelar_asistencia_local':
+			$id = $_REQUEST['id'];
+			$tipo = $_REQUEST['tipo'];
+			$usuario = $_REQUEST['usuario'];
+
+			$row2 = $db->super_query( "SELECT propietario FROM notificaciones WHERE tipo = '12' AND user='".$usuario. "' AND venue='".$id. "'");
+			$prop = $row2['propietario'];
+			$row2 = $db->super_query( "SELECT id_l FROM venue WHERE id = '".$id."'");
+			$db->query("DELETE FROM invitaciones_local WHERE id_u='".$usuario. "' AND id_l='".$row2['id_l']. "'");
+			$db->query("DELETE FROM notificaciones WHERE tipo = '12' AND user='".$usuario. "' AND venue='".$id. "'");
+			$db->query("DELETE FROM asistencia WHERE id_v = '".$id."' AND id_u='".$usuario. "'");
+
+			$row = $db->super_query( "SELECT nombre FROM usuarios_drink2nite WHERE id = '".$usuario."'");
+			
+			enviar_push('Rechazó de invitación',$row['nombre'].' rechazó tu invitación al local',''.$prop.'');
 			$accion = 1;		
 			$accion = $_GET['callback'].'('.json_encode($accion).')';
 							
