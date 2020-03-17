@@ -12,11 +12,12 @@ function localizar(posicion) {
     storage.setItem('nombres_drink2nite', response2.nombres);
     storage.setItem('apellidos_drink2nite', response2.apellidos);
     storage.setItem('foto_drink2nite', response2.foto);
+    storage.setItem('timeout_drink2nite', 1);
     if(response2.notificacion > 0){ $('#notificaciones_contenedor').html('<span class="notification" style="position: absolute; top: 10px; left:6px;">'+response2.notificacion+'</span>'); } else { $('#notificaciones_contenedor').html(''); }
     /* $('.foto_central').attr('src',response2.foto); */
     } });
     var latlng = new google.maps.LatLng(posicion.coords.latitude, posicion.coords.longitude);
-    $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=localesn&tipo="+tipo+"&latitud="+posicion.coords.latitude+"&longitud="+posicion.coords.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
+    $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=localesn2&tipo="+tipo+"&latitud="+posicion.coords.latitude+"&longitud="+posicion.coords.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
     if(response != null) { 
     var myMarkers = {"markers": response};
     $("#mapa").mapmarker({
@@ -36,7 +37,11 @@ function localizar(posicion) {
     $('#fab_ref').fadeIn();
     $('#icono_refrescar_vueltas').hide();
     $('#icono_refrescar').show();
-    $('.cargando_datos, .foto_central, .pulse_holder, ons-progress-bar').fadeOut(); } });
+    $('.cargando_datos, .foto_central, .pulse_holder, ons-progress-bar').fadeOut(); 
+    localesx2();
+    $("#lugares_proximos").removeClass("arriba medio2");
+    $("#lugares_proximos").addClass("medio");
+  } });
   }
   function editar_perfil() {
     document.querySelector('#myNavigator').pushPage('html/editar.html', { animation : 'slide', callback: function() {
@@ -122,8 +127,8 @@ function refrescar() {
   function error(mensaje)  {
     /* window.location ="inicio.html"; 
     location.reload(); */
-    ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Tiempo agotado, obteniendo datos de tu IP.', { timeout: 1000, animation: 'ascend' });
-    localizar_ip();
+    ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Vamos a proceder, obteniendo datos de tu IP.', { timeout: 1000, animation: 'ascend' });
+    if(!localStorage["timeout_drink2nite"]) { localizar_ip(); }
   }
   function localizar_ip() {
     ip = storage.getItem('ip_drink2nite');
@@ -142,10 +147,9 @@ function refrescar() {
       storage.setItem('apellidos_drink2nite', response2.apellidos);
       storage.setItem('foto_drink2nite', response2.foto);
       if(response2.notificacion > 0){ $('#notificaciones_contenedor').html('<span class="notification" style="position: absolute; top: 10px; left:6px;">'+response2.notificacion+'</span>'); } else { $('#notificaciones_contenedor').html(''); }
-      $('.foto_central').attr('src',response2.foto);
       } });
       var latlng = new google.maps.LatLng(response.latitude, response.longitude);
-      $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=localesn&tipo="+tipo+"&latitud="+response.latitude+"&longitud="+response.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
+      $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=localesn2&tipo="+tipo+"&latitud="+response.latitude+"&longitud="+response.longitude+"&id="+localStorage["usuario_drink2nite"], "dataType": "jsonp", success: function( response ) {
       if(response != null) { 
       var myMarkers = {"markers": response};
       $("#mapa").mapmarker({
@@ -165,7 +169,11 @@ function refrescar() {
       $('#fab_ref').fadeIn();
       $('#icono_refrescar_vueltas').hide();
       $('#icono_refrescar').show();
-      $('.cargando_datos, .foto_central, .pulse_holder, ons-progress-bar').fadeOut(); } });
+      $('.cargando_datos, .foto_central, .pulse_holder, ons-progress-bar').fadeOut();
+      localesx2();
+      $("#lugares_proximos").removeClass("arriba medio2");
+      $("#lugares_proximos").addClass("medio");
+    } });
     } });
   }
   function html(id, contenido, cargador) { 
@@ -178,9 +186,35 @@ function refrescar() {
       }
     });
   }
-  function locales(id){ 
-    var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=locales_cerca&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite');
+  function locales(id,pagina){ 
+    var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=locales_cerca3&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite')+'&pagina='+pagina;
     var showData = $('#'+id);
+
+
+    $.getJSON(apiSrc, function(data) {
+        console.log(data);
+        var content = '';
+        var j = 0;
+        $.each(data, function(i, item) {
+          j++;
+          logo_url = 'https://drink2nite.com/subidas/logos/'+ item.logo;
+          content += '<ons-card onclick="local(\''+ item.id +'\', \''+ item.nombre +'\', \''+logo_url+'\')"> <ons-row> <ons-col width="100px" style="padding-right:10px;"><div class="logo_local" style="background-image:url(\''+ logo_url +'\');"></div></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.lugar +'<br><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-walk" style="color:#999; margin-right:3px; position:relative; top:-2px;"></ons-icon> '+ item.distancia +'km </button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;" id="color_valoracion">'+ item.valoracion +'</button></span></ons-col> </ons-row></ons-card>';
+            //alert(item.title);
+        })
+
+        if(pagina == 1) { showData.empty(); }
+        showData.append(content);
+        pagina++;
+        if(j == 5) {
+          $('#boton_cargar').html('<div style="padding:10px;"><ons-button modifier="large" onclick="locales(\'contenido_locales_principal\',\''+pagina+'\');">Cargar más</ons-button></div>').fadeIn();
+        } else { $('#boton_cargar').fadeOut(); }
+    });
+    
+  }
+
+  function localesx2(){ 
+    var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=locales_cerca2&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite');
+    var showData = $('#localesx2');
 
 
     $.getJSON(apiSrc, function(data) {
@@ -189,8 +223,8 @@ function refrescar() {
         var content = '';
 
         $.each(data, function(i, item) {
-
-          content += '<ons-card onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> <ons-row> <ons-col width="100px" style="padding-right:10px;"><div class="logo_local" style="background-image:url(\'https://drink2nite.com/subidas/logos/'+ item.logo +'\');"></div></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.lugar +'<br><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-walk" style="color:#999; margin-right:3px; position:relative; top:-2px;"></ons-icon> '+ item.distancia +'km </button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;" id="color_valoracion">'+ item.valoracion +'</button></span></ons-col> </ons-row></ons-card>';
+          logo_url = 'https://drink2nite.com/subidas/logos/'+ item.logo;
+          content += '<div class="item" onclick="local(\''+ item.id +'\', \''+ item.nombre +'\', \''+logo_url+'\')"> <ons-row> <ons-col width="80px" style="padding-right:10px; padding-top:5px;"><div class="logo_local2" style="background-image:url(\''+ logo_url +'\');"></div></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.nombre + '</div><span font-size:13px;"><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-walk" style="margin-right:3px; position:relative; top:-2px;"></ons-icon> '+ item.distancia +'km </button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;" id="color_valoracion">'+ item.valoracion +'</button></span></ons-col> </ons-row></div>';
             //alert(item.title);
         })
 
@@ -212,7 +246,8 @@ function refrescar() {
         var content = '';
 
         $.each(data, function(i, item) {
-          content += '<ons-carousel-item onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"><img src="https://drink2nite.com/subidas/promos/'+ item.imagen +'" style="width: 100%; height:180px; border-radius:3px;"> </ons-carousel-item>';
+          logo_url = 'https://drink2nite.com/subidas/logos/'+ item.logo;
+          content += '<ons-carousel-item onclick="local(\''+ item.id +'\', \''+ item.nombre +'\', \''+logo_url+'\')"><img src="https://drink2nite.com/subidas/promos/'+ item.imagen +'" style="width: 100%; height:180px; border-radius:3px;"> </ons-carousel-item>';
             //alert(item.title);
         })
 
@@ -249,12 +284,13 @@ function refrescar() {
 
   }
 
-  function local(id, titulo2) {
+  function local(id, titulo2, logo_url) {
     document.querySelector('#myNavigator').pushPage('html/local.html', { animation : 'slide' }).then(function() {
       $('#titulo_app').html(titulo2);
+      $('#boton_right').html('<ons-toolbar-button><i class="ion-md-add" onclick="crear_evento(\''+id+'\',\''+logo_url+'\')"></i></ons-toolbar-button>');
     });
     
-     $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=local&id="+id+"&uid="+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite'), "dataType": "jsonp", success: function( response ) {
+     $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=local2&id="+id+"&uid="+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite'), "dataType": "jsonp", success: function( response ) {
        if(response.promo) {
           $('#mapa_venue').html('<ons-carousel swipeable auto-scroll var="carousel">'+response.promo+'</ons-carousel>').css("height", "auto");
           $('#ons-card-info').css("top", "-5px");
@@ -277,7 +313,7 @@ function refrescar() {
         $('#descripcion_local').html(response.descripcion2);
         $('#icono_local').html(icono);
         $('#direccion_local').html(response.direccion);
-        $('#botones_local').html(response.botones);
+        $('#botones_local').html(response.botones+'<button class="button button--material" style="margin-top:7px; width: 100%; min-height:30px; line-height:25px; font-weight:bold; background: transparent; border:1px solid rgba(255,255,255,0.2);" onclick="invitar_local(\''+id+'\')"><i class="zmdi zmdi-account-add"></i> Invitar amigos</button>');
         $('#carga_rapida_local').hide();
         $('#nombre_persona, #nombre_persona2, #nombre_persona3').html(storage.getItem('nombre_drink2nite'));
         $('#foto_persona, #foto_persona2, #foto_persona3').attr("src",storage.getItem('foto_drink2nite'));
@@ -357,8 +393,8 @@ function buscar_local(event) {
         console.log(data);
 
         $.each(data, function(i, item) {
-
-          content += '<ons-card onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> <ons-row> <ons-col width="100px" style="padding-right:10px;"><img src="https://drink2nite.com/subidas/logos/'+ item.logo +'" style="width: 100%; border-radius:3px;"> </ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.direccion +'<br>'+ item.distancia +'km</span></ons-col> </ons-row></ons-card>';
+          logo_url = 'https://drink2nite.com/subidas/logos/'+ item.logo;
+          content += '<ons-card onclick="local(\''+ item.id +'\', \''+ item.nombre +'\', \''+logo_url+'\')"> <ons-row> <ons-col width="100px" style="padding-right:10px;"><img src="'+logo_url+'" style="width: 100%; border-radius:3px;"> </ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.direccion +'<br>'+ item.distancia +'km</span></ons-col> </ons-row></ons-card>';
             //alert(item.title);
         })
         showData.empty();
@@ -489,7 +525,7 @@ function venue(id) {
 	$(vn).hide();
 	$(nv).show();
 	ons.notification.alert({
-	  message: '¡Se ha posteado este Check In a tus seguidores!',
+	  message: '¡Se ha posteado este Check In a tus seguidores, durará 24 horas en la sección de Tonight!',
 	  title: 'Check In',
 	  buttonLabel: 'OK',
 	  animation: 'default',
@@ -583,7 +619,7 @@ function cerrar_sesion() {
 }
 function locales_mostrar_todo() {
   promo('promo_carousel');
-  locales('contenido_locales_principal');
+  locales('contenido_locales_principal',1);
 }
 function perfil_propio(){
 		$('#imagen_perfil_propio').attr("src",storage.getItem('foto_drink2nite'));
@@ -658,7 +694,56 @@ function seguidos(id, contenedor, cargador){
   
 
 }
+function ver_mas_usuarios(pagina) {
+  var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=tonightv2&id='+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite')+'&pagina='+pagina+'&cantidad=10';
+  var showData = $('#contenido_vermas');
+  var cargador = $('#cargador_vermas');
 
+  $.getJSON(apiSrc, function(data) {
+      console.log(data);
+      var content = '';
+      var j = 0;
+      $.each(data, function(i, item) {
+        j++;
+        content += '<ons-list-item onclick="perfil_ver(\''+ item.id +'\', \''+ item.tipo +'\')"> <div class="left"> <img class="list-item__thumbnail" src="'+item.foto+'"> </div> <div class="center"> <span class="list-item__title" style="padding-bottom:10px;">' + item.completo + '</span> </div> <div class="right"><span style="font-size:20px;">'+ item.distancia +'</span><span style="font-size:11px">km</span></div></ons-list-item>';
+          //alert(item.title);
+      })
+
+      if(pagina == 1) { showData.empty(); }
+      showData.append(content);
+      cargador.hide();
+      pagina++;
+      if(j == 10) {
+        $('#boton_cargar2').html('<div style="padding:10px;"><ons-button modifier="large" onclick="ver_mas_usuarios(\''+pagina+'\');">Cargar más</ons-button></div>').fadeIn();
+      } else { 
+        $('#boton_cargar2').fadeOut(); }
+  });
+}
+function ver_mas_venues(pagina) {
+  var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=tonightv32&id='+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite')+'&pagina='+pagina+'&cantidad=4';
+  var showData = $('#contenido_vermas');
+  var cargador = $('#cargador_vermas');
+
+  $.getJSON(apiSrc, function(data) {
+      console.log(data);
+      var content = '';
+      var j = 0;
+      $.each(data, function(i, item) {
+        j++;
+        content += '<ons-card onclick="venue_ir(\''+ item.id_v +'\')" style="margin:10px 12px 5px 12px;"><ons-row> <ons-col width="110px" style="padding-right:10px; position: relative;"><div style="position:relative;"> <img style="width:30px; height:30px; border-radius:30px; position:absolute; bottom:-10px; right:15px; border:3px solid #424242;" src="'+item.foto+'"><div class="logo_local" style="background-image:url(https://drink2nite.com/subidas/logos/' + item.logo + ')"></div></div></ons-col><ons-col><div class="title" style="font-size:18px;">' + item.local + '</div><span style="font-size:13px;"><span style="color:rgba(255,255,255,0.6);">'+item.completo+'</span><br><div style="margin-top:8px;"><button class="button button--light" style="line-height:16px; font-size:13px;">'+item.hace+' </button> <a class="button button--light" style="line-height:16px; font-size:13px;" href="https://maps.google.com/?q='+item.latitud+','+item.longitud+'" target="_blank">¿Cómo llegar?</a></div></span></ons-col></ons-row><ons-row style="margin-top:20px;"><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-walk" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ item.distancia +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-6px; color:#999;">Distancia (km)</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-contacts" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+item.asistencia+'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Confirmados</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-chatbubbles" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+item.chat+'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Chats</span></ons-col></ons-row></ons-card>';
+          //alert(item.title);
+      })
+
+      if(pagina == 1) { showData.empty(); }
+      showData.append(content);
+      cargador.hide();
+      pagina++;
+      if(j == 4) {
+        $('#boton_cargar2').html('<div style="padding:10px;"><ons-button modifier="large" onclick="ver_mas_venues(\''+pagina+'\');">Cargar más</ons-button></div>').fadeIn();
+      } else { 
+        $('#boton_cargar2').fadeOut(); }
+  });
+}
 function tonightv2() {
     var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=tonightv2&id='+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite');
     var showData = $('#tonigh_contenido');
@@ -674,8 +759,8 @@ function tonightv2() {
         })
         showData.empty();
         showData.append(content);
-        if(!content) showData.html('<div style="padding:20px; text-align:center;">No se encontraron lugares</div>');
-        showData.prepend('<ul class="list list--material"><li class="list-header list-header--material">Gente cercana</li></ul>');
+        if(!content) { showData.html('<div style="padding:20px; text-align:center;">No se encontraron personas</div>'); botonm1 = ''; } else { botonm1 = '<button class="button button--light" style="line-height:16px; font-size:13px; float:right;" onclick="document.querySelector(\'#myNavigator\').pushPage(\'html/vermas.html\', {data: {title: \'Ver más\'}, animation: \'slide\', callback: function() { ver_mas_usuarios(\'1\'); } });">Ver más</button>'; }
+        showData.prepend('<ul class="list list--material"><li class="list-header list-header--material">Gente cercana'+botonm1+'</li></ul>');
     });
 
     var apiSrc2 = 'https://drink2nite.com/app/index.php?do=drink&act=tonightv3&id='+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite');
@@ -697,10 +782,52 @@ function tonightv2() {
         })
         showData2.empty();
         showData2.append(content2);
-        if(!content2) showData2.html('<div style="padding:20px; text-align:center;">No se encontraron check ins</div>');
-        showData2.prepend('<ul class="list list--material"><li class="list-header list-header--material">Check In cercanos</li></ul>');
+        if(!content2) { 
+          showData2.html('<div style="padding:20px 20px 0 20px; text-align:center;"><img src="img/checkin.png" style="width:150px; margin-bottom:15px;"><div style="padding-bottom:15px;">No se encontraron check ins</div><div id="realizar_checkin"><div class="titulo">Lugares que te podrían interesar</div><div style="position:relative; height:200px;"><p style="text-align: center; height: 40px; position: absolute; top:0; left: 0; right: 0; bottom: 0; margin: auto; width: 100%;"><ons-progress-circular indeterminate></ons-progress-circular></p></div></div></div>'); botonm2 = ''; 
+          realizar_checkin();
+        } else { botonm2 = '<button class="button button--light" style="line-height:16px; font-size:13px; float:right;" onclick="document.querySelector(\'#myNavigator\').pushPage(\'html/vermas.html\', {data: {title: \'Ver más\'}, animation: \'slide\', callback: function() { ver_mas_venues(\'1\'); } });">Ver más</button>'; }
+        showData2.prepend('<ul class="list list--material"><li class="list-header list-header--material">Check In cercanos'+botonm2+'</li></ul>');
     });
     eventos_c('eventos_carousel');
+}
+function realizar_checkin(){ 
+  var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=locales_cerca2&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite');
+  var showData = $('#realizar_checkin');
+
+
+  $.getJSON(apiSrc, function(data) {
+      console.log(data);
+
+      var content = '';
+
+      $.each(data, function(i, item) {
+        logo_url = 'https://drink2nite.com/subidas/logos/'+ item.logo;
+        content += '<div class="item" onclick="local(\''+ item.id +'\', \''+ item.nombre +'\', \''+logo_url+'\')" style="padding-top:15px;"> <ons-row> <ons-col width="50px" style="padding-right:10px; padding-top:5px;"><div class="logo_local2" style="background-image:url(\''+ logo_url +'\');"></div></ons-col> <ons-col><div class="title" style="font-size:18px; text-align:left; padding-left:12px;"> ' + item.nombre + '</div><span font-size:13px;"><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-walk" style="margin-right:3px; position:relative; top:-2px;"></ons-icon> '+ item.distancia +'km </button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;" id="color_valoracion">'+ item.valoracion +'</button></span></ons-col><ons-col width="80px"><button class="button button--outline" style="margin-top:16px;" onclick="check_in_ahora(\''+item.id+'\')">Check In</button></ons-col></ons-row></div>';
+          //alert(item.title);
+      })
+
+      showData.empty();
+      showData.append('<div class="titulo">Lugares que te podrían interesar</div><div class="contenedor">'+content+'</div>');
+
+  });
+
+}
+function check_in_ahora(id) {
+	ons.notification.alert({
+	  message: '¡Se ha posteado este Check In a tus seguidores, durará 24 horas en la sección de Tonight!',
+	  title: 'Check In',
+	  buttonLabel: 'OK',
+	  animation: 'default',
+	  callback: function() {
+      var modal = document.querySelector('ons-modal');
+		  modal.show();
+		  $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=venue&id="+id+"&uid="+storage.getItem('usuario_drink2nite'), "dataType": "jsonp", success: function( response ) {
+        recargar();
+        tonightv2();
+				modal.hide();
+		  } });
+	  }
+	});
 }
 function notificacion(){ 
   id = storage.getItem('usuario_drink2nite');
@@ -726,6 +853,8 @@ function notificacion(){
           9. Comentar al Evento
           10. Invitación al Evento
           11. Aceptar al Evento
+          12. Invitar Local
+          13. Aceptar ir a Local
           */
           if(item.tipo == 1) {
             content += '<ons-card onclick="venue_ir(\''+ item.id +'\')"> <ons-row> <ons-col width="60px" style="padding-right:10px; position:relative;"><div class="logo_local2" style="background-image:url(\'https://drink2nite.com/subidas/logos/'+ item.logo +'\');"></div><ons-icon icon="ion-md-flame" style="padding:5px; text-align:center; font-size:20px; border-radius:20px; width:20px; height:20px; position:absolute; top:35px; right:5px; background:#C81C60;"></ons-icon></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' ha realizado un Check In</div><span style="font-size:13px;">'+ item.local +'<br><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-clock" style="color:#999; margin-right:3px; position:relative; top:-2px;"></ons-icon> '+item.hace+' </button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-walk" style="color:#999; margin-right:3px; position:relative; top:-2px;" ></ons-icon> '+item.distancia+' km</button></ons-col></ons-row></ons-card>';
@@ -745,7 +874,8 @@ function notificacion(){
      }
 
      if(item.tipo == 4) {
-      content += '<ons-card onclick="local(\''+ item.id_l +'\', \''+ item.local +'\')"> <ons-row> <ons-col width="60px" style="padding-right:10px; position:relative;"><div class="logo_local2" style="background-image:url(\'https://drink2nite.com/subidas/logos/'+ item.logo +'\');"></div><ons-icon icon="ion-md-flag" style="padding:5px; text-align:center; font-size:20px; border-radius:20px; width:20px; height:20px; position:absolute; top:35px; right:5px; background:#F21E05;"></ons-icon></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' ha realizado un check in</div><span style="font-size:13px;">'+ item.local +'<br><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-clock" style="color:#999; margin-right:3px; position:relative; top:-2px;"></ons-icon> '+item.hace+' </button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-walk" style="color:#999; margin-right:3px; position:relative; top:-2px;" ></ons-icon> '+item.distancia+' km</button></span></ons-col> </ons-row></ons-card>';
+      logo_url = 'https://drink2nite.com/subidas/logos/'+ item.logo;
+      content += '<ons-card onclick="local(\''+ item.id_l +'\', \''+ item.local +'\', \''+logo_url+'\')"> <ons-row> <ons-col width="60px" style="padding-right:10px; position:relative;"><div class="logo_local2" style="background-image:url(\''+ logo_url +'\');"></div><ons-icon icon="ion-md-flag" style="padding:5px; text-align:center; font-size:20px; border-radius:20px; width:20px; height:20px; position:absolute; top:35px; right:5px; background:#F21E05;"></ons-icon></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' ha realizado un check in</div><span style="font-size:13px;">'+ item.local +'<br><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-clock" style="color:#999; margin-right:3px; position:relative; top:-2px;"></ons-icon> '+item.hace+' </button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-walk" style="color:#999; margin-right:3px; position:relative; top:-2px;" ></ons-icon> '+item.distancia+' km</button></span></ons-col> </ons-row></ons-card>';
    }
    if(item.tipo == 5) {
     content += '<ons-card onclick="venue_ir(\''+ item.id +'\')"> <ons-row> <ons-col width="60px" style="padding-right:10px; position:relative;"><div class="logo_local2" style="background-image:url(\'https://drink2nite.com/subidas/logos/'+ item.logo +'\');"></div><ons-icon icon="ion-md-text" style="padding:5px; text-align:center; font-size:20px; border-radius:20px; width:20px; height:20px; position:absolute; top:35px; right:5px; background:#058AF2;"></ons-icon></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' ha comentado el Check In</div><span style="font-size:13px;">'+ item.local +'<br><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-clock" style="color:#999; margin-right:3px; position:relative; top:-2px;"></ons-icon> '+item.hace+' </button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;"><ons-icon icon="ion-md-walk" style="color:#999; margin-right:3px; position:relative; top:-2px;" ></ons-icon> '+item.distancia+' km</button></span></ons-col></ons-row></ons-card>';
@@ -772,6 +902,21 @@ if(item.tipo == 9) {
 if(item.tipo == 10) {
 
   content += '<ons-card> <ons-row> <ons-col width="60px" style="padding-right:10px; position:relative;"><div class="logo_local2" style="background-image:url(\'https://drink2nite.com/subidas/logos/'+ item.logo +'\');"></div><ons-icon icon="md-drink" style="padding:5px; text-align:center; font-size:20px; border-radius:20px; width:20px; height:20px; position:absolute; top:35px; right:5px; background:#058AF2;"></ons-icon></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' te ha invitado al Evento '+item.titulo+'</div><span style="font-size:13px;">'+ item.local +'<br><div id="botones_invitar_'+item.id_e+'"><button class="button" style="line-height:16px; font-size:13px; margin-top:10px; background:#e14339;" modifier="material" onclick="aceptar_asistencia(\''+item.id_e+'\')">Aceptar invitación</button> <button class="button" modifier="material" style="line-height:16px; font-size:13px; margin-top:10px; background:#333;" onclick="rechazar_asistencia(\''+item.id_e+'\')">Rechazar</button></div></ons-col></ons-row></ons-card>';
+ }
+
+ if(item.tipo == 11) {
+
+  content += '<ons-card onclick="ver_evento(\''+ item.id_e +'\', \''+item.local+'\')"> <ons-row> <ons-col width="60px" style="padding-right:10px; position:relative;"><div class="logo_local2" style="background-image:url(\'https://drink2nite.com/subidas/logos/'+ item.logo +'\');"></div><ons-icon icon="md-drink" style="padding:5px; text-align:center; font-size:20px; border-radius:20px; width:20px; height:20px; position:absolute; top:35px; right:5px; background:#058AF2;"></ons-icon></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' ha aceptado tu invitación al evento</div><span style="font-size:13px;">'+ item.local +'</ons-col></ons-row></ons-card>';
+ }
+
+ if(item.tipo == 12) {
+
+  content += '<ons-card> <ons-row> <ons-col width="60px" style="padding-right:10px; position:relative;"><div class="logo_local2" style="background-image:url(\'https://drink2nite.com/subidas/logos/'+ item.logo +'\');"></div><ons-icon icon="md-drink" style="padding:5px; text-align:center; font-size:20px; border-radius:20px; width:20px; height:20px; position:absolute; top:35px; right:5px; background:#058AF2;"></ons-icon></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' te ha invitado a este local</div><span style="font-size:13px;">'+ item.local +'<br><div id="botones_invitar_'+item.id+'"><button class="button" style="line-height:16px; font-size:13px; margin-top:10px; background:#e14339;" modifier="material" onclick="aceptar_asistencia_local(\''+item.id+'\')">Aceptar invitación</button> <button class="button" modifier="material" style="line-height:16px; font-size:13px; margin-top:10px; background:#333;" onclick="rechazar_asistencia_local(\''+item.id+'\')">Rechazar</button></div></ons-col></ons-row></ons-card>';
+ }
+
+ if(item.tipo == 13) {
+
+  content += '<ons-card onclick="venue_ir(\''+ item.id +'\')"> <ons-row> <ons-col width="60px" style="padding-right:10px; position:relative;"><div class="logo_local2" style="background-image:url(\'https://drink2nite.com/subidas/logos/'+ item.logo +'\');"></div><ons-icon icon="md-drink" style="padding:5px; text-align:center; font-size:20px; border-radius:20px; width:20px; height:20px; position:absolute; top:35px; right:5px; background:#058AF2;"></ons-icon></ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' ha aceptado tu invitación</div><span style="font-size:13px;">'+ item.local +'</ons-col></ons-row></ons-card>';
  }
             //alert(item.title);
         })
@@ -840,7 +985,26 @@ function venue_ir(id){
         if(item.asistencia == 0 && storage.getItem('usuario_drink2nite') != item.id_u) {
           asistire = 'No confir.';
         }
-            content += '<ons-card> <ons-row> <ons-col width="60px" style="padding-right:10px;"><img src="https://drink2nite.com/subidas/logos/'+ item.logo +'" class="list-item__thumbnail" style="border-radius:30px;"> </ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' ha realizado un Check In</div><span style="font-size:13px;">'+ item.local +'<br><span style="color:rgba(255,255,255,0.6);">'+item.descripcion+'</span><br><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;">'+item.hace+' </button> '+boton_asistir+'</span></ons-col></ons-row><ons-row style="margin-top:20px;"><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-walk" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ item.distancia +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-6px; color:#999;">Distancia (km)</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-contacts" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ item.cantidad +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Confirmados</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-body" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ asistire +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Asistencia</span></ons-col></ons-row></ons-card>';
+
+        if(item.activo == 1) {
+          $('#clock').countdown(item.fechac).on('update.countdown', function(event) {
+var format = '%H:%M:%S';
+if(event.offset.totalDays > 0) {
+  format = '%-d día%!d ' + format;
+}
+if(event.offset.weeks > 0) {
+  format = '%-w semana%!w ' + format;
+}
+$(this).html(event.strftime(format));
+})
+.on('finish.countdown', function(event) {
+$(this).html('¡El Check-In ha terminado!')
+  .parent().addClass('disabled');
+}); } else {
+$('#clock').html('El Check-In se ha cerrado');
+}
+
+            content += '<ons-card> <ons-row> <ons-col width="60px" style="padding-right:10px;"><img src="https://drink2nite.com/subidas/logos/'+ item.logo +'" class="list-item__thumbnail" style="border-radius:30px;"> </ons-col> <ons-col><div class="title" style="font-size:18px;"> ' + item.completo + ' ha realizado un Check In</div><span style="font-size:13px;">'+ item.local +'<br><button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;">'+item.hace+' </button> '+boton_asistir+'</span></ons-col></ons-row><ons-row style="margin-top:20px;"><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-walk" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ item.distancia +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-6px; color:#999;">Distancia (km)</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-contacts" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ item.cantidad +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Confirmados</span></ons-col><ons-col width="35px" style="padding-right:10px;"><ons-icon icon="ion-md-body" size="28px" style="color:#999;"></ons-icon></ons-col><ons-col><span style="font-size:20px;">'+ asistire +'</span><br><span style="font-size:10px; text-transform:uppercase; position:relative; top:-5px; color:#999;">Asistencia</span></ons-col></ons-row></ons-card>';
          
             //alert(item.title);
         })
@@ -907,7 +1071,7 @@ function asistir_venue(id, tipo) {
 	modal.show();
   ons.notification.alert({
 	  message: mensaje,
-	  title: 'Asistecia a Venue',
+	  title: 'Asistecia',
 	  buttonLabel: 'OK',
     animation: 'default',
     callback: function() {
@@ -945,8 +1109,25 @@ if(invitado != 1) {
   document.querySelector('#myNavigator').popPage();
 }
 }
+function asistir_local(id, tipo, invitado) {
+  
+  mensaje = '¡Asistiré!';
+  var modal = document.querySelector('ons-modal');
+	modal.show();
+  ons.notification.alert({
+	  message: mensaje,
+	  title: 'Asistencia al Local',
+	  buttonLabel: 'OK',
+    animation: 'default',
+    callback: function() {
+		  $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=asistir_local_acepto&id="+id+"&uid="+storage.getItem('usuario_drink2nite')+"&tipo="+tipo+"&invitado="+invitado, "dataType": "jsonp", success: function( response ) {
+        modal.hide();
+		  } });
+	  }
+  });
+}
 function mis_eventos() {
-  document.querySelector('#myNavigator').pushPage('html/miseventos.html', {data: {title: 'Mis Venue'}, animation: 'slide', callback:function(){ 
+  document.querySelector('#myNavigator').pushPage('html/miseventos.html', {data: {title: 'Mis Check-Ins'}, animation: 'slide', callback:function(){ 
   var apiSrc2 = 'https://drink2nite.com/app/index.php?do=drink&act=miseventos&id='+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite');
     var showData2 = $('#contenido_miseventos');
     var cargador2 = $('#cargador_miseventos');
@@ -983,7 +1164,7 @@ function mis_eventos() {
   }});
 }
 function mis_venues() {
-  document.querySelector('#myNavigator').pushPage('html/misvenues.html', {data: {title: 'Mis Venue'}, animation: 'slide', callback:function(){ 
+  document.querySelector('#myNavigator').pushPage('html/misvenues.html', {data: {title: 'Mis Check-Ins'}, animation: 'slide', callback:function(){ 
   var apiSrc2 = 'https://drink2nite.com/app/index.php?do=drink&act=misvenues&id='+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite');
     var showData2 = $('#contenido_misvenues');
     var cargador2 = $('#cargador_misvenues');
@@ -1001,7 +1182,7 @@ function mis_venues() {
         })
         showData2.empty();
         showData2.append(content2);
-        if(!content2) showData2.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No se encontraron venues</ons-button></div>');
+        if(!content2) showData2.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No se encontraron check-ins</ons-button></div>');
         cargador2.hide();
     });
   }});
@@ -1017,7 +1198,8 @@ function mis_favoritos() {
         console.log(data);
 
         $.each(data, function(i, item) {
-          content2 += '<ons-list-item onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> <div class="left"> <img style="width:75px; margin-right:10px;" src="https://drink2nite.com/subidas/logos/' + item.logo + '"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + '</span><span class="list-item__subtitle">' + item.direccion + '</span> </div> <div class="right"><span style="font-size:20px;">'+ item.distancia +'</span><span style="font-size:11px">km</span></div></ons-list-item>';
+          logo_url = 'https://drink2nite.com/subidas/logos/'+ item.logo;
+          content2 += '<ons-list-item onclick="local(\''+ item.id +'\', \''+ item.nombre +'\', \''+logo_url+'\')"> <div class="left"> <img style="width:75px; margin-right:10px;" src="' + logo_url + '"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + '</span><span class="list-item__subtitle">' + item.direccion + '</span> </div> <div class="right"><span style="font-size:20px;">'+ item.distancia +'</span><span style="font-size:11px">km</span></div></ons-list-item>';
             //alert(item.title);
         })
         showData2.empty();
@@ -1041,8 +1223,8 @@ function mis_locales(id, contenedor, cargador){
         var content = '';
   
         $.each(data, function(i, item) {
-          
-          content += '<ons-card> <ons-row> <ons-col width="100px" style="padding-right:10px;"><img src="https://drink2nite.com/subidas/logos/'+ item.logo +'" style="width: 100%; border-radius:3px;" onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> </ons-col> <ons-col><div class="title" style="font-size:18px;" onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.descripcion +'<br><span style="color:rgba(255,255,255,0.8)">'+item.lugar+'</span></span><div><button class="button button--outline" style="line-height:16px; font-size:13px; margin-top:10px;" onclick="editar_local(\''+ item.id +'\')"><ons-icon icon="ion-md-create" style="color:#FFF; margin-right:3px; position:relative; top:-2px;" ></ons-icon> Editar local</button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;" onclick="eliminar_local(\''+ item.id +'\', \''+ item.nombre +'\')"><ons-icon icon="ion-md-close" style="color:#999; margin-right:3px; position:relative; top:-2px;" ></ons-icon> Eliminar</button></div></ons-col> </ons-row></ons-card>';
+          logo_url = 'https://drink2nite.com/subidas/logos/'+ item.logo;
+          content += '<ons-card> <ons-row> <ons-col width="100px" style="padding-right:10px;"><img src="'+ logo_url +'" style="width: 100%; border-radius:3px;" onclick="local(\''+ item.id +'\', \''+ item.nombre +'\', \''+logo_url+'\')"> </ons-col> <ons-col><div class="title" style="font-size:18px;" onclick="local(\''+ item.id +'\', \''+ item.nombre +'\')"> ' + item.nombre + '</div><span style="color:rgba(255,255,255,0.4); font-size:13px;">'+ item.descripcion +'<br><span style="color:rgba(255,255,255,0.8)">'+item.lugar+'</span></span><div><button class="button button--outline" style="line-height:16px; font-size:13px; margin-top:10px;" onclick="editar_local(\''+ item.id +'\')"><ons-icon icon="ion-md-create" style="color:#FFF; margin-right:3px; position:relative; top:-2px;" ></ons-icon> Editar local</button> <button class="button button--light" style="line-height:16px; font-size:13px; margin-top:10px;" onclick="eliminar_local(\''+ item.id +'\', \''+ item.nombre +'\')"><ons-icon icon="ion-md-close" style="color:#999; margin-right:3px; position:relative; top:-2px;" ></ons-icon> Eliminar</button></div></ons-col> </ons-row></ons-card>';
             //alert(item.title);
         })
   
@@ -1071,8 +1253,8 @@ function mis_promos(id){
         var content = '';
   
         $.each(data, function(i, item) {
-          
-          content += '<ons-list-item><div class="center"><span class="list-item__title"><img class="list-item__thumbnail" style="display:inline-block; margin-top:-6px;" align="middle" src="https://drink2nite.com/subidas/logos/'+ item.logo +'" onclick="local(\''+ item.id_l +'\', \''+ item.nombre +'\')"> <span style="margin:0 0 0 5px; display:inline-block;">' + item.nombre + '</span></span><span class="list-item__subtitle"><img src="https://drink2nite.com/subidas/promos/'+ item.imagen +'" style="width:100%; margin-top:5px; border-radius:10px;"><div style="margin-top:7px;"><ons-button modifier="material" onclick="editar_promo(\''+ item.id +'\', \'https://drink2nite.com/subidas/promos/'+ item.imagen +'\')"><i class="fa fa-pencil"></i> Editar</ons-button> <ons-button modifier="material" onclick="eliminar_promo(\''+ item.id +'\')"><i class="fa fa-trash"></i> Eliminar</ons-button></div></span></div></ons-list-item>';
+          logo_url = 'https://drink2nite.com/subidas/logos/'+ item.logo;
+          content += '<ons-list-item><div class="center"><span class="list-item__title"><img class="list-item__thumbnail" style="display:inline-block; margin-top:-6px;" align="middle" src="'+ logo_url +'" onclick="local(\''+ item.id_l +'\', \''+ item.nombre +'\', \''+logo_url+'\')"> <span style="margin:0 0 0 5px; display:inline-block;">' + item.nombre + '</span></span><span class="list-item__subtitle"><img src="https://drink2nite.com/subidas/promos/'+ item.imagen +'" style="width:100%; margin-top:5px; border-radius:10px;"><div style="margin-top:7px;"><ons-button modifier="material" onclick="editar_promo(\''+ item.id +'\', \'https://drink2nite.com/subidas/promos/'+ item.imagen +'\')"><i class="fa fa-pencil"></i> Editar</ons-button> <ons-button modifier="material" onclick="eliminar_promo(\''+ item.id +'\')"><i class="fa fa-trash"></i> Eliminar</ons-button></div></span></div></ons-list-item>';
             //alert(item.title);
         })
   
@@ -1109,7 +1291,7 @@ function escribir_chat(event) {
         showData.append(content);
         modal.hide();
         $('#escribir_chat').val('').blur();
-        if(!content) showData.html('<div style="padding:20px; text-align:center;">No se encontraron chats en este venue</div>');
+        if(!content) showData.html('<div style="padding:20px; text-align:center;">No se encontraron chats en este check-in</div>');
     });
     
   }
@@ -1266,6 +1448,7 @@ function enviar() {
           buttonLabel: 'OK',
           animation: 'default'
         });
+        refrescar();
 			} });
 			event.preventDefault();
 	});
@@ -1356,7 +1539,27 @@ function crear_evento(id, imagen) {
   } });
 }
 function crear_ahora() {
-	$("#formulario_creare").submit(function( event ) {
+  $("#formulario_creare").submit(function( event ) {
+  if(!$('#nombre').val()) {
+    ons.notification.alert({message: '¡Falta agregar el títutlo del evento!', title: 'Error', buttonLabel: 'OK', animation: 'default'});
+    return false;
+  }
+  if(!$('#h_e').val()) {
+    ons.notification.alert({message: '¡Falta agregar la hora del evento!', title: 'Error', buttonLabel: 'OK', animation: 'default'});
+    return false;
+  }
+  if(!$('#fecha').val()) {
+    ons.notification.alert({message: '¡Falta agregar la fecha del evento!', title: 'Error', buttonLabel: 'OK', animation: 'default'});
+    return false;
+  }
+  if(!$('#h_c').val()) {
+    ons.notification.alert({message: '¡Falta agregar la hora que termina el evento!', title: 'Error', buttonLabel: 'OK', animation: 'default'});
+    return false;
+  }
+  if(!$('#fecha2').val()) {
+    ons.notification.alert({message: '¡Falta agregar la fecha que termina el evento!', title: 'Error', buttonLabel: 'OK', animation: 'default'});
+    return false;
+  }
     var modal = document.querySelector('ons-modal');
     modal.show();
   
@@ -1515,10 +1718,42 @@ function invitar_evento(id) {
     });
   } });
 }
+function invitar_local(id) {
+  document.querySelector('#myNavigator').pushPage('html/invitar.html', { animation : 'slide', callback: function() {
+    var apiSrc = 'https://drink2nite.com/app/index.php?do=drink&act=invitar_local&id='+id+'&idu='+storage.getItem('usuario_drink2nite')+'&lat='+storage.getItem('latitud_drink2nite')+'&lon='+storage.getItem('longitud_drink2nite');
+    var showData = $('#contenido_invitar');
+    var cargador = $('#cargador_invitar');
+  
+  
+    $.getJSON(apiSrc, function(data) {
+        console.log(data);
+  
+        var content = '';
+  
+        $.each(data, function(i, item) {
+          if(item.invitado == null) { boton = '<button class="button button--outline" style="line-height:16px; font-size:13px; margin-top:3px;" onclick="invitar2(\''+id+'\',\''+item.id+'\')">Invitar al local</button>'; } else { boton = 'Ya está invitado'; }
+          
+          content += '<ons-list-item> <div class="left"> <img class="list-item__thumbnail" src="'+item.foto+'"> </div> <div class="center"> <span class="list-item__title">' + item.nombre + '</span><span id="botoninvitar_'+item.id+'" class="list-item__subtitle"><button class="button button--outline" style="line-height:16px; font-size:13px; margin-top:3px; border-color:rgba(255,255,255,0.2);"><ons-icon icon="ion-md-walk" style="color:#999; margin-right:3px; position:relative; top:-2px;" class="ons-icon ion-md-walk ons-icon--ion" modifier="material"></ons-icon> '+item.distancia+'km</button> '+ boton +'</span> </div> </ons-list-item>';
+            //alert(item.title);
+        })
+  
+        showData.empty();
+        showData.append(content);
+        if(!content) showData.html('<div style="padding:20px; text-align:center;"><img src="img/noi.png" width="40%" style="display:block; margin:20px auto 20px auto;"><ons-button modifier="large--quiet" disabled="true">No tienes seguidores para invitar</ons-button></div>');
+        $(cargador).fadeOut();
+  
+    });
+  } });
+}
 function invitar(id, usuario) {
     $.ajax({ url: "https://drink2nite.com/app/index.php?do=drink&act=invitar_usuario&id="+id+"&usuario="+usuario+"&usuario2="+storage.getItem('usuario_drink2nite'), "dataType": "jsonp", success: function( response ) {
       $('#botoninvitar_'+usuario).html('Invitación enviada');
     } });
+}
+function invitar2(id, usuario) {
+  $.ajax({ url: "https://drink2nite.com/app/index.php?do=drink&act=invitar_usuario2&id="+id+"&usuario="+usuario+"&usuario2="+storage.getItem('usuario_drink2nite'), "dataType": "jsonp", success: function( response ) {
+    $('#botoninvitar_'+usuario).html('Invitación enviada');
+  } });
 }
 function agregar_calendario(titulo,lugar,notas,y1,y2,m1,m2,d1,d2,h1,h2,mi1,mi2) {
   var startDate = new Date(y1,m1,d1,h1,mi1,0,0,0); 
@@ -1545,6 +1780,14 @@ function aceptar_asistencia(id) {
   $('#botones_invitar_'+id).html('Se aceptó');
   asistir_evento(id,3,1);
 }
+function rechazar_asistencia_local(id) {
+  $('#botones_invitar_'+id).html('Se rechazó');
+  cancelar_asistencia_local(id,2);
+}
+function aceptar_asistencia_local(id) {
+  $('#botones_invitar_'+id).html('Se aceptó');
+  asistir_local(id,3,1);
+}
 function cancelar_asistencia(id,tipo) {
   var modal = document.querySelector('ons-modal');
   modal.show();
@@ -1554,6 +1797,24 @@ function cancelar_asistencia(id,tipo) {
     tipoc = 1;
   }
   $.ajax({ url: "https://drink2nite.com/app/index.php?do=drink&act=cancelar_asistencia&id="+id+"&usuario="+storage.getItem('usuario_drink2nite')+"&tipo="+tipoc, "dataType": "jsonp", success: function( response ) {
+    modal.hide();
+    ons.notification.alert({
+      message: '¡Se ha cancelado la asistencia!',
+      title: 'Asistencia',
+      buttonLabel: 'OK',
+      animation: 'default'
+    });
+    } });
+}
+function cancelar_asistencia_local(id,tipo) {
+  var modal = document.querySelector('ons-modal');
+  modal.show();
+  if(tipo == 2) {
+    tipoc = 2;
+  } else {
+    tipoc = 1;
+  }
+  $.ajax({ url: "https://drink2nite.com/app/index.php?do=drink&act=cancelar_asistencia_local&id="+id+"&usuario="+storage.getItem('usuario_drink2nite')+"&tipo="+tipoc, "dataType": "jsonp", success: function( response ) {
     modal.hide();
     ons.notification.alert({
       message: '¡Se ha cancelado la asistencia!',

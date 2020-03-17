@@ -12,6 +12,34 @@ document.addEventListener('init', function(event) {
 myApp.controllers = {
 
   PrincipalPage: function(page) {
+
+    var eventName = 
+      'dragup dragdown swipeup swipedown doubletap';
+    $(document).on(eventName, '#lugares_proximos', function(event) {
+      if (event.type !== 'release') {
+        if(event.type == 'dragup' || event.type == 'swipeup' || event.type == 'doubletap') {
+            $("#lugares_proximos").removeClass("medio medio2");
+            $("#lugares_proximos").addClass("arriba");
+        }
+      
+      if(event.type == 'dragdown' || event.type == 'swipedown') {
+            $("#lugares_proximos").removeClass("arriba medio medio2");
+      }
+    }
+    });
+
+    var eventName2 = 
+      'drag tap';
+    $(document).on(eventName2, '#mapa', function(event) {
+      if (event.type !== 'release') {
+        if ($('#lugares_proximos').hasClass('arriba')){
+            $("#lugares_proximos").removeClass("arriba medio");
+            $("#lugares_proximos").addClass("medio2");
+        }
+      }
+    });
+
+    storage.removeItem('timeout_drink2nite');
     ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Cargando datos', { timeout: 1000, animation: 'ascend' });
 
     $.ajax({ "url": "https://drink2nite.com/app/index.php?do=drink&act=ip", "dataType": "jsonp", success: function( response ) {
@@ -21,12 +49,21 @@ myApp.controllers = {
     if (navigator.geolocation) {
       var options = {
         enableHighAccuracy: false,
-        timeout: 40000,
+        timeout: 11000,
         maximumAge: 0
       };
       navigator.geolocation.getCurrentPosition(localizar, error, options); 
     }  
       else { alert('No soportado!'); }
+
+      setTimeout(function(){ 
+        if(!localStorage["timeout_drink2nite"]) {
+            ons.notification.toast('<i class="fa fa-circle-notch fa-spin"></i> Tiempo agotado, obteniendo datos de tu IP.', { timeout: 1000, animation: 'ascend' });
+            storage.setItem('timeout_drink2nite', 2);
+            localizar_ip();
+        }
+     }, 10000);
+
 
     // Set button functionality to open/close the menu.
     page.querySelector('[component="button/search"]').onclick = function() {
